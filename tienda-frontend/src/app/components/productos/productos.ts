@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from '../../services/producto';
-import { Carrito } from '../../services/carrito';
+import { CommonModule } from '@angular/common';
+import { ProductoService } from '../../services/producto.service';
+import { CarritoService } from '../../services/carrito.service';
 import { Producto } from '../../models/producto';
 
 @Component({
   selector: 'app-productos',
-  templateUrl: './productos.html'
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './productos.html',
+  styleUrls: ['./productos.css']
 })
 export class Productos implements OnInit {
   productos: Producto[] = [];
 
   constructor(
-    private producto: Producto,
-    private carrito: Carrito
+    private productoService: ProductoService,
+    private carritoService: CarritoService
   ) {}
 
   ngOnInit(): void {
@@ -20,14 +24,14 @@ export class Productos implements OnInit {
   }
 
   obtenerProductos(): void {
-    this.producto.getProductos().subscribe({
-      next: (data) => (this.productos = data),
+    this.productoService.getProductos().subscribe({
+      next: (data: Producto[]) => (this.productos = data),
       error: (err) => console.error('Error al cargar productos', err)
     });
   }
 
   agregarAlCarrito(producto: Producto): void {
-    this.carrito.agregarProducto(producto);
+    this.carritoService.agregarProducto(producto);
     alert(`"${producto.nombre}" agregado al carrito`);
   }
 }

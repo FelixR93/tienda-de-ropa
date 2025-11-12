@@ -7,7 +7,13 @@ const { errorHandler } = require('./middlewares/error.handler');
 
 const app = express();
 
-app.use(cors());
+// ✅ Configurar CORS para permitir Angular (localhost:4200)
+app.use(cors({
+  origin: 'http://localhost:4200',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
+}));
+
 app.use(express.json());
 app.use(morgan('dev'));
 

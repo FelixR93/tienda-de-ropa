@@ -1,10 +1,17 @@
-<h2 class="text-center">Catálogo de Productos</h2>
-<div class="productos">
-  <div *ngFor="let p of productos" class="producto">
-    <img [src]="p.imagen" alt="{{p.nombre}}" width="150">
-    <h3>{{ p.nombre }}</h3>
-    <p>{{ p.descripcion }}</p>
-    <p><strong>${{ p.precio }}</strong></p>
-    <button (click)="agregarAlCarrito(p)">Agregar al carrito</button>
+<div class="productos-container">
+  <h2>Catálogo de Productos</h2>
+
+  <div *ngIf="productos.length === 0" class="alerta">
+    No hay productos disponibles.
+  </div>
+
+  <div class="grid">
+    <div class="producto-card" *ngFor="let producto of productos">
+      <img [src]="producto.imagen" alt="{{ producto.nombre }}" />
+      <h3>{{ producto.nombre }}</h3>
+      <p>{{ producto.descripcion }}</p>
+      <p class="precio">Precio: ${{ producto.precio }}</p>
+      <button (click)="agregarAlCarrito(producto)">Agregar al carrito</button>
+    </div>
   </div>
 </div>

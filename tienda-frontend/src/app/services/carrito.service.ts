@@ -4,29 +4,28 @@ import { Producto } from '../models/producto';
 @Injectable({
   providedIn: 'root'
 })
-export class Carrito {
-
+export class CarritoService {
   private carrito: Producto[] = [];
 
   constructor() {}
 
-  agregarProducto(producto: Producto): void {
-    this.carrito.push(producto);
-  }
-
   obtenerCarrito(): Producto[] {
     return this.carrito;
+  }
+
+  agregarProducto(producto: Producto): void {
+    this.carrito.push(producto);
   }
 
   eliminarProducto(index: number): void {
     this.carrito.splice(index, 1);
   }
 
-  obtenerTotal(): number {
-    return this.carrito.reduce((total, item) => total + item.precio, 0);
-  }
-
   vaciarCarrito(): void {
     this.carrito = [];
+  }
+
+  obtenerTotal(): number {
+    return this.carrito.reduce((total, prod) => total + prod.precio, 0);
   }
 }

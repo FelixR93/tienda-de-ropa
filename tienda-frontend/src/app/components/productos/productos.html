@@ -5,13 +5,33 @@
     No hay productos disponibles.
   </div>
 
-  <div class="grid">
-    <div class="producto-card" *ngFor="let producto of productos">
-      <img [src]="producto.imagen" alt="{{ producto.nombre }}" />
-      <h3>{{ producto.nombre }}</h3>
-      <p>{{ producto.descripcion }}</p>
-      <p class="precio">Precio: ${{ producto.precio }}</p>
-      <button (click)="agregarAlCarrito(producto)">Agregar al carrito</button>
+  <div class="productos-grid">
+    <div 
+      class="producto-card" 
+      *ngFor="let producto of productos" 
+      (click)="producto.flipped = !producto.flipped"
+    >
+      <div class="card-inner" [class.flipped]="producto.flipped">
+        
+        <!-- Frente -->
+        <div class="card-front">
+          <img [src]="producto.imagen" alt="{{ producto.nombre }}" class="producto-img" />
+          <div class="producto-info">
+            <h3>{{ producto.nombre }}</h3>
+            <p class="precio">Precio: ${{ producto.precio }}</p>
+            <button (click)="agregarAlCarrito(producto); $event.stopPropagation()">Agregar al carrito</button>
+          </div>
+        </div>
+
+        <!-- Reverso -->
+        <div class="card-back">
+          <h3>{{ producto.nombre }}</h3>
+          <p>{{ producto.descripcion }}</p> 
+          <p><strong>Stock:</strong> {{ producto.stock }}</p>
+          <button class="btn-comprar" (click)="$event.stopPropagation()">Ver Detalles</button>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

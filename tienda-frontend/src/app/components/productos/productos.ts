@@ -13,6 +13,7 @@ import { Producto } from '../../models/producto';
 })
 export class Productos implements OnInit {
   productos: Producto[] = [];
+  productoSeleccionado?: Producto; // ✅ Agregado
 
   constructor(
     private productoService: ProductoService,
@@ -34,4 +35,18 @@ export class Productos implements OnInit {
     this.carritoService.agregarProducto(producto);
     alert(`"${producto.nombre}" agregado al carrito`);
   }
+
+  verDetalles(producto: Producto): void { // ✅ Agregado
+    this.productoSeleccionado = producto;
+  }
+
+  toggleDetalles(producto: any): void {
+  producto.mostrarDetalles = !producto.mostrarDetalles;
+  }
+
+  toggleFlip(producto: any): void {
+  producto.flipped = !producto.flipped;
+}
+
+
 }

@@ -5,4 +5,6 @@ export interface Producto {
   precio: number;
   imagen: string;
   stock: number;
+  mostrarDetalles?: boolean;
+  flipped?: boolean;
 }

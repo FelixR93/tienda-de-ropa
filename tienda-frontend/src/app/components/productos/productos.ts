@@ -9,7 +9,7 @@ import { Producto } from '../../models/producto';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './productos.html',
-  styleUrls: ['./productos.css']
+  styleUrls: ['./productos.scss']
 })
 export class Productos implements OnInit {
   productos: Producto[] = [];

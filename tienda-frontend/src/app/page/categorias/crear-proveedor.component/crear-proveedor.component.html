@@ -1,0 +1,25 @@
+<div class="proveedor-container">
+  <h2 class="titulo">Crear nuevo proveedor</h2>
+
+  <div class="form-card">
+    <label class="label">Nombre del proveedor</label>
+    <input
+      type="text"
+      [(ngModel)]="nombre"
+      class="input"
+      placeholder="Ej: Proveedor XYZ"
+    />
+
+    <label class="label">Teléfono</label>
+    <input
+      type="text"
+      [(ngModel)]="telefono"
+      class="input"
+      placeholder="0999999999"
+    />
+
+    <button class="btn" (click)="crear()">Guardar proveedor</button>
+
+    <p *ngIf="mensajeExito" class="mensaje-exito">{{ mensajeExito }}</p>
+  </div>
+</div>

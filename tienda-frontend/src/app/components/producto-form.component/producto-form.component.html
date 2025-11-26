@@ -1,0 +1,61 @@
+<div class="form-wrapper">
+
+  <div class="card shadow form-card">
+    <h2 class="title">
+      {{ modoEdicion ? 'Editar Producto' : 'Registrar Producto' }}
+    </h2>
+
+    <form [formGroup]="productoForm" (ngSubmit)="submitForm()">
+
+      <!-- Nombre -->
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre" placeholder="Escribe el nombre">
+      </div>
+
+      <!-- Descripción -->
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea formControlName="descripcion" rows="3" placeholder="Describe el producto"></textarea>
+      </div>
+
+      <!-- Precio y Stock -->
+      <div class="row-group">
+        <div class="form-group">
+          <label>Precio ($)</label>
+          <input type="number" formControlName="precio" min="0">
+        </div>
+
+        <div class="form-group">
+          <label>Stock</label>
+          <input type="number" formControlName="stock" min="0">
+        </div>
+      </div>
+
+      <!-- Imagen -->
+      <div class="form-group">
+        <label>Imagen del producto</label>
+
+        <div class="upload-area">
+          <input type="file" accept="image/*" (change)="onFileSelected($event)">
+          <span class="upload-text">Seleccionar imagen</span>
+        </div>
+
+        <!-- Vista previa -->
+        <div *ngIf="imagenURL" class="preview mt-2">
+          <img [src]="imagenURL" alt="Vista previa" class="img-thumbnail">
+        </div>
+      </div>
+
+      <!-- Botón Guardar -->
+      <button type="submit" class="btn-save" [disabled]="cargando || productoForm.invalid">
+        {{ cargando ? (modoEdicion ? 'Actualizando...' : 'Guardando...') : (modoEdicion ? 'Actualizar Producto' : 'Guardar Producto') }}
+      </button>
+
+      <!-- Mensaje de estado -->
+      <p *ngIf="mensaje" class="msg mt-2">{{ mensaje }}</p>
+
+    </form>
+  </div>
+
+</div>

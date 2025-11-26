@@ -1,0 +1,17 @@
+<div class="categoria-container">
+  <h2 class="titulo">Crear nueva categoría</h2>
+
+  <div class="form-card">
+    <label class="label">Nombre de la categoría</label>
+    <input
+      type="text"
+      [(ngModel)]="nombre"
+      class="input"
+      placeholder="Ej: Calzado, Ropa, Accesorios"
+    />
+
+    <button class="btn" (click)="crear()">Guardar categoría</button>
+
+    <p *ngIf="mensajeExito" class="mensaje-exito">{{ mensajeExito }}</p>
+  </div>
+</div>

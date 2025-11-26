@@ -1,0 +1,191 @@
+/* ==== GRID GENERAL ==== */
+.cart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+/* ==== TARJETA PRODUCTO ==== */
+.cart-card {
+  perspective: 1700px;
+  cursor: pointer;
+
+  .card-inner {
+    position: relative;
+    width: 100%;
+    min-height: 390px;
+    border-radius: 16px;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background: #fff;
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.09);
+
+    &:hover {
+      transform: rotateY(180deg);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+    }
+
+    /* CARA FRONTAL */
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 1.2rem;
+      border-radius: 16px;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      transition: all 0.3s ease;
+    }
+
+    /* ==== FRONT ==== */
+    .card-front {
+      .image-wrapper {
+        width: 100%;
+        height: 210px;
+        overflow: hidden;
+        border-radius: 14px;
+        background: #f7f7f7;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s ease;
+        }
+
+        &:hover img {
+          transform: scale(1.12);
+        }
+      }
+
+      .product-name {
+        margin-top: 0.8rem;
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: #1e1e1e;
+        text-align: center;
+      }
+
+      .product-price {
+        margin-top: 0.3rem;
+        color: #0b8d5c;
+        font-weight: 700;
+        font-size: 1.25rem;
+      }
+    }
+
+    /* ==== BACK ==== */
+    .card-back {
+      transform: rotateY(180deg);
+      justify-content: space-evenly;
+      padding: 1.5rem;
+
+      .product-desc {
+        font-size: 0.95rem;
+        color: #6f6f6f;
+        text-align: center;
+        line-height: 1.4;
+        padding: 0 0.4rem;
+      }
+
+      .product-stock {
+        font-weight: 600;
+        margin-top: 0.3rem;
+        color: #3a3a3a;
+      }
+
+      /* Cantidad */
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+
+        .btn-qty {
+          width: 36px;
+          height: 36px;
+          border: none;
+          background: #f2f2f2;
+          border-radius: 8px;
+          font-size: 1.1rem;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.25s ease;
+
+          &:hover {
+            background: #e3e3e3;
+            transform: scale(1.08);
+          }
+        }
+
+        .qty {
+          font-size: 1.1rem;
+          font-weight: 600;
+          min-width: 30px;
+          text-align: center;
+          color: #222;
+        }
+      }
+
+      /* Botones */
+      .card-actions {
+        width: 100%;
+        display: flex;
+        gap: 0.6rem;
+
+        .btn {
+          flex: 1;
+          border-radius: 8px;
+          padding: 0.55rem 0.6rem;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+/* ==== FOOTER ==== */
+.cart-footer {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: #fafafa;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.3rem;
+
+  h4 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1d1d1d;
+  }
+
+  .footer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+
+    .btn {
+      border-radius: 10px;
+      padding: 0.65rem 1.2rem;
+      font-size: 0.95rem;
+    }
+  }
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 600px) {
+  .cart-card .card-inner {
+    min-height: 330px;
+  }
+}

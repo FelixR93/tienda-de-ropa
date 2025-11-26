@@ -1,0 +1,288 @@
+// Colores y variables
+$primary: #2c3e50;
+$secondary: #7f8c8d;
+$accent: #3498db;
+$success: #27ae60;
+$error: #e74c3c;
+$light-bg: #f8f9fa;
+$card-radius: 1rem;
+$shadow: 0 10px 30px rgba(0,0,0,0.15);
+$transition: all 0.3s ease;
+
+// Container general
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .wizard-container {
+    background: #fff;
+    border-radius: $card-radius;
+    padding: 2rem;
+    box-shadow: $shadow;
+    margin-bottom: 3rem;
+
+    .wizard-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+
+      .step {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        border-bottom: 3px solid lighten($secondary, 20%);
+        font-weight: bold;
+        color: $secondary;
+        transition: all 0.3s ease;
+
+        &.active {
+          color: $primary;
+          border-color: $accent;
+        }
+      }
+    }
+
+    .wizard-card {
+      background: $light-bg;
+      border-radius: $card-radius;
+      padding: 2rem;
+      text-align: center;
+      transition: $transition;
+
+      button {
+        padding: 0.75rem 1.5rem;
+        border-radius: $card-radius/2;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: $transition;
+
+        &.btn-dark {
+          background: $primary;
+          color: #fff;
+
+          &:hover {
+            background: darken($primary, 10%);
+          }
+        }
+
+        &.btn-secondary {
+          background: $secondary;
+          color: #fff;
+
+          &:hover {
+            background: darken($secondary, 10%);
+          }
+        }
+
+        &.btn-success {
+          background: $success;
+          color: #fff;
+
+          &:hover {
+            background: darken($success, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  // Catálogo Premium
+  .catalog-section {
+    .catalog-title {
+      font-size: 2rem;
+      color: $primary;
+      position: relative;
+      margin-bottom: 2rem;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: $accent;
+        margin: 0.5rem auto 0;
+        border-radius: 2px;
+      }
+    }
+
+    .premium-card {
+      perspective: 1200px;
+
+      .premium-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s ease;
+        transform-style: preserve-3d;
+        cursor: pointer;
+
+        &.flipped {
+          transform: rotateY(180deg);
+        }
+
+        .premium-front,
+        .premium-back {
+          position: absolute;
+          width: 100%;
+          backface-visibility: hidden;
+          border-radius: $card-radius;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .premium-front {
+          background: #fff;
+          box-shadow: $shadow;
+          padding: 1rem;
+
+          .image-wrapper {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: $card-radius/2;
+            margin-bottom: 1rem;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition: transform 0.3s ease;
+
+              &:hover {
+                transform: scale(1.05);
+              }
+            }
+          }
+
+          .info {
+            text-align: center;
+
+            .name {
+              font-weight: bold;
+              color: $primary;
+            }
+
+            .desc {
+              font-size: 0.9rem;
+              color: $secondary;
+              margin: 0.25rem 0;
+            }
+
+            .price {
+              font-weight: bold;
+              color: $accent;
+              margin-top: 0.5rem;
+            }
+          }
+        }
+
+        .premium-back {
+          background: $light-bg;
+          transform: rotateY(180deg);
+          box-shadow: $shadow;
+          padding: 1rem;
+
+          .info-back {
+            text-align: center;
+
+            .name-back {
+              font-weight: bold;
+              color: $primary;
+              margin-bottom: 0.5rem;
+            }
+
+            .small {
+              font-size: 0.85rem;
+              color: $secondary;
+            }
+
+            p {
+              margin: 0.5rem 0;
+            }
+          }
+
+          button {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            border-radius: $card-radius/2;
+            border: none;
+            width: 100%;
+            font-weight: bold;
+            transition: $transition;
+
+            &:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            }
+
+            &.btn-light {
+              background: #fff;
+              border: 1px solid $accent;
+              color: $accent;
+
+              &:hover {
+                background: $accent;
+                color: #fff;
+              }
+            }
+
+            &:nth-child(2) {
+              background: $primary;
+              color: #fff;
+            }
+
+            &:nth-child(3) {
+              background: $error;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Toast message
+  .toast-message {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: $primary;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: $card-radius/2;
+    box-shadow: $shadow;
+    font-weight: bold;
+    animation: slideIn 0.4s ease forwards;
+    z-index: 999;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 992px) {
+  .catalog-section .premium-card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .wizard-container,
+  .catalog-section {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,14 @@
+/* compras-realizadas.component.scss */
+.card {
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease-in-out;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.table th, .table td {
+  vertical-align: middle;
+}
+.toast {
+  min-width: 200px;
+}

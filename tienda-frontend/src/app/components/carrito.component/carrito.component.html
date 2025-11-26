@@ -1,0 +1,95 @@
+<div class="container my-5">
+  <h2 class="mb-4 text-center">🛒 Carrito de Compras</h2>
+
+  <!-- LOADER -->
+  <div *ngIf="cargando" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>
+
+  <!-- CARRITO VACÍO -->
+  <div *ngIf="!cargando && carrito.length === 0" class="alert alert-info text-center">
+    Tu carrito está vacío
+  </div>
+
+  <!-- LISTA -->
+  <div *ngIf="!cargando && carrito.length > 0" class="cart-grid">
+
+    <div *ngFor="let item of carrito" class="cart-card">
+
+      <ng-container *ngIf="item?.producto as prod">
+
+        <div class="card-inner">
+
+          <!-- FRONT -->
+          <div class="card-front">
+            <div class="image-wrapper">
+              <img 
+                [src]="prod.imagen ? ('http://localhost:5000' + prod.imagen) : 'assets/no-image.png'"
+                alt="{{ prod.nombre || 'Sin nombre' }}"
+              />
+            </div>
+
+            <div class="product-name">{{ prod.nombre || 'Sin nombre' }}</div>
+
+            <div class="product-price">
+              $ {{ prod.precio ? prod.precio.toFixed(2) : '0.00' }}
+            </div>
+          </div>
+
+          <!-- BACK -->
+          <div class="card-back">
+
+            <div class="product-desc">
+              {{ prod.descripcion || 'Sin descripción' }}
+            </div>
+
+            <div class="product-stock">
+              Stock: {{ prod.stock }}
+            </div>
+
+            <div class="quantity-controls">
+              <button class="btn-qty" (click)="disminuir(item)">-</button>
+              <span class="qty">{{ item.cantidad }}</span>
+              <button class="btn-qty" (click)="aumentar(item)">+</button>
+            </div>
+
+            <div class="card-actions">
+              <button class="btn btn-danger btn-sm me-2" (click)="eliminar(item)">
+                Eliminar
+              </button>
+
+              <button class="btn btn-success btn-sm" (click)="irACompra()">
+                Comprar
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- TOTAL Y ACCIONES -->
+  <div *ngIf="carrito.length" class="cart-footer">
+    <h4>Total: $ {{ obtenerTotal() }}</h4>
+
+    <div class="footer-actions">
+      <button class="btn btn-outline-danger" (click)="vaciarCarrito()">
+        Vaciar Carrito
+      </button>
+
+      <button class="btn btn-primary" (click)="irAProductos()">
+        Seguir Comprando
+      </button>
+
+      <button class="btn btn-success" (click)="irACompra()">
+        Comprar Todo
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div *ngIf="toastMessage" class="toast show position-fixed bottom-0 end-0 m-3" role="alert">
+    <div class="toast-body">{{ toastMessage }}</div>
+  </div>
+</div>

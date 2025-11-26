@@ -1,0 +1,176 @@
+<div class="home-container">
+
+  <!-- Hero / Banner Principal -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Nueva Colección XIXI</h1>
+      <p>Ropa moderna, versátil y con estilo para todos.</p>
+      <a routerLink="/productos" class="btn btn-primary">Explorar Colección</a>
+    </div>
+    <div class="hero-image">
+      <img src="assets/img/coleccion.jpg" alt="Colección ropa">
+    </div>
+  </section>
+
+  <!-- Promociones Destacadas -->
+  <section class="promos">
+    <h2 class="section-title">Ofertas Destacadas</h2>
+    <div class="promo-grid">
+      <div class="promo-card">
+        <img src="assets/img/promo1.avif" alt="Promo 1">
+        <div class="promo-overlay">
+          <h3>Jeans desde $15.99</h3>
+          <a routerLink="/productos" class="btn btn-outline-light">Ver más</a>
+        </div>
+      </div>
+      <div class="promo-card">
+        <img src="assets/img/promo2.jpg" alt="Promo 2">
+        <div class="promo-overlay">
+          <h3>Tennis desde $15.99</h3>
+          <a routerLink="/productos" class="btn btn-outline-light">Ver más</a>
+        </div>
+      </div>
+      <div class="promo-card">
+        <img src="assets/img/promo3.jpg" alt="Promo 3">
+        <div class="promo-overlay">
+          <h3>Buzos y Blusas desde $12.99</h3>
+          <a routerLink="/productos" class="btn btn-outline-light">Ver más</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrusel de Recomendados -->
+  <section class="destacados">
+    <h2 class="section-title">Recomendados para ti</h2>
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="carousel-item">
+          <div class="product-card">
+            <img src="assets/img/oversize.jpg" alt="Producto 1">
+            <div class="product-info">
+              <h5>Camiseta Oversize</h5>
+              <p>Comodidad y estilo relajado.</p>
+              <span class="price">$12.99</span>
+              <a routerLink="/producto/1" class="btn btn-primary btn-sm">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="product-card">
+            <img src="assets/img/camisa.jpg" alt="Producto 2">
+            <div class="product-info">
+              <h5>Vestido Midi Floral Verano</h5>
+              <p> Vestido midi con estampado floral, tejido ligero y transpirable. Ideal para temporada de verano.</p>
+              <span class="price">$35.00</span>
+              <a routerLink="/producto/2" class="btn btn-primary btn-sm">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="product-card">
+            <img src="assets/img/camisa.jpg" alt="Producto 3">
+            <div class="product-info">
+              <h5>Pantalón Chino Slim Fit</h5>
+              <p>Pantalón chino de corte slim fit en color beige. Versátil para looks casuales y semi-formales.</p>
+              <span class="price">$35.00</span>
+              <a routerLink="/producto/2" class="btn btn-primary btn-sm">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="product-card">
+            <img src="assets/img/camisa.jpg" alt="Producto 4">
+            <div class="product-info">
+              <h5>Camisa Casual</h5>
+              <p>Estilo para oficina o salidas casuales.</p>
+              <span class="price">$35.00</span>
+              <a routerLink="/producto/2" class="btn btn-primary btn-sm">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="product-card">
+            <img src="assets/img/camisa.jpg" alt="Producto 5">
+            <div class="product-info">
+              <h5>Chaqueta Denim Vintage Azul</h5>
+              <p>Chaqueta de mezclilla estilo vintage, confeccionada en 100% algodón.</p>
+              <span class="price">$35.00</span>
+              <a routerLink="/producto/2" class="btn btn-primary btn-sm">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="product-card">
+            <img src="assets/img/camisa.jpg" alt="Producto 6">
+            <div class="product-info">
+              <h5>Camiseta Básica de Algodón Orgánico</h5>
+              <p>Camiseta unisex de corte regular, 100% algodón orgánico. Perfecta para uso diario.</p>
+              <span class="price">$35.00</span>
+              <a routerLink="/producto/2" class="btn btn-primary btn-sm">Ver Producto</a>
+            </div>
+          </div>
+        </div>
+        <!-- Agrega más productos -->
+      </div>
+      <button class="carousel-prev">&lt;</button>
+      <button class="carousel-next">&gt;</button>
+    </div>
+  </section>
+
+  <!-- Colecciones -->
+  <section class="colecciones">
+    <h2 class="section-title">Colecciones</h2>
+    <div class="colecciones-grid">
+      <div class="coleccion-card">
+        <img src="assets/img/MUJER.jpg" alt="Mujer">
+        <div class="coleccion-overlay">
+          <h3>Mujer</h3>
+          <a routerLink="/productos?genero=mujer" class="btn btn-light">Ver Mujer</a>
+        </div>
+      </div>
+      <div class="coleccion-card">
+        <img src="assets/img/HOMBRE.jpg" alt="Hombre">
+        <div class="coleccion-overlay">
+          <h3>Hombre</h3>
+          <a routerLink="/productos?genero=hombre" class="btn btn-light">Ver Hombre</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section class="beneficios">
+    <div class="beneficio">
+      <i class="bi bi-truck"></i>
+      <h4>Envíos rápidos</h4>
+      <p>Recibe tu pedido en todo Ecuador.</p>
+    </div>
+    <div class="beneficio">
+      <i class="bi bi-shield-lock"></i>
+      <h4>Pago seguro</h4>
+      <p>Protección en cada transacción.</p>
+    </div>
+    <div class="beneficio">
+      <i class="bi bi-arrow-repeat"></i>
+      <h4>Devoluciones fáciles</h4>
+      <p>Cambios rápidos y sin problemas.</p>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <h2>Únete a nuestro newsletter</h2>
+    <p>Recibe lo último en moda y promociones exclusivas.</p>
+    <form>
+      <input type="email" placeholder="Tu correo electrónico" required>
+      <button type="submit" class="btn btn-primary">Suscribirse</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 XIXI. Todos los derechos reservados.</p>
+  </footer>
+
+</div>

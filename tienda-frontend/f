@@ -1,0 +1,2963 @@
+[33mcommit 923622894c4abf003407c1fb0b7f063d55fcc09d[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: FelixR93 <166468113+FelixR93@users.noreply.github.com>
+Date:   Sat Nov 22 10:15:29 2025 -0500
+
+    subiendo el frontend
+
+[1mdiff --git a/angular.json b/angular.json[m
+[1mindex a90659f..d542f75 100644[m
+[1m--- a/angular.json[m
+[1m+++ b/angular.json[m
+[36m@@ -2,7 +2,8 @@[m
+   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",[m
+   "version": 1,[m
+   "cli": {[m
+[31m-    "packageManager": "npm"[m
+[32m+[m[32m    "packageManager": "npm",[m
+[32m+[m[32m    "analytics": "20b6252b-7a79-458a-afb6-d9e55383f4da"[m
+   },[m
+   "newProjectRoot": "projects",[m
+   "projects": {[m
+[36m@@ -24,12 +25,12 @@[m
+             "tsConfig": "tsconfig.app.json",[m
+             "inlineStyleLanguage": "scss",[m
+             "assets": [[m
+[31m-              {[m
+[31m-                "glob": "**/*",[m
+[31m-                "input": "public"[m
+[31m-              }[m
+[32m+[m[32m              "src/favicon.ico",[m
+[32m+[m[32m              "src/assets"[m
+             ],[m
+[32m+[m
+             "styles": [[m
+[32m+[m[32m              "node_modules/bootstrap/dist/css/bootstrap.min.css",[m
+               "src/styles.scss"[m
+             ],[m
+             "server": "src/main.server.ts",[m
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex 867f195..5a666c7 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -16,6 +16,7 @@[m
+         "@angular/platform-server": "^21.0.0",[m
+         "@angular/router": "^21.0.0",[m
+         "@angular/ssr": "^21.0.0",[m
+[32m+[m[32m        "bootstrap": "^5.3.8",[m
+         "express": "^5.1.0",[m
+         "rxjs": "~7.8.0",[m
+         "tslib": "^2.3.0"[m
+[36m@@ -1089,9 +1090,9 @@[m
+       }[m
+     },[m
+     "node_modules/@csstools/css-syntax-patches-for-csstree": {[m
+[31m-      "version": "1.0.16",[m
+[31m-      "resolved": "https://registry.npmjs.org/@csstools/css-syntax-patches-for-csstree/-/css-syntax-patches-for-csstree-1.0.16.tgz",[m
+[31m-      "integrity": "sha512-2SpS4/UaWQaGpBINyG5ZuCHnUDeVByOhvbkARwfmnfxDvTaj80yOI1cD8Tw93ICV5Fx4fnyDKWQZI1CDtcWyUg==",[m
+[32m+[m[32m      "version": "1.0.17",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@csstools/css-syntax-patches-for-csstree/-/css-syntax-patches-for-csstree-1.0.17.tgz",[m
+[32m+[m[32m      "integrity": "sha512-LCC++2h8pLUSPY+EsZmrrJ1EOUu+5iClpEiDhhdw3zRJpPbABML/N5lmRuBHjxtKm9VnRcsUzioyD0sekFMF0A==",[m
+       "dev": true,[m
+       "funding": [[m
+         {[m
+[36m@@ -1977,67 +1978,6 @@[m
+         "node": "20 || >=22"[m
+       }[m
+     },[m
+[31m-    "node_modules/@isaacs/cliui": {[m
+[31m-      "version": "8.0.2",[m
+[31m-      "resolved": "https://registry.npmjs.org/@isaacs/cliui/-/cliui-8.0.2.tgz",[m
+[31m-      "integrity": "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "ISC",[m
+[31m-      "dependencies": {[m
+[31m-        "string-width": "^5.1.2",[m
+[31m-        "string-width-cjs": "npm:string-width@^4.2.0",[m
+[31m-        "strip-ansi": "^7.0.1",[m
+[31m-        "strip-ansi-cjs": "npm:strip-ansi@^6.0.1",[m
+[31m-        "wrap-ansi": "^8.1.0",[m
+[31m-        "wrap-ansi-cjs": "npm:wrap-ansi@^7.0.0"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=12"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@isaacs/cliui/node_modules/emoji-regex": {[m
+[31m-      "version": "9.2.2",[m
+[31m-      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-9.2.2.tgz",[m
+[31m-      "integrity": "sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT"[m
+[31m-    },[m
+[31m-    "node_modules/@isaacs/cliui/node_modules/string-width": {[m
+[31m-      "version": "5.1.2",[m
+[31m-      "resolved": "https://registry.npmjs.org/string-width/-/string-width-5.1.2.tgz",[m
+[31m-      "integrity": "sha512-HnLOCR3vjcY8beoNLtcjZ5/nxn2afmME6lhrDrebokqMap+XbeW8n9TXpPDOqdGK5qcI3oT0GKTW6wC7EMiVqA==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "eastasianwidth": "^0.2.0",[m
+[31m-        "emoji-regex": "^9.2.2",[m
+[31m-        "strip-ansi": "^7.0.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=12"[m
+[31m-      },[m
+[31m-      "funding": {[m
+[31m-        "url": "https://github.com/sponsors/sindresorhus"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@isaacs/cliui/node_modules/wrap-ansi": {[m
+[31m-      "version": "8.1.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-8.1.0.tgz",[m
+[31m-      "integrity": "sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "ansi-styles": "^6.1.0",[m
+[31m-        "string-width": "^5.0.1",[m
+[31m-        "strip-ansi": "^7.0.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=12"[m
+[31m-      },[m
+[31m-      "funding": {[m
+[31m-        "url": "https://github.com/chalk/wrap-ansi?sponsor=1"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/@isaacs/fs-minipass": {[m
+       "version": "4.0.1",[m
+       "resolved": "https://registry.npmjs.org/@isaacs/fs-minipass/-/fs-minipass-4.0.1.tgz",[m
+[36m@@ -2722,16 +2662,16 @@[m
+       }[m
+     },[m
+     "node_modules/@npmcli/fs": {[m
+[31m-      "version": "4.0.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@npmcli/fs/-/fs-4.0.0.tgz",[m
+[31m-      "integrity": "sha512-/xGlezI6xfGO9NwuJlnwz/K14qD1kCSAGtacBHnGzeAIuJGazcp45KP5NuyARXoKb7cwulAGWVsbeSxdG/cb0Q==",[m
+[32m+[m[32m      "version": "5.0.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@npmcli/fs/-/fs-5.0.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-7OsC1gNORBEawOa5+j2pXN9vsicaIOH5cPXxoR6fJOmH6/EXpJB2CajXOu1fPRFun2m1lktEFX11+P89hqO/og==",[m
+       "dev": true,[m
+       "license": "ISC",[m
+       "dependencies": {[m
+         "semver": "^7.3.5"[m
+       },[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || >=20.5.0"[m
+[32m+[m[32m        "node": "^20.17.0 || >=22.9.0"[m
+       }[m
+     },[m
+     "node_modules/@npmcli/git": {[m
+[36m@@ -2851,14 +2791,14 @@[m
+       }[m
+     },[m
+     "node_modules/@npmcli/package-json": {[m
+[31m-      "version": "7.0.3",[m
+[31m-      "resolved": "https://registry.npmjs.org/@npmcli/package-json/-/package-json-7.0.3.tgz",[m
+[31m-      "integrity": "sha512-XT8016UrDfnR7yh2XvnIqaPnA5v2QomaWryDYYgKNT0LaX0vcKf4gu2f3CWD/ltV4tOto4MwZynWlynMJL8bBQ==",[m
+[32m+[m[32m      "version": "7.0.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@npmcli/package-json/-/package-json-7.0.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-0wInJG3j/K40OJt/33ax47WfWMzZTm6OQxB9cDhTt5huCP2a9g2GnlsxmfN+PulItNPIpPrZ+kfwwUil7eHcZQ==",[m
+       "dev": true,[m
+       "license": "ISC",[m
+       "dependencies": {[m
+         "@npmcli/git": "^7.0.0",[m
+[31m-        "glob": "^12.0.0",[m
+[32m+[m[32m        "glob": "^13.0.0",[m
+         "hosted-git-info": "^9.0.0",[m
+         "json-parse-even-better-errors": "^5.0.0",[m
+         "proc-log": "^6.0.0",[m
+[36m@@ -3337,6 +3277,17 @@[m
+       "license": "MIT",[m
+       "optional": true[m
+     },[m
+[32m+[m[32m    "node_modules/@popperjs/core": {[m
+[32m+[m[32m      "version": "2.11.8",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz",[m
+[32m+[m[32m      "integrity": "sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==",[m
+[32m+[m[32m      "license": "MIT",[m
+[32m+[m[32m      "peer": true,[m
+[32m+[m[32m      "funding": {[m
+[32m+[m[32m        "type": "opencollective",[m
+[32m+[m[32m        "url": "https://opencollective.com/popperjs"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+     "node_modules/@rolldown/binding-android-arm64": {[m
+       "version": "1.0.0-beta.47",[m
+       "resolved": "https://registry.npmjs.org/@rolldown/binding-android-arm64/-/binding-android-arm64-1.0.0-beta.47.tgz",[m
+[36m@@ -4200,16 +4151,16 @@[m
+       }[m
+     },[m
+     "node_modules/@vitest/expect": {[m
+[31m-      "version": "4.0.12",[m
+[31m-      "resolved": "https://registry.npmjs.org/@vitest/expect/-/expect-4.0.12.tgz",[m
+[31m-      "integrity": "sha512-is+g0w8V3/ZhRNrRizrJNr8PFQKwYmctWlU4qg8zy5r9aIV5w8IxXLlfbbxJCwSpsVl2PXPTm2/zruqTqz3QSg==",[m
+[32m+[m[32m      "version": "4.0.13",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@vitest/expect/-/expect-4.0.13.tgz",[m
+[32m+[m[32m      "integrity": "sha512-zYtcnNIBm6yS7Gpr7nFTmq8ncowlMdOJkWLqYvhr/zweY6tFbDkDi8BPPOeHxEtK1rSI69H7Fd4+1sqvEGli6w==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "@standard-schema/spec": "^1.0.0",[m
+         "@types/chai": "^5.2.2",[m
+[31m-        "@vitest/spy": "4.0.12",[m
+[31m-        "@vitest/utils": "4.0.12",[m
+[32m+[m[32m        "@vitest/spy": "4.0.13",[m
+[32m+[m[32m        "@vitest/utils": "4.0.13",[m
+         "chai": "^6.2.1",[m
+         "tinyrainbow": "^3.0.3"[m
+       },[m
+[36m@@ -4218,13 +4169,13 @@[m
+       }[m
+     },[m
+     "node_modules/@vitest/mocker": {[m
+[31m-      "version": "4.0.12",[m
+[31m-      "resolved": "https://registry.npmjs.org/@vitest/mocker/-/mocker-4.0.12.tgz",[m
+[31m-      "integrity": "sha512-GsmA/tD5Ht3RUFoz41mZsMU1AXch3lhmgbTnoSPTdH231g7S3ytNN1aU0bZDSyxWs8WA7KDyMPD5L4q6V6vj9w==",[m
+[32m+[m[32m      "version": "4.0.13",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@vitest/mocker/-/mocker-4.0.13.tgz",[m
+[32m+[m[32m      "integrity": "sha512-eNCwzrI5djoauklwP1fuslHBjrbR8rqIVbvNlAnkq1OTa6XT+lX68mrtPirNM9TnR69XUPt4puBCx2Wexseylg==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "dependencies": {[m
+[31m-        "@vitest/spy": "4.0.12",[m
+[32m+[m[32m        "@vitest/spy": "4.0.13",[m
+         "estree-walker": "^3.0.3",[m
+         "magic-string": "^0.30.21"[m
+       },[m
+[36m@@ -4255,9 +4206,9 @@[m
+       }[m
+     },[m
+     "node_modules/@vitest/pretty-format": {[m
+[31m-      "version": "4.0.12",[m
+[31m-      "resolved": "https://registry.npmjs.org/@vitest/pretty-format/-/pretty-format-4.0.12.tgz",[m
+[31m-      "integrity": "sha512-R7nMAcnienG17MvRN8TPMJiCG8rrZJblV9mhT7oMFdBXvS0x+QD6S1G4DxFusR2E0QIS73f7DqSR1n87rrmE+g==",[m
+[32m+[m[32m      "version": "4.0.13",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@vitest/pretty-format/-/pretty-format-4.0.13.tgz",[m
+[32m+[m[32m      "integrity": "sha512-ooqfze8URWbI2ozOeLDMh8YZxWDpGXoeY3VOgcDnsUxN0jPyPWSUvjPQWqDGCBks+opWlN1E4oP1UYl3C/2EQA==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "dependencies": {[m
+[36m@@ -4268,13 +4219,13 @@[m
+       }[m
+     },[m
+     "node_modules/@vitest/runner": {[m
+[31m-      "version": "4.0.12",[m
+[31m-      "resolved": "https://registry.npmjs.org/@vitest/runner/-/runner-4.0.12.tgz",[m
+[31m-      "integrity": "sha512-hDlCIJWuwlcLumfukPsNfPDOJokTv79hnOlf11V+n7E14rHNPz0Sp/BO6h8sh9qw4/UjZiKyYpVxK2ZNi+3ceQ==",[m
+[32m+[m[32m      "version": "4.0.13",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@vitest/runner/-/runner-4.0.13.tgz",[m
+[32m+[m[32m      "integrity": "sha512-9IKlAru58wcVaWy7hz6qWPb2QzJTKt+IOVKjAx5vb5rzEFPTL6H4/R9BMvjZ2ppkxKgTrFONEJFtzvnyEpiT+A==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "dependencies": {[m
+[31m-        "@vitest/utils": "4.0.12",[m
+[32m+[m[32m        "@vitest/utils": "4.0.13",[m
+         "pathe": "^2.0.3"[m
+       },[m
+       "funding": {[m
+[36m@@ -4282,13 +4233,13 @@[m
+       }[m
+     },[m
+     "node_modules/@vitest/snapshot": {[m
+[31m-      "version": "4.0.12",[m
+[31m-      "resolved": "https://registry.npmjs.org/@vitest/snapshot/-/snapshot-4.0.12.tgz",[m
+[31m-      "integrity": "sha512-2jz9zAuBDUSbnfyixnyOd1S2YDBrZO23rt1bicAb6MA/ya5rHdKFRikPIDpBj/Dwvh6cbImDmudegnDAkHvmRQ==",[m
+[32m+[m[32m      "version": "4.0.13",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@vitest/snapshot/-/snapshot-4.0.13.tgz",[m
+[32m+[m[32m      "integrity": "sha512-hb7Usvyika1huG6G6l191qu1urNPsq1iFc2hmdzQY3F5/rTgqQnwwplyf8zoYHkpt7H6rw5UfIw6i/3qf9oSxQ==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "dependencies": {[m
+[31m-        "@vitest/pretty-format": "4.0.12",[m
+[32m+[m[32m        "@vitest/pretty-format": "4.0.13",[m
+         "magic-string": "^0.30.21",[m
+         "pathe": "^2.0.3"[m
+       },[m
+[36m@@ -4307,9 +4258,9 @@[m
+       }[m
+     },[m
+     "node_modules/@vitest/spy": {[m
+[31m-      "version": "4.0.12",[m
+[31m-      "resolved": "https://registry.npmjs.org/@vitest/spy/-/spy-4.0.12.tgz",[m
+[31m-      "integrity": "sha512-GZjI9PPhiOYNX8Nsyqdw7JQB+u0BptL5fSnXiottAUBHlcMzgADV58A7SLTXXQwcN1yZ6gfd1DH+2bqjuUlCzw==",[m
+[32m+[m[32m      "version": "4.0.13",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@vitest/spy/-/spy-4.0.13.tgz",[m
+[32m+[m[32m      "integrity": "sha512-hSu+m4se0lDV5yVIcNWqjuncrmBgwaXa2utFLIrBkQCQkt+pSwyZTPFQAZiiF/63j8jYa8uAeUZ3RSfcdWaYWw==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "funding": {[m
+[36m@@ -4317,13 +4268,13 @@[m
+       }[m
+     },[m
+     "node_modules/@vitest/utils": {[m
+[31m-      "version": "4.0.12",[m
+[31m-      "resolved": "https://registry.npmjs.org/@vitest/utils/-/utils-4.0.12.tgz",[m
+[31m-      "integrity": "sha512-DVS/TLkLdvGvj1avRy0LSmKfrcI9MNFvNGN6ECjTUHWJdlcgPDOXhjMis5Dh7rBH62nAmSXnkPbE+DZ5YD75Rw==",[m
+[32m+[m[32m      "version": "4.0.13",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@vitest/utils/-/utils-4.0.13.tgz",[m
+[32m+[m[32m      "integrity": "sha512-ydozWyQ4LZuu8rLp47xFUWis5VOKMdHjXCWhs1LuJsTNKww+pTHQNK4e0assIB9K80TxFyskENL6vCu3j34EYA==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "dependencies": {[m
+[31m-        "@vitest/pretty-format": "4.0.12",[m
+[32m+[m[32m        "@vitest/pretty-format": "4.0.13",[m
+         "tinyrainbow": "^3.0.3"[m
+       },[m
+       "funding": {[m
+[36m@@ -4569,6 +4520,25 @@[m
+       "dev": true,[m
+       "license": "ISC"[m
+     },[m
+[32m+[m[32m    "node_modules/bootstrap": {[m
+[32m+[m[32m      "version": "5.3.8",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/bootstrap/-/bootstrap-5.3.8.tgz",[m
+[32m+[m[32m      "integrity": "sha512-HP1SZDqaLDPwsNiqRqi5NcP0SSXciX2s9E+RyqJIIqGo+vJeN5AJVM98CXmW/Wux0nQ5L7jeWUdplCEf0Ee+tg==",[m
+[32m+[m[32m      "funding": [[m
+[32m+[m[32m        {[m
+[32m+[m[32m          "type": "github",[m
+[32m+[m[32m          "url": "https://github.com/sponsors/twbs"[m
+[32m+[m[32m        },[m
+[32m+[m[32m        {[m
+[32m+[m[32m          "type": "opencollective",[m
+[32m+[m[32m          "url": "https://opencollective.com/bootstrap"[m
+[32m+[m[32m        }[m
+[32m+[m[32m      ],[m
+[32m+[m[32m      "license": "MIT",[m
+[32m+[m[32m      "peerDependencies": {[m
+[32m+[m[32m        "@popperjs/core": "^2.11.8"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+     "node_modules/brace-expansion": {[m
+       "version": "2.0.2",[m
+       "resolved": "https://registry.npmjs.org/brace-expansion/-/brace-expansion-2.0.2.tgz",[m
+[36m@@ -4644,15 +4614,15 @@[m
+       }[m
+     },[m
+     "node_modules/cacache": {[m
+[31m-      "version": "20.0.2",[m
+[31m-      "resolved": "https://registry.npmjs.org/cacache/-/cacache-20.0.2.tgz",[m
+[31m-      "integrity": "sha512-rVWvqtWcgSzB22wImrVto+7PmE+lUqv5dYzRHD0QJsfpSwTkW+GIqA4ykSt/CCjQlQle8USn8CO8vcWNrIqktg==",[m
+[32m+[m[32m      "version": "20.0.3",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/cacache/-/cacache-20.0.3.tgz",[m
+[32m+[m[32m      "integrity": "sha512-3pUp4e8hv07k1QlijZu6Kn7c9+ZpWWk4j3F8N3xPuCExULobqJydKYOTj1FTq58srkJsXvO7LbGAH4C0ZU3WGw==",[m
+       "dev": true,[m
+       "license": "ISC",[m
+       "dependencies": {[m
+[31m-        "@npmcli/fs": "^4.0.0",[m
+[32m+[m[32m        "@npmcli/fs": "^5.0.0",[m
+         "fs-minipass": "^3.0.0",[m
+[31m-        "glob": "^11.0.3",[m
+[32m+[m[32m        "glob": "^13.0.0",[m
+         "lru-cache": "^11.1.0",[m
+         "minipass": "^7.0.3",[m
+         "minipass-collect": "^2.0.1",[m
+[36m@@ -4660,36 +4630,12 @@[m
+         "minipass-pipeline": "^1.2.4",[m
+         "p-map": "^7.0.2",[m
+         "ssri": "^13.0.0",[m
+[31m-        "unique-filename": "^4.0.0"[m
+[32m+[m[32m        "unique-filename": "^5.0.0"[m
+       },[m
+       "engines": {[m
+         "node": "^20.17.0 || >=22.9.0"[m
+       }[m
+     },[m
+[31m-    "node_modules/cacache/node_modules/glob": {[m
+[31m-      "version": "11.1.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/glob/-/glob-11.1.0.tgz",[m
+[31m-      "integrity": "sha512-vuNwKSaKiqm7g0THUBu2x7ckSs3XJLXE+2ssL7/MfTGPLLcrJQ/4Uq1CjPTtO5cCIiRxqvN6Twy1qOwhL0Xjcw==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "BlueOak-1.0.0",[m
+[31m-      "dependencies": {[m
+[31m-        "foreground-child": "^3.3.1",[m
+[31m-        "jackspeak": "^4.1.1",[m
+[31m-        "minimatch": "^10.1.1",[m
+[31m-        "minipass": "^7.1.2",[m
+[31m-        "package-json-from-dist": "^1.0.0",[m
+[31m-        "path-scurry": "^2.0.0"[m
+[31m-      },[m
+[31m-      "bin": {[m
+[31m-        "glob": "dist/esm/bin.mjs"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": "20 || >=22"[m
+[31m-      },[m
+[31m-      "funding": {[m
+[31m-        "url": "https://github.com/sponsors/isaacs"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/cacache/node_modules/lru-cache": {[m
+       "version": "11.2.2",[m
+       "resolved": "https://registry.npmjs.org/lru-cache/-/lru-cache-11.2.2.tgz",[m
+[36m@@ -4890,13 +4836,6 @@[m
+         "node": ">=20"[m
+       }[m
+     },[m
+[31m-    "node_modules/cliui/node_modules/emoji-regex": {[m
+[31m-      "version": "10.6.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.6.0.tgz",[m
+[31m-      "integrity": "sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT"[m
+[31m-    },[m
+     "node_modules/cliui/node_modules/string-width": {[m
+       "version": "7.2.0",[m
+       "resolved": "https://registry.npmjs.org/string-width/-/string-width-7.2.0.tgz",[m
+[36m@@ -5226,13 +5165,6 @@[m
+         "node": ">= 0.4"[m
+       }[m
+     },[m
+[31m-    "node_modules/eastasianwidth": {[m
+[31m-      "version": "0.2.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/eastasianwidth/-/eastasianwidth-0.2.0.tgz",[m
+[31m-      "integrity": "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT"[m
+[31m-    },[m
+     "node_modules/ee-first": {[m
+       "version": "1.1.1",[m
+       "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz",[m
+[36m@@ -5240,16 +5172,16 @@[m
+       "license": "MIT"[m
+     },[m
+     "node_modules/electron-to-chromium": {[m
+[31m-      "version": "1.5.258",[m
+[31m-      "resolved": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.258.tgz",[m
+[31m-      "integrity": "sha512-rHUggNV5jKQ0sSdWwlaRDkFc3/rRJIVnOSe9yR4zrR07m3ZxhP4N27Hlg8VeJGGYgFTxK5NqDmWI4DSH72vIJg==",[m
+[32m+[m[32m      "version": "1.5.259",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.259.tgz",[m
+[32m+[m[32m      "integrity": "sha512-I+oLXgpEJzD6Cwuwt1gYjxsDmu/S/Kd41mmLA3O+/uH2pFRO/DvOjUyGozL8j3KeLV6WyZ7ssPwELMsXCcsJAQ==",[m
+       "dev": true,[m
+       "license": "ISC"[m
+     },[m
+     "node_modules/emoji-regex": {[m
+[31m-      "version": "8.0.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz",[m
+[31m-      "integrity": "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==",[m
+[32m+[m[32m      "version": "10.6.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.6.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==",[m
+       "dev": true,[m
+       "license": "MIT"[m
+     },[m
+[36m@@ -5629,23 +5561,6 @@[m
+         "node": ">= 0.8"[m
+       }[m
+     },[m
+[31m-    "node_modules/foreground-child": {[m
+[31m-      "version": "3.3.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.1.tgz",[m
+[31m-      "integrity": "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "ISC",[m
+[31m-      "dependencies": {[m
+[31m-        "cross-spawn": "^7.0.6",[m
+[31m-        "signal-exit": "^4.0.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=14"[m
+[31m-      },[m
+[31m-      "funding": {[m
+[31m-        "url": "https://github.com/sponsors/isaacs"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/forwarded": {[m
+       "version": "0.2.0",[m
+       "resolved": "https://registry.npmjs.org/forwarded/-/forwarded-0.2.0.tgz",[m
+[36m@@ -5772,22 +5687,16 @@[m
+       }[m
+     },[m
+     "node_modules/glob": {[m
+[31m-      "version": "12.0.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/glob/-/glob-12.0.0.tgz",[m
+[31m-      "integrity": "sha512-5Qcll1z7IKgHr5g485ePDdHcNQY0k2dtv/bjYy0iuyGxQw2qSOiiXUXJ+AYQpg3HNoUMHqAruX478Jeev7UULw==",[m
+[32m+[m[32m      "version": "13.0.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/glob/-/glob-13.0.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-tvZgpqk6fz4BaNZ66ZsRaZnbHvP/jG3uKJvAZOwEVUL4RTA5nJeeLYfyN9/VA8NX/V3IBG+hkeuGpKjvELkVhA==",[m
+       "dev": true,[m
+       "license": "BlueOak-1.0.0",[m
+       "dependencies": {[m
+[31m-        "foreground-child": "^3.3.1",[m
+[31m-        "jackspeak": "^4.1.1",[m
+         "minimatch": "^10.1.1",[m
+         "minipass": "^7.1.2",[m
+[31m-        "package-json-from-dist": "^1.0.0",[m
+         "path-scurry": "^2.0.0"[m
+       },[m
+[31m-      "bin": {[m
+[31m-        "glob": "dist/esm/bin.mjs"[m
+[31m-      },[m
+       "engines": {[m
+         "node": "20 || >=22"[m
+       },[m
+[36m@@ -5922,28 +5831,23 @@[m
+       "license": "BSD-2-Clause"[m
+     },[m
+     "node_modules/http-errors": {[m
+[31m-      "version": "2.0.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-2.0.0.tgz",[m
+[31m-      "integrity": "sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==",[m
+[32m+[m[32m      "version": "2.0.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-2.0.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+[31m-        "depd": "2.0.0",[m
+[31m-        "inherits": "2.0.4",[m
+[31m-        "setprototypeof": "1.2.0",[m
+[31m-        "statuses": "2.0.1",[m
+[31m-        "toidentifier": "1.0.1"[m
+[32m+[m[32m        "depd": "~2.0.0",[m
+[32m+[m[32m        "inherits": "~2.0.4",[m
+[32m+[m[32m        "setprototypeof": "~1.2.0",[m
+[32m+[m[32m        "statuses": "~2.0.2",[m
+[32m+[m[32m        "toidentifier": "~1.0.1"[m
+       },[m
+       "engines": {[m
+         "node": ">= 0.8"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/http-errors/node_modules/statuses": {[m
+[31m-      "version": "2.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/statuses/-/statuses-2.0.1.tgz",[m
+[31m-      "integrity": "sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==",[m
+[31m-      "license": "MIT",[m
+[31m-      "engines": {[m
+[31m-        "node": ">= 0.8"[m
+[32m+[m[32m      },[m
+[32m+[m[32m      "funding": {[m
+[32m+[m[32m        "type": "opencollective",[m
+[32m+[m[32m        "url": "https://opencollective.com/express"[m
+       }[m
+     },[m
+     "node_modules/http-proxy-agent": {[m
+[36m@@ -6196,22 +6100,6 @@[m
+         "node": ">=10"[m
+       }[m
+     },[m
+[31m-    "node_modules/jackspeak": {[m
+[31m-      "version": "4.1.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/jackspeak/-/jackspeak-4.1.1.tgz",[m
+[31m-      "integrity": "sha512-zptv57P3GpL+O0I7VdMJNBZCu+BPHVQUk55Ft8/QCJjTVxrnJHuVuX/0Bl2A6/+2oyR/ZMEuFKwmzqqZ/U5nPQ==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "BlueOak-1.0.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@isaacs/cliui": "^8.0.2"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": "20 || >=22"[m
+[31m-      },[m
+[31m-      "funding": {[m
+[31m-        "url": "https://github.com/sponsors/isaacs"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/js-tokens": {[m
+       "version": "4.0.0",[m
+       "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",[m
+[36m@@ -6337,13 +6225,6 @@[m
+         "node": ">=20.0.0"[m
+       }[m
+     },[m
+[31m-    "node_modules/listr2/node_modules/emoji-regex": {[m
+[31m-      "version": "10.6.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.6.0.tgz",[m
+[31m-      "integrity": "sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT"[m
+[31m-    },[m
+     "node_modules/listr2/node_modules/string-width": {[m
+       "version": "7.2.0",[m
+       "resolved": "https://registry.npmjs.org/string-width/-/string-width-7.2.0.tgz",[m
+[36m@@ -6445,13 +6326,6 @@[m
+         "url": "https://github.com/sponsors/sindresorhus"[m
+       }[m
+     },[m
+[31m-    "node_modules/log-update/node_modules/emoji-regex": {[m
+[31m-      "version": "10.6.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.6.0.tgz",[m
+[31m-      "integrity": "sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT"[m
+[31m-    },[m
+     "node_modules/log-update/node_modules/string-width": {[m
+       "version": "7.2.0",[m
+       "resolved": "https://registry.npmjs.org/string-width/-/string-width-7.2.0.tgz",[m
+[36m@@ -7272,13 +7146,6 @@[m
+         "url": "https://github.com/sponsors/sindresorhus"[m
+       }[m
+     },[m
+[31m-    "node_modules/package-json-from-dist": {[m
+[31m-      "version": "1.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/package-json-from-dist/-/package-json-from-dist-1.0.1.tgz",[m
+[31m-      "integrity": "sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "BlueOak-1.0.0"[m
+[31m-    },[m
+     "node_modules/pacote": {[m
+       "version": "21.0.3",[m
+       "resolved": "https://registry.npmjs.org/pacote/-/pacote-21.0.3.tgz",[m
+[36m@@ -7599,15 +7466,15 @@[m
+       }[m
+     },[m
+     "node_modules/raw-body": {[m
+[31m-      "version": "3.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-3.0.1.tgz",[m
+[31m-      "integrity": "sha512-9G8cA+tuMS75+6G/TzW8OtLzmBDMo8p1JRxN5AZ+LAp8uxGA8V8GZm4GQ4/N5QNQEnLmg6SS7wyuSmbKepiKqA==",[m
+[32m+[m[32m      "version": "3.0.2",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-3.0.2.tgz",[m
+[32m+[m[32m      "integrity": "sha512-K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==",[m
+       "license": "MIT",[m
+       "dependencies": {[m
+[31m-        "bytes": "3.1.2",[m
+[31m-        "http-errors": "2.0.0",[m
+[31m-        "iconv-lite": "0.7.0",[m
+[31m-        "unpipe": "1.0.0"[m
+[32m+[m[32m        "bytes": "~3.1.2",[m
+[32m+[m[32m        "http-errors": "~2.0.1",[m
+[32m+[m[32m        "iconv-lite": "~0.7.0",[m
+[32m+[m[32m        "unpipe": "~1.0.0"[m
+       },[m
+       "engines": {[m
+         "node": ">= 0.10"[m
+[36m@@ -8229,55 +8096,6 @@[m
+         "url": "https://github.com/sponsors/sindresorhus"[m
+       }[m
+     },[m
+[31m-    "node_modules/string-width-cjs": {[m
+[31m-      "name": "string-width",[m
+[31m-      "version": "4.2.3",[m
+[31m-      "resolved": "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz",[m
+[31m-      "integrity": "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "emoji-regex": "^8.0.0",[m
+[31m-        "is-fullwidth-code-point": "^3.0.0",[m
+[31m-        "strip-ansi": "^6.0.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/string-width-cjs/node_modules/ansi-regex": {[m
+[31m-      "version": "5.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",[m
+[31m-      "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/string-width-cjs/node_modules/is-fullwidth-code-point": {[m
+[31m-      "version": "3.0.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz",[m
+[31m-      "integrity": "sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/string-width-cjs/node_modules/strip-ansi": {[m
+[31m-      "version": "6.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz",[m
+[31m-      "integrity": "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "ansi-regex": "^5.0.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/strip-ansi": {[m
+       "version": "7.1.2",[m
+       "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-7.1.2.tgz",[m
+[36m@@ -8294,30 +8112,6 @@[m
+         "url": "https://github.com/chalk/strip-ansi?sponsor=1"[m
+       }[m
+     },[m
+[31m-    "node_modules/strip-ansi-cjs": {[m
+[31m-      "name": "strip-ansi",[m
+[31m-      "version": "6.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz",[m
+[31m-      "integrity": "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "ansi-regex": "^5.0.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/strip-ansi-cjs/node_modules/ansi-regex": {[m
+[31m-      "version": "5.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",[m
+[31m-      "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/supports-preserve-symlinks-flag": {[m
+       "version": "1.0.0",[m
+       "resolved": "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz",[m
+[36m@@ -8542,29 +8336,29 @@[m
+       "license": "MIT"[m
+     },[m
+     "node_modules/unique-filename": {[m
+[31m-      "version": "4.0.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/unique-filename/-/unique-filename-4.0.0.tgz",[m
+[31m-      "integrity": "sha512-XSnEewXmQ+veP7xX2dS5Q4yZAvO40cBN2MWkJ7D/6sW4Dg6wYBNwM1Vrnz1FhH5AdeLIlUXRI9e28z1YZi71NQ==",[m
+[32m+[m[32m      "version": "5.0.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/unique-filename/-/unique-filename-5.0.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-2RaJTAvAb4owyjllTfXzFClJ7WsGxlykkPvCr9pA//LD9goVq+m4PPAeBgNodGZ7nSrntT/auWpJ6Y5IFXcfjg==",[m
+       "dev": true,[m
+       "license": "ISC",[m
+       "dependencies": {[m
+[31m-        "unique-slug": "^5.0.0"[m
+[32m+[m[32m        "unique-slug": "^6.0.0"[m
+       },[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || >=20.5.0"[m
+[32m+[m[32m        "node": "^20.17.0 || >=22.9.0"[m
+       }[m
+     },[m
+     "node_modules/unique-slug": {[m
+[31m-      "version": "5.0.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/unique-slug/-/unique-slug-5.0.0.tgz",[m
+[31m-      "integrity": "sha512-9OdaqO5kwqR+1kVgHAhsp5vPNU0hnxRa26rBFNfNgM7M6pNtgzeBn3s/xbyCQL3dcjzOatcef6UUHpB/6MaETg==",[m
+[32m+[m[32m      "version": "6.0.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/unique-slug/-/unique-slug-6.0.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-4Lup7Ezn8W3d52/xBhZBVdx323ckxa7DEvd9kPQHppTkLoJXw6ltrBCyj5pnrxj0qKDxYMJ56CoxNuFCscdTiw==",[m
+       "dev": true,[m
+       "license": "ISC",[m
+       "dependencies": {[m
+         "imurmurhash": "^0.1.4"[m
+       },[m
+       "engines": {[m
+[31m-        "node": "^18.17.0 || >=20.5.0"[m
+[32m+[m[32m        "node": "^20.17.0 || >=22.9.0"[m
+       }[m
+     },[m
+     "node_modules/unpipe": {[m
+[36m@@ -9207,19 +9001,19 @@[m
+       }[m
+     },[m
+     "node_modules/vitest": {[m
+[31m-      "version": "4.0.12",[m
+[31m-      "resolved": "https://registry.npmjs.org/vitest/-/vitest-4.0.12.tgz",[m
+[31m-      "integrity": "sha512-pmW4GCKQ8t5Ko1jYjC3SqOr7TUKN7uHOHB/XGsAIb69eYu6d1ionGSsb5H9chmPf+WeXt0VE7jTXsB1IvWoNbw==",[m
+[32m+[m[32m      "version": "4.0.13",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/vitest/-/vitest-4.0.13.tgz",[m
+[32m+[m[32m      "integrity": "sha512-QSD4I0fN6uZQfftryIXuqvqgBxTvJ3ZNkF6RWECd82YGAYAfhcppBLFXzXJHQAAhVFyYEuFTrq6h0hQqjB7jIQ==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "dependencies": {[m
+[31m-        "@vitest/expect": "4.0.12",[m
+[31m-        "@vitest/mocker": "4.0.12",[m
+[31m-        "@vitest/pretty-format": "4.0.12",[m
+[31m-        "@vitest/runner": "4.0.12",[m
+[31m-        "@vitest/snapshot": "4.0.12",[m
+[31m-        "@vitest/spy": "4.0.12",[m
+[31m-        "@vitest/utils": "4.0.12",[m
+[32m+[m[32m        "@vitest/expect": "4.0.13",[m
+[32m+[m[32m        "@vitest/mocker": "4.0.13",[m
+[32m+[m[32m        "@vitest/pretty-format": "4.0.13",[m
+[32m+[m[32m        "@vitest/runner": "4.0.13",[m
+[32m+[m[32m        "@vitest/snapshot": "4.0.13",[m
+[32m+[m[32m        "@vitest/spy": "4.0.13",[m
+[32m+[m[32m        "@vitest/utils": "4.0.13",[m
+         "debug": "^4.4.3",[m
+         "es-module-lexer": "^1.7.0",[m
+         "expect-type": "^1.2.2",[m
+[36m@@ -9248,10 +9042,10 @@[m
+         "@opentelemetry/api": "^1.9.0",[m
+         "@types/debug": "^4.1.12",[m
+         "@types/node": "^20.0.0 || ^22.0.0 || >=24.0.0",[m
+[31m-        "@vitest/browser-playwright": "4.0.12",[m
+[31m-        "@vitest/browser-preview": "4.0.12",[m
+[31m-        "@vitest/browser-webdriverio": "4.0.12",[m
+[31m-        "@vitest/ui": "4.0.12",[m
+[32m+[m[32m        "@vitest/browser-playwright": "4.0.13",[m
+[32m+[m[32m        "@vitest/browser-preview": "4.0.13",[m
+[32m+[m[32m        "@vitest/browser-webdriverio": "4.0.13",[m
+[32m+[m[32m        "@vitest/ui": "4.0.13",[m
+         "happy-dom": "*",[m
+         "jsdom": "*"[m
+       },[m
+[36m@@ -9441,89 +9235,6 @@[m
+         "node": ">=8"[m
+       }[m
+     },[m
+[31m-    "node_modules/wrap-ansi-cjs": {[m
+[31m-      "name": "wrap-ansi",[m
+[31m-      "version": "7.0.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz",[m
+[31m-      "integrity": "sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "ansi-styles": "^4.0.0",[m
+[31m-        "string-width": "^4.1.0",[m
+[31m-        "strip-ansi": "^6.0.0"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=10"[m
+[31m-      },[m
+[31m-      "funding": {[m
+[31m-        "url": "https://github.com/chalk/wrap-ansi?sponsor=1"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/wrap-ansi-cjs/node_modules/ansi-regex": {[m
+[31m-      "version": "5.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",[m
+[31m-      "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/wrap-ansi-cjs/node_modules/ansi-styles": {[m
+[31m-      "version": "4.3.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.3.0.tgz",[m
+[31m-      "integrity": "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "color-convert": "^2.0.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      },[m
+[31m-      "funding": {[m
+[31m-        "url": "https://github.com/chalk/ansi-styles?sponsor=1"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/wrap-ansi-cjs/node_modules/is-fullwidth-code-point": {[m
+[31m-      "version": "3.0.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz",[m
+[31m-      "integrity": "sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/wrap-ansi-cjs/node_modules/string-width": {[m
+[31m-      "version": "4.2.3",[m
+[31m-      "resolved": "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz",[m
+[31m-      "integrity": "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "emoji-regex": "^8.0.0",[m
+[31m-        "is-fullwidth-code-point": "^3.0.0",[m
+[31m-        "strip-ansi": "^6.0.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/wrap-ansi-cjs/node_modules/strip-ansi": {[m
+[31m-      "version": "6.0.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz",[m
+[31m-      "integrity": "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "ansi-regex": "^5.0.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=8"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/wrap-ansi/node_modules/ansi-regex": {[m
+       "version": "5.0.1",[m
+       "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",[m
+[36m@@ -9550,6 +9261,13 @@[m
+         "url": "https://github.com/chalk/ansi-styles?sponsor=1"[m
+       }[m
+     },[m
+[32m+[m[32m    "node_modules/wrap-ansi/node_modules/emoji-regex": {[m
+[32m+[m[32m      "version": "8.0.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==",[m
+[32m+[m[32m      "dev": true,[m
+[32m+[m[32m      "license": "MIT"[m
+[32m+[m[32m    },[m
+     "node_modules/wrap-ansi/node_modules/is-fullwidth-code-point": {[m
+       "version": "3.0.0",[m
+       "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz",[m
+[36m@@ -9687,13 +9405,6 @@[m
+         "node": "^20.19.0 || ^22.12.0 || >=23"[m
+       }[m
+     },[m
+[31m-    "node_modules/yargs/node_modules/emoji-regex": {[m
+[31m-      "version": "10.6.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-10.6.0.tgz",[m
+[31m-      "integrity": "sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "MIT"[m
+[31m-    },[m
+     "node_modules/yargs/node_modules/string-width": {[m
+       "version": "7.2.0",[m
+       "resolved": "https://registry.npmjs.org/string-width/-/string-width-7.2.0.tgz",[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 148aab8..910d914 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -32,6 +32,7 @@[m
+     "@angular/platform-server": "^21.0.0",[m
+     "@angular/router": "^21.0.0",[m
+     "@angular/ssr": "^21.0.0",[m
+[32m+[m[32m    "bootstrap": "^5.3.8",[m
+     "express": "^5.1.0",[m
+     "rxjs": "~7.8.0",[m
+     "tslib": "^2.3.0"[m
+[36m@@ -46,4 +47,4 @@[m
+     "typescript": "~5.9.2",[m
+     "vitest": "^4.0.8"[m
+   }[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/app.config.ts b/src/app/app.config.ts[m
+[1mindex 797642e..6b841c6 100644[m
+[1m--- a/src/app/app.config.ts[m
+[1m+++ b/src/app/app.config.ts[m
+[36m@@ -1,5 +1,6 @@[m
+ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';[m
+ import { provideRouter } from '@angular/router';[m
+[32m+[m[32mimport { provideHttpClient, withFetch } from '@angular/common/http';[m
+ [m
+ import { routes } from './app.routes';[m
+ import { provideClientHydration, withEventReplay } from '@angular/platform-browser';[m
+[36m@@ -7,6 +8,7 @@[m [mimport { provideClientHydration, withEventReplay } from '@angular/platform-brows[m
+ export const appConfig: ApplicationConfig = {[m
+   providers: [[m
+     provideBrowserGlobalErrorListeners(),[m
+[31m-    provideRouter(routes), provideClientHydration(withEventReplay())[m
+[32m+[m[32m    provideRouter(routes), provideClientHydration(withEventReplay()),[m
+[32m+[m[32m    provideHttpClient(withFetch())[m
+   ][m
+ };[m
+[1mdiff --git a/src/app/app.html b/src/app/app.html[m
+[1mindex 7528372..1e15754 100644[m
+[1m--- a/src/app/app.html[m
+[1m+++ b/src/app/app.html[m
+[36m@@ -1,342 +1,2 @@[m
+[31m-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * to get started with your project! * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->[m
+[31m-[m
+[31m-<style>[m
+[31m-  :host {[m
+[31m-    --bright-blue: oklch(51.01% 0.274 263.83);[m
+[31m-    --electric-violet: oklch(53.18% 0.28 296.97);[m
+[31m-    --french-violet: oklch(47.66% 0.246 305.88);[m
+[31m-    --vivid-pink: oklch(69.02% 0.277 332.77);[m
+[31m-    --hot-red: oklch(61.42% 0.238 15.34);[m
+[31m-    --orange-red: oklch(63.32% 0.24 31.68);[m
+[31m-[m
+[31m-    --gray-900: oklch(19.37% 0.006 300.98);[m
+[31m-    --gray-700: oklch(36.98% 0.014 302.71);[m
+[31m-    --gray-400: oklch(70.9% 0.015 304.04);[m
+[31m-[m
+[31m-    --red-to-pink-to-purple-vertical-gradient: linear-gradient([m
+[31m-      180deg,[m
+[31m-      var(--orange-red) 0%,[m
+[31m-      var(--vivid-pink) 50%,[m
+[31m-      var(--electric-violet) 100%[m
+[31m-    );[m
+[31m-[m
+[31m-    --red-to-pink-to-purple-horizontal-gradient: linear-gradient([m
+[31m-      90deg,[m
+[31m-      var(--orange-red) 0%,[m
+[31m-      var(--vivid-pink) 50%,[m
+[31m-      var(--electric-violet) 100%[m
+[31m-    );[m
+[31m-[m
+[31m-    --pill-accent: var(--bright-blue);[m
+[31m-[m
+[31m-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,[m
+[31m-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",[m
+[31m-      "Segoe UI Symbol";[m
+[31m-    box-sizing: border-box;[m
+[31m-    -webkit-font-smoothing: antialiased;[m
+[31m-    -moz-osx-font-smoothing: grayscale;[m
+[31m-  }[m
+[31m-[m
+[31m-  h1 {[m
+[31m-    font-size: 3.125rem;[m
+[31m-    color: var(--gray-900);[m
+[31m-    font-weight: 500;[m
+[31m-    line-height: 100%;[m
+[31m-    letter-spacing: -0.125rem;[m
+[31m-    margin: 0;[m
+[31m-    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,[m
+[31m-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",[m
+[31m-      "Segoe UI Symbol";[m
+[31m-  }[m
+[31m-[m
+[31m-  p {[m
+[31m-    margin: 0;[m
+[31m-    color: var(--gray-700);[m
+[31m-  }[m
+[31m-[m
+[31m-  main {[m
+[31m-    width: 100%;[m
+[31m-    min-height: 100%;[m
+[31m-    display: flex;[m
+[31m-    justify-content: center;[m
+[31m-    align-items: center;[m
+[31m-    padding: 1rem;[m
+[31m-    box-sizing: inherit;[m
+[31m-    position: relative;[m
+[31m-  }[m
+[31m-[m
+[31m-  .angular-logo {[m
+[31m-    max-width: 9.2rem;[m
+[31m-  }[m
+[31m-[m
+[31m-  .content {[m
+[31m-    display: flex;[m
+[31m-    justify-content: space-around;[m
+[31m-    width: 100%;[m
+[31m-    max-width: 700px;[m
+[31m-    margin-bottom: 3rem;[m
+[31m-  }[m
+[31m-[m
+[31m-  .content h1 {[m
+[31m-    margin-top: 1.75rem;[m
+[31m-  }[m
+[31m-[m
+[31m-  .content p {[m
+[31m-    margin-top: 1.5rem;[m
+[31m-  }[m
+[31m-[m
+[31m-  .divider {[m
+[31m-    width: 1px;[m
+[31m-    background: var(--red-to-pink-to-purple-vertical-gradient);[m
+[31m-    margin-inline: 0.5rem;[m
+[31m-  }[m
+[31m-[m
+[31m-  .pill-group {[m
+[31m-    display: flex;[m
+[31m-    flex-direction: column;[m
+[31m-    align-items: start;[m
+[31m-    flex-wrap: wrap;[m
+[31m-    gap: 1.25rem;[m
+[31m-  }[m
+[31m-[m
+[31m-  .pill {[m
+[31m-    display: flex;[m
+[31m-    align-items: center;[m
+[31m-    --pill-accent: var(--bright-blue);[m
+[31m-    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);[m
+[31m-    color: var(--pill-accent);[m
+[31m-    padding-inline: 0.75rem;[m
+[31m-    padding-block: 0.375rem;[m
+[31m-    border-radius: 2.75rem;[m
+[31m-    border: 0;[m
+[31m-    transition: background 0.3s ease;[m
+[31m-    font-family: var(--inter-font);[m
+[31m-    font-size: 0.875rem;[m
+[31m-    font-style: normal;[m
+[31m-    font-weight: 500;[m
+[31m-    line-height: 1.4rem;[m
+[31m-    letter-spacing: -0.00875rem;[m
+[31m-    text-decoration: none;[m
+[31m-    white-space: nowrap;[m
+[31m-  }[m
+[31m-[m
+[31m-  .pill:hover {[m
+[31m-    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);[m
+[31m-  }[m
+[31m-[m
+[31m-  .pill-group .pill:nth-child(6n + 1) {[m
+[31m-    --pill-accent: var(--bright-blue);[m
+[31m-  }[m
+[31m-  .pill-group .pill:nth-child(6n + 2) {[m
+[31m-    --pill-accent: var(--electric-violet);[m
+[31m-  }[m
+[31m-  .pill-group .pill:nth-child(6n + 3) {[m
+[31m-    --pill-accent: var(--french-violet);[m
+[31m-  }[m
+[31m-[m
+[31m-  .pill-group .pill:nth-child(6n + 4),[m
+[31m-  .pill-group .pill:nth-child(6n + 5),[m
+[31m-  .pill-group .pill:nth-child(6n + 6) {[m
+[31m-    --pill-accent: var(--hot-red);[m
+[31m-  }[m
+[31m-[m
+[31m-  .pill-group svg {[m
+[31m-    margin-inline-start: 0.25rem;[m
+[31m-  }[m
+[31m-[m
+[31m-  .social-links {[m
+[31m-    display: flex;[m
+[31m-    align-items: center;[m
+[31m-    gap: 0.73rem;[m
+[31m-    margin-top: 1.5rem;[m
+[31m-  }[m
+[31m-[m
+[31m-  .social-links path {[m
+[31m-    transition: fill 0.3s ease;[m
+[31m-    fill: var(--gray-400);[m
+[31m-  }[m
+[31m-[m
+[31m-  .social-links a:hover svg path {[m
+[31m-    fill: var(--gray-900);[m
+[31m-  }[m
+[31m-[m
+[31m-  @media screen and (max-width: 650px) {[m
+[31m-    .content {[m
+[31m-      flex-direction: column;[m
+[31m-      width: max-content;[m
+[31m-    }[m
+[31m-[m
+[31m-    .divider {[m
+[31m-      height: 1px;[m
+[31m-      width: 100%;[m
+[31m-      background: var(--red-to-pink-to-purple-horizontal-gradient);[m
+[31m-      margin-block: 1.5rem;[m
+[31m-    }[m
+[31m-  }[m
+[31m-</style>[m
+[31m-[m
+[31m-<main class="main">[m
+[31m-  <div class="content">[m
+[31m-    <div class="left-side">[m
+[31m-      <svg[m
+[31m-        xmlns="http://www.w3.org/2000/svg"[m
+[31m-        viewBox="0 0 982 239"[m
+[31m-        fill="none"[m
+[31m-        class="angular-logo"[m
+[31m-      >[m
+[31m-        <g clip-path="url(#a)">[m
+[31m-          <path[m
+[31m-            fill="url(#b)"[m
+[31m-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"[m
+[31m-          />[m
+[31m-          <path[m
+[31m-            fill="url(#c)"[m
+[31m-            d="M388.676 191.625h30.849L363.31 31.828h-35.758l-56.215 159.797h30.848l13.174-39.356h60.061l13.256 39.356Zm-65.461-62.675 21.602-64.311h1.227l21.602 64.311h-44.431Zm126.831-7.527v70.202h-28.23V71.839h27.002v20.374h1.392c2.782-6.71 7.2-12.028 13.255-15.956 6.056-3.927 13.584-5.89 22.503-5.89 8.264 0 15.465 1.8 21.684 5.318 6.137 3.518 10.964 8.673 14.319 15.382 3.437 6.71 5.074 14.81 4.992 24.383v76.175h-28.23v-71.92c0-8.019-2.046-14.237-6.219-18.819-4.173-4.5-9.819-6.791-17.102-6.791-4.91 0-9.328 1.063-13.174 3.272-3.846 2.128-6.792 5.237-9.001 9.328-2.046 4.009-3.191 8.918-3.191 14.728ZM589.233 239c-10.147 0-18.82-1.391-26.103-4.091-7.282-2.7-13.092-6.382-17.511-10.964-4.418-4.582-7.528-9.655-9.164-15.219l25.448-6.136c1.145 2.372 2.782 4.663 4.991 6.954 2.209 2.291 5.155 4.255 8.837 5.81 3.683 1.554 8.428 2.291 14.074 2.291 8.019 0 14.647-1.964 19.884-5.81 5.237-3.845 7.856-10.227 7.856-19.064v-22.665h-1.391c-1.473 2.946-3.601 5.892-6.383 9.001-2.782 3.109-6.464 5.645-10.965 7.691-4.582 2.046-10.228 3.109-17.101 3.109-9.165 0-17.511-2.209-25.039-6.545-7.446-4.337-13.42-10.883-17.757-19.474-4.418-8.673-6.628-19.473-6.628-32.565 0-13.091 2.21-24.301 6.628-33.383 4.419-9.082 10.311-15.955 17.839-20.7 7.528-4.746 15.874-7.037 25.039-7.037 7.037 0 12.846 1.145 17.347 3.518 4.582 2.373 8.182 5.236 10.883 8.51 2.7 3.272 4.746 6.382 6.137 9.327h1.554v-19.8h27.821v121.749c0 10.228-2.454 18.737-7.364 25.447-4.91 6.709-11.538 11.7-20.048 15.055-8.509 3.355-18.165 4.991-28.884 4.991Zm.245-71.266c5.974 0 11.047-1.473 15.302-4.337 4.173-2.945 7.446-7.118 9.573-12.519 2.21-5.482 3.274-12.027 3.274-19.637 0-7.609-1.064-14.155-3.274-19.8-2.127-5.646-5.318-10.064-9.491-13.255-4.174-3.11-9.329-4.746-15.384-4.746s-11.537 1.636-15.792 4.91c-4.173 3.272-7.365 7.772-9.492 13.418-2.128 5.727-3.191 12.191-3.191 19.392 0 7.2 1.063 13.745 3.273 19.228 2.127 5.482 5.318 9.736 9.573 12.764 4.174 3.027 9.41 4.582 15.629 4.582Zm141.56-26.51V71.839h28.23v119.786h-27.412v-21.273h-1.227c-2.7 6.709-7.119 12.191-13.338 16.446-6.137 4.255-13.747 6.382-22.748 6.382-7.855 0-14.81-1.718-20.783-5.237-5.974-3.518-10.72-8.591-14.075-15.382-3.355-6.709-5.073-14.891-5.073-24.464V71.839h28.312v71.921c0 7.609 2.046 13.664 6.219 18.083 4.173 4.5 9.655 6.709 16.365 6.709 4.173 0 8.183-.982 12.111-3.028 3.927-2.045 7.118-5.072 9.655-9.082 2.537-4.091 3.764-9.164 3.764-15.218Zm65.707-109.395v159.796h-28.23V31.828h28.23Zm44.841 162.169c-7.61 0-14.402-1.391-20.457-4.091-6.055-2.7-10.883-6.791-14.32-12.109-3.518-5.319-5.237-11.946-5.237-19.801 0-6.791 1.228-12.355 3.765-16.773 2.536-4.419 5.891-7.937 10.228-10.637 4.337-2.618 9.164-4.664 14.647-6.055 5.4-1.391 11.046-2.373 16.856-3.027 7.037-.737 12.683-1.391 17.102-1.964 4.337-.573 7.528-1.555 9.574-2.782 1.963-1.309 3.027-3.273 3.027-5.973v-.491c0-5.891-1.718-10.391-5.237-13.664-3.518-3.191-8.51-4.828-15.056-4.828-6.955 0-12.356 1.473-16.447 4.5-4.009 3.028-6.71 6.546-8.183 10.719l-26.348-3.764c2.046-7.282 5.483-13.336 10.31-18.328 4.746-4.909 10.638-8.59 17.511-11.045 6.955-2.455 14.565-3.682 22.912-3.682 5.809 0 11.537.654 17.265 2.045s10.965 3.6 15.711 6.71c4.746 3.109 8.51 7.282 11.455 12.6 2.864 5.318 4.337 11.946 4.337 19.883v80.184h-27.166v-16.446h-.9c-1.719 3.355-4.092 6.464-7.201 9.328-3.109 2.864-6.955 5.237-11.619 6.955-4.828 1.718-10.229 2.536-16.529 2.536Zm7.364-20.701c5.646 0 10.556-1.145 14.729-3.354 4.173-2.291 7.364-5.237 9.655-9.001 2.292-3.763 3.355-7.854 3.355-12.273v-14.155c-.9.737-2.373 1.391-4.5 2.046-2.128.654-4.419 1.145-7.037 1.636-2.619.491-5.155.9-7.692 1.227-2.537.328-4.746.655-6.628.901-4.173.572-8.019 1.472-11.292 2.781-3.355 1.31-5.973 3.11-7.855 5.401-1.964 2.291-2.864 5.318-2.864 8.918 0 5.237 1.882 9.164 5.728 11.782 3.682 2.782 8.51 4.091 14.401 4.091Zm64.643 18.328V71.839h27.412v19.965h1.227c2.21-6.955 5.974-12.274 11.292-16.038 5.319-3.763 11.456-5.645 18.329-5.645 1.555 0 3.355.082 5.237.163 1.964.164 3.601.328 4.91.573v25.938c-1.227-.41-3.109-.819-5.646-1.146a58.814 58.814 0 0 0-7.446-.49c-5.155 0-9.738 1.145-13.829 3.354-4.091 2.209-7.282 5.236-9.655 9.164-2.373 3.927-3.519 8.427-3.519 13.5v70.448h-28.312ZM222.077 39.192l-8.019 125.923L137.387 0l84.69 39.192Zm-53.105 162.825-57.933 33.056-57.934-33.056 11.783-28.556h92.301l11.783 28.556ZM111.039 62.675l30.357 73.803H80.681l30.358-73.803ZM7.937 165.115 0 39.192 84.69 0 7.937 165.115Z"[m
+[31m-          />[m
+[31m-        </g>[m
+[31m-        <defs>[m
+[31m-          <radialGradient[m
+[31m-            id="c"[m
+[31m-            cx="0"[m
+[31m-            cy="0"[m
+[31m-            r="1"[m
+[31m-            gradientTransform="rotate(118.122 171.182 60.81) scale(205.794)"[m
+[31m-            gradientUnits="userSpaceOnUse"[m
+[31m-          >[m
+[31m-            <stop stop-color="#FF41F8" />[m
+[31m-            <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5" />[m
+[31m-            <stop offset="1" stop-color="#FF41F8" stop-opacity="0" />[m
+[31m-          </radialGradient>[m
+[31m-          <linearGradient[m
+[31m-            id="b"[m
+[31m-            x1="0"[m
+[31m-            x2="982"[m
+[31m-            y1="192"[m
+[31m-            y2="192"[m
+[31m-            gradientUnits="userSpaceOnUse"[m
+[31m-          >[m
+[31m-            <stop stop-color="#F0060B" />[m
+[31m-            <stop offset="0" stop-color="#F0070C" />[m
+[31m-            <stop offset=".526" stop-color="#CC26D5" />[m
+[31m-            <stop offset="1" stop-color="#7702FF" />[m
+[31m-          </linearGradient>[m
+[31m-          <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>[m
+[31m-        </defs>[m
+[31m-      </svg>[m
+[31m-      <h1>Hello, {{ title() }}</h1>[m
+[31m-      <p>Congratulations! Your app is running. 🎉</p>[m
+[31m-    </div>[m
+[31m-    <div class="divider" role="separator" aria-label="Divider"></div>[m
+[31m-    <div class="right-side">[m
+[31m-      <div class="pill-group">[m
+[31m-        @for (item of [[m
+[31m-          { title: 'Explore the Docs', link: 'https://angular.dev' },[m
+[31m-          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },[m
+[31m-          { title: 'Prompt and best practices for AI', link: 'https://angular.dev/ai/develop-with-ai'},[m
+[31m-          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },[m
+[31m-          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },[m
+[31m-          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },[m
+[31m-        ]; track item.title) {[m
+[31m-          <a[m
+[31m-            class="pill"[m
+[31m-            [href]="item.link"[m
+[31m-            target="_blank"[m
+[31m-            rel="noopener"[m
+[31m-          >[m
+[31m-            <span>{{ item.title }}</span>[m
+[31m-            <svg[m
+[31m-              xmlns="http://www.w3.org/2000/svg"[m
+[31m-              height="14"[m
+[31m-              viewBox="0 -960 960 960"[m
+[31m-              width="14"[m
+[31m-              fill="currentColor"[m
+[31m-            >[m
+[31m-              <path[m
+[31m-                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"[m
+[31m-              />[m
+[31m-            </svg>[m
+[31m-          </a>[m
+[31m-        }[m
+[31m-      </div>[m
+[31m-      <div class="social-links">[m
+[31m-        <a[m
+[31m-          href="https://github.com/angular/angular"[m
+[31m-          aria-label="Github"[m
+[31m-          target="_blank"[m
+[31m-          rel="noopener"[m
+[31m-        >[m
+[31m-          <svg[m
+[31m-            width="25"[m
+[31m-            height="24"[m
+[31m-            viewBox="0 0 25 24"[m
+[31m-            fill="none"[m
+[31m-            xmlns="http://www.w3.org/2000/svg"[m
+[31m-            alt="Github"[m
+[31m-          >[m
+[31m-            <path[m
+[31m-              d="M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z"[m
+[31m-            />[m
+[31m-          </svg>[m
+[31m-        </a>[m
+[31m-        <a[m
+[31m-          href="https://twitter.com/angular"[m
+[31m-          aria-label="Twitter"[m
+[31m-          target="_blank"[m
+[31m-          rel="noopener"[m
+[31m-        >[m
+[31m-          <svg[m
+[31m-            width="24"[m
+[31m-            height="24"[m
+[31m-            viewBox="0 0 24 24"[m
+[31m-            fill="none"[m
+[31m-            xmlns="http://www.w3.org/2000/svg"[m
+[31m-            alt="Twitter"[m
+[31m-          >[m
+[31m-            <path[m
+[31m-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"[m
+[31m-            />[m
+[31m-          </svg>[m
+[31m-        </a>[m
+[31m-        <a[m
+[31m-          href="https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw"[m
+[31m-          aria-label="Youtube"[m
+[31m-          target="_blank"[m
+[31m-          rel="noopener"[m
+[31m-        >[m
+[31m-          <svg[m
+[31m-            width="29"[m
+[31m-            height="20"[m
+[31m-            viewBox="0 0 29 20"[m
+[31m-            fill="none"[m
+[31m-            xmlns="http://www.w3.org/2000/svg"[m
+[31m-            alt="Youtube"[m
+[31m-          >[m
+[31m-            <path[m
+[31m-              fill-rule="evenodd"[m
+[31m-              clip-rule="evenodd"[m
+[31m-              d="M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z"[m
+[31m-            />[m
+[31m-          </svg>[m
+[31m-        </a>[m
+[31m-      </div>[m
+[31m-    </div>[m
+[31m-  </div>[m
+[31m-</main>[m
+[31m-[m
+[31m-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->[m
+[31m-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->[m
+[31m-[m
+[31m-[m
+[31m-<router-outlet />[m
+[32m+[m[32m<app-header></app-header>[m
+[32m+[m[32m<router-outlet></router-outlet>[m
+[1mdiff --git a/src/app/app.routes.ts b/src/app/app.routes.ts[m
+[1mindex dc39edb..3ee8379 100644[m
+[1m--- a/src/app/app.routes.ts[m
+[1m+++ b/src/app/app.routes.ts[m
+[36m@@ -1,3 +1,16 @@[m
+ import { Routes } from '@angular/router';[m
+[32m+[m[32mimport { ProductoListComponent } from './components/producto-list.component/producto-list.component';[m
+[32m+[m[32mimport { CarritoComponent } from './components/carrito.component/carrito.component';[m
+[32m+[m[32mimport { ProductoFormComponent } from './components/producto-form.component/producto-form.component';[m
+[32m+[m[32mimport { ComprasRealizadasComponent } from './components/compras-realizadas.component/compras-realizadas.component';[m
+[32m+[m[32mimport { HomeComponent } from './page/home/home.component/home.component';[m
+ [m
+[31m-export const routes: Routes = [];[m
+[32m+[m[32mexport const routes: Routes = [[m
+[32m+[m[32m  { path: '', component: HomeComponent },[m
+[32m+[m[32m  { path: 'productos', component: ProductoListComponent },[m
+[32m+[m[32m  { path: 'carrito', component: CarritoComponent },[m
+[32m+[m[32m  { path: 'producto/nuevo', component: ProductoFormComponent },[m
+[32m+[m[32m  { path: 'producto/editar/:id', component: ProductoFormComponent },[m
+[32m+[m[32m  { path: 'compras', component: ComprasRealizadasComponent },[m
+[32m+[m[32m  { path: '**', redirectTo: '' }[m
+[32m+[m[32m];[m
+[1mdiff --git a/src/app/app.ts b/src/app/app.ts[m
+[1mindex 1f8575e..bc922f1 100644[m
+[1m--- a/src/app/app.ts[m
+[1m+++ b/src/app/app.ts[m
+[36m@@ -1,11 +1,14 @@[m
+[32m+[m[32m// app.ts[m
+ import { Component, signal } from '@angular/core';[m
+ import { RouterOutlet } from '@angular/router';[m
+[32m+[m[32mimport { HeaderComponent } from './components/header.component/header.component'; // ruta correcta[m
+ [m
+ @Component({[m
+   selector: 'app-root',[m
+[31m-  imports: [RouterOutlet],[m
+[32m+[m[32m  standalone: true,[m
+[32m+[m[32m  imports: [RouterOutlet, HeaderComponent], // <-- Importar el header aquí[m
+   templateUrl: './app.html',[m
+[31m-  styleUrl: './app.scss'[m
+[32m+[m[32m  styleUrls: ['./app.scss'][m
+ })[m
+ export class App {[m
+   protected readonly title = signal('tienda-frontend');[m
+[1mdiff --git a/src/app/components/carrito.component/carrito.component.html b/src/app/components/carrito.component/carrito.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5acb487[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/carrito.component/carrito.component.html[m
+[36m@@ -0,0 +1,45 @@[m
+[32m+[m[32m<div class="container my-5">[m
+[32m+[m[32m  <h2 class="mb-4 text-center">🛒 Carrito de Compras</h2>[m
+[32m+[m
+[32m+[m[32m  <div *ngIf="cargando" class="text-center my-5">[m
+[32m+[m[32m    <div class="spinner-border text-primary" role="status"></div>[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <div *ngIf="!cargando && carrito.length === 0" class="alert alert-info text-center">[m
+[32m+[m[32m    Tu carrito está vacío[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <div *ngIf="!cargando && carrito.length > 0" class="row g-4">[m
+[32m+[m[32m    <div *ngFor="let item of carrito" class="col-md-6 col-lg-4">[m
+[32m+[m[32m      <div class="card shadow-sm h-100">[m
+[32m+[m[32m        <img [src]="'assets/img/' + item.producto.imagen" class="card-img-top" [alt]="item.producto.nombre">[m
+[32m+[m[32m        <div class="card-body d-flex flex-column">[m
+[32m+[m[32m          <h5 class="card-title">{{ item.producto.nombre }}</h5>[m
+[32m+[m[32m          <p class="card-text flex-grow-1">{{ item.producto.descripcion }}</p>[m
+[32m+[m[32m          <p class="h5">$ {{ item.producto.precio.toFixed(2) }}</p>[m
+[32m+[m[32m          <div class="d-flex align-items-center justify-content-between mt-3">[m
+[32m+[m[32m            <div class="btn-group" role="group">[m
+[32m+[m[32m              <button class="btn btn-outline-secondary" (click)="disminuir(item)">-</button>[m
+[32m+[m[32m              <span class="px-3">{{ item.cantidad }}</span>[m
+[32m+[m[32m              <button class="btn btn-outline-secondary" (click)="aumentar(item)">+</button>[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m            <button class="btn btn-danger btn-sm" (click)="eliminar(item)">Eliminar</button>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <div *ngIf="carrito.length" class="mt-4 d-flex justify-content-between align-items-center">[m
+[32m+[m[32m    <h4>Total: $ {{ obtenerTotal() }}</h4>[m
+[32m+[m[32m    <div>[m
+[32m+[m[32m      <button class="btn btn-outline-danger me-2" (click)="vaciarCarrito()">Vaciar Carrito</button>[m
+[32m+[m[32m      <button class="btn btn-primary" (click)="irAProductos()">Seguir Comprando</button>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <!-- Toast -->[m
+[32m+[m[32m  <div *ngIf="toastMessage" class="toast show position-fixed bottom-0 end-0 m-3" role="alert">[m
+[32m+[m[32m    <div class="toast-body">{{ toastMessage }}</div>[m
+[32m+[m[32m  </div>[m
+[32m+[m[32m</div>[m
+[1mdiff --git a/src/app/components/carrito.component/carrito.component.scss b/src/app/components/carrito.component/carrito.component.scss[m
+[1mnew file mode 100644[m
+[1mindex 0000000..92c1f38[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/carrito.component/carrito.component.scss[m
+[36m@@ -0,0 +1,19 @@[m
+[32m+[m[32m.container {[m
+[32m+[m[32m  max-width: 900px;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mngb-accordion .card-header {[m
+[32m+[m[32m  background-color: #f8f9fa;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  font-weight: 600;[m
+[32m+[m[32m  font-size: 1.1rem;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mngb-accordion .card-body {[m
+[32m+[m[32m  background-color: #fff;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mimg.img-thumbnail {[m
+[32m+[m[32m  object-fit: cover;[m
+[32m+[m[32m  border-radius: 6px;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/carrito.component/carrito.component.spec.ts b/src/app/components/carrito.component/carrito.component.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ad35c5c[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/carrito.component/carrito.component.spec.ts[m
+[36m@@ -0,0 +1,23 @@[m
+[32m+[m[32mimport { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m
+[32m+[m[32mimport { CarritoComponent } from './carrito.component';[m
+[32m+[m
+[32m+[m[32mdescribe('CarritoComponent', () => {[m
+[32m+[m[32m  let component: CarritoComponent;[m
+[32m+[m[32m  let fixture: ComponentFixture<CarritoComponent>;[m
+[32m+[m
+[32m+[m[32m  beforeEach(async () => {[m
+[32m+[m[32m    await TestBed.configureTestingModule({[m
+[32m+[m[32m      imports: [CarritoComponent][m
+[32m+[m[32m    })[m
+[32m+[m[32m    .compileComponents();[m
+[32m+[m
+[32m+[m[32m    fixture = TestBed.createComponent(CarritoComponent);[m
+[32m+[m[32m    component = fixture.componentInstance;[m
+[32m+[m[32m    await fixture.whenStable();[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  it('should create', () => {[m
+[32m+[m[32m    expect(component).toBeTruthy();[m
+[32m+[m[32m  });[m
+[32m+[m[32m});[m
+[1mdiff --git a/src/app/components/carrito.component/carrito.component.ts b/src/app/components/carrito.component/carrito.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..94b59bb[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/carrito.component/carrito.component.ts[m
+[36m@@ -0,0 +1,101 @@[m
+[32m+[m[32mimport { Component, OnInit } from '@angular/core';[m
+[32m+[m[32mimport { CommonModule } from '@angular/common';[m
+[32m+[m[32mimport { RouterModule, Router } from '@angular/router';[m
+[32m+[m[32mimport { CarritoService } from '../../services/carrito.service';[m
+[32m+[m[32mimport { Producto } from '../../models/producto';[m
+[32m+[m
+[32m+[m[32minterface ProductoCarrito {[m
+[32m+[m[32m  producto: Producto;[m
+[32m+[m[32m  cantidad: number;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  selector: 'app-carrito',[m
+[32m+[m[32m  standalone: true,[m
+[32m+[m[32m  imports: [CommonModule, RouterModule],[m
+[32m+[m[32m  templateUrl: './carrito.component.html',[m
+[32m+[m[32m  styleUrls: ['./carrito.component.scss'],[m
+[32m+[m[32m})[m
+[32m+[m[32mexport class CarritoComponent implements OnInit {[m
+[32m+[m
+[32m+[m[32m  carrito: ProductoCarrito[] = [];[m
+[32m+[m[32m  cargando = true;[m
+[32m+[m[32m  toastMessage: string | null = null;[m
+[32m+[m
+[32m+[m[32m  constructor(private carritoService: CarritoService, private router: Router) {}[m
+[32m+[m
+[32m+[m[32m  ngOnInit() {[m
+[32m+[m[32m    this.cargarCarrito();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  cargarCarrito() {[m
+[32m+[m[32m    this.carritoService.getCarrito().subscribe({[m
+[32m+[m[32m      next: (res) => {[m
+[32m+[m[32m        this.carrito = res.productos.map((p: any) => ({[m
+[32m+[m[32m          producto: p.producto,[m
+[32m+[m[32m          cantidad: p.cantidad[m
+[32m+[m[32m        }));[m
+[32m+[m[32m        this.cargando = false;[m
+[32m+[m[32m      },[m
+[32m+[m[32m      error: (err) => console.error('Error al cargar carrito', err)[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  aumentar(item: ProductoCarrito) {[m
+[32m+[m[32m    item.cantidad++;[m
+[32m+[m[32m    this.actualizarCarrito(item);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  disminuir(item: ProductoCarrito) {[m
+[32m+[m[32m    if (item.cantidad > 1) {[m
+[32m+[m[32m      item.cantidad--;[m
+[32m+[m[32m      this.actualizarCarrito(item);[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m      this.eliminar(item);[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  actualizarCarrito(item: ProductoCarrito) {[m
+[32m+[m[32m    this.carritoService.agregarAlCarrito(item.producto._id!, item.cantidad).subscribe({[m
+[32m+[m[32m      next: () => this.showToast(`"${item.producto.nombre}" actualizado`),[m
+[32m+[m[32m      error: (err) => console.error(err)[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  eliminar(item: ProductoCarrito) {[m
+[32m+[m[32m    this.carritoService.eliminarDelCarrito(item.producto._id!).subscribe({[m
+[32m+[m[32m      next: () => {[m
+[32m+[m[32m        this.carrito = this.carrito.filter(p => p.producto._id !== item.producto._id);[m
+[32m+[m[32m        this.showToast(`"${item.producto.nombre}" eliminado`);[m
+[32m+[m[32m      },[m
+[32m+[m[32m      error: (err) => console.error(err)[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  vaciarCarrito() {[m
+[32m+[m[32m    this.carritoService.vaciarCarrito().subscribe({[m
+[32m+[m[32m      next: () => {[m
+[32m+[m[32m        this.carrito = [];[m
+[32m+[m[32m        this.showToast('Carrito vaciado');[m
+[32m+[m[32m      },[m
+[32m+[m[32m      error: (err) => console.error(err)[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  obtenerTotal(): string {[m
+[32m+[m[32m    return this.carrito.reduce((sum, item) => sum + item.producto.precio * item.cantidad, 0).toFixed(2);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  cantidadTotal(): number {[m
+[32m+[m[32m    return this.carrito.reduce((sum, item) => sum + item.cantidad, 0);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  showToast(message: string) {[m
+[32m+[m[32m    this.toastMessage = message;[m
+[32m+[m[32m    setTimeout(() => this.toastMessage = null, 2500);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  irAProductos() {[m
+[32m+[m[32m    this.router.navigate(['/productos']);[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/compras-realizadas.component/compras-realizadas.component.html b/src/app/components/compras-realizadas.component/compras-realizadas.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2c7b50e[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/compras-realizadas.component/compras-realizadas.component.html[m
+[36m@@ -0,0 +1,52 @@[m
+[32m+[m[32m<!-- compras-realizadas.component.html -->[m
+[32m+[m[32m<div class="container py-4">[m
+[32m+[m[32m  <h2 class="mb-4 text-primary">Mis Compras Realizadas</h2>[m
+[32m+[m
+[32m+[m[32m  <!-- Spinner -->[m
+[32m+[m[32m  <div *ngIf="cargando" class="text-center my-5">[m
+[32m+[m[32m    <div class="spinner-border text-primary" role="status"></div>[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <!-- Mensaje si no hay compras -->[m
+[32m+[m[32m  <div *ngIf="!cargando && compras.length === 0" class="alert alert-info">[m
+[32m+[m[32m    No has realizado ninguna compra todavía.[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <!-- Lista de compras -->[m
+[32m+[m[32m  <div class="row" *ngIf="compras.length > 0">[m
+[32m+[m[32m    <div class="col-md-6 mb-4" *ngFor="let compra of compras">[m
+[32m+[m[32m      <div class="card shadow-sm h-100">[m
+[32m+[m[32m        <div class="card-header bg-primary text-white">[m
+[32m+[m[32m          Compra ID: {{ compra._id | slice:0:8 }}... | Fecha: {{ compra.fecha | date:'short' }}[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m        <div class="card-body p-3">[m
+[32m+[m[32m          <table class="table table-sm table-borderless mb-2">[m
+[32m+[m[32m            <thead>[m
+[32m+[m[32m              <tr>[m
+[32m+[m[32m                <th>Producto</th>[m
+[32m+[m[32m                <th>Cantidad</th>[m
+[32m+[m[32m                <th>Subtotal</th>[m
+[32m+[m[32m              </tr>[m
+[32m+[m[32m            </thead>[m
+[32m+[m[32m            <tbody>[m
+[32m+[m[32m              <tr *ngFor="let item of compra.productos">[m
+[32m+[m[32m                <td>{{ item.nombre }}</td>[m
+[32m+[m[32m                <td>{{ item.cantidad }}</td>[m
+[32m+[m[32m                <td>$ {{ obtenerSubtotal(item) }}</td>[m
+[32m+[m[32m              </tr>[m
+[32m+[m[32m            </tbody>[m
+[32m+[m[32m          </table>[m
+[32m+[m[32m          <hr>[m
+[32m+[m[32m          <div class="d-flex justify-content-end fw-bold">[m
+[32m+[m[32m            Total: $ {{ compra.total | number:'1.2-2' }}[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m  </div>[m
+[32m+[m[32m</div>[m
+[32m+[m
+[32m+[m[32m<!-- Toast -->[m
+[32m+[m[32m<div class="toast position-fixed bottom-0 end-0 m-3" *ngIf="toastMessage" role="alert">[m
+[32m+[m[32m  <div class="toast-body bg-danger text-white">{{ toastMessage }}</div>[m
+[32m+[m[32m</div>[m
+[1mdiff --git a/src/app/components/compras-realizadas.component/compras-realizadas.component.scss b/src/app/components/compras-realizadas.component/compras-realizadas.component.scss[m
+[1mnew file mode 100644[m
+[1mindex 0000000..04a65a5[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/compras-realizadas.component/compras-realizadas.component.scss[m
+[36m@@ -0,0 +1,14 @@[m
+[32m+[m[32m/* compras-realizadas.component.scss */[m
+[32m+[m[32m.card {[m
+[32m+[m[32m  border-radius: 0.75rem;[m
+[32m+[m[32m  transition: transform 0.2s ease-in-out;[m
+[32m+[m[32m}[m
+[32m+[m[32m.card:hover {[m
+[32m+[m[32m  transform: translateY(-4px);[m
+[32m+[m[32m}[m
+[32m+[m[32m.table th, .table td {[m
+[32m+[m[32m  vertical-align: middle;[m
+[32m+[m[32m}[m
+[32m+[m[32m.toast {[m
+[32m+[m[32m  min-width: 200px;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/compras-realizadas.component/compras-realizadas.component.spec.ts b/src/app/components/compras-realizadas.component/compras-realizadas.component.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f42709a[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/compras-realizadas.component/compras-realizadas.component.spec.ts[m
+[36m@@ -0,0 +1,23 @@[m
+[32m+[m[32mimport { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m
+[32m+[m[32mimport { ComprasRealizadasComponent } from './compras-realizadas.component';[m
+[32m+[m
+[32m+[m[32mdescribe('ComprasRealizadasComponent', () => {[m
+[32m+[m[32m  let component: ComprasRealizadasComponent;[m
+[32m+[m[32m  let fixture: ComponentFixture<ComprasRealizadasComponent>;[m
+[32m+[m
+[32m+[m[32m  beforeEach(async () => {[m
+[32m+[m[32m    await TestBed.configureTestingModule({[m
+[32m+[m[32m      imports: [ComprasRealizadasComponent][m
+[32m+[m[32m    })[m
+[32m+[m[32m    .compileComponents();[m
+[32m+[m
+[32m+[m[32m    fixture = TestBed.createComponent(ComprasRealizadasComponent);[m
+[32m+[m[32m    component = fixture.componentInstance;[m
+[32m+[m[32m    await fixture.whenStable();[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  it('should create', () => {[m
+[32m+[m[32m    expect(component).toBeTruthy();[m
+[32m+[m[32m  });[m
+[32m+[m[32m});[m
+[1mdiff --git a/src/app/components/compras-realizadas.component/compras-realizadas.component.ts b/src/app/components/compras-realizadas.component/compras-realizadas.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f619214[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/compras-realizadas.component/compras-realizadas.component.ts[m
+[36m@@ -0,0 +1,54 @@[m
+[32m+[m[32m// compras-realizadas.component.ts[m
+[32m+[m[32mimport { Component, OnInit } from '@angular/core';[m
+[32m+[m[32mimport { CommonModule } from '@angular/common';[m
+[32m+[m[32mimport { CarritoService } from '../../services/carrito.service';[m
+[32m+[m[32mimport { RouterModule } from '@angular/router';[m
+[32m+[m
+[32m+[m[32minterface Compra {[m
+[32m+[m[32m  _id: string;[m
+[32m+[m[32m  fecha: string;[m
+[32m+[m[32m  total: number;[m
+[32m+[m[32m  productos: { nombre: string; cantidad: number; precio: number }[];[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  selector: 'app-compras-realizadas',[m
+[32m+[m[32m  standalone: true,[m
+[32m+[m[32m  imports: [CommonModule, RouterModule],[m
+[32m+[m[32m  templateUrl: './compras-realizadas.component.html',[m
+[32m+[m[32m  styleUrls: ['./compras-realizadas.component.scss'][m
+[32m+[m[32m})[m
+[32m+[m[32mexport class ComprasRealizadasComponent implements OnInit {[m
+[32m+[m[32m  compras: Compra[] = [];[m
+[32m+[m[32m  cargando = true;[m
+[32m+[m[32m  toastMessage: string | null = null;[m
+[32m+[m
+[32m+[m[32m  constructor(private carritoService: CarritoService) {}[m
+[32m+[m
+[32m+[m[32m  ngOnInit() {[m
+[32m+[m[32m    this.cargarCompras();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  cargarCompras() {[m
+[32m+[m[32m    this.carritoService.getComprasRealizadas().subscribe({[m
+[32m+[m[32m      next: (res) => {[m
+[32m+[m[32m        this.compras = res.compras || [];[m
+[32m+[m[32m        this.cargando = false;[m
+[32m+[m[32m      },[m
+[32m+[m[32m      error: (err: any) => {[m
+[32m+[m[32m        console.error('Error al cargar compras realizadas:', err);[m
+[32m+[m[32m        this.cargando = false;[m
+[32m+[m[32m        this.showToast('Error al cargar tus compras');[m
+[32m+[m[32m      }[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  obtenerSubtotal(producto: { cantidad: number; precio: number }) {[m
+[32m+[m[32m    return (producto.cantidad * producto.precio).toFixed(2);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  showToast(message: string) {[m
+[32m+[m[32m    this.toastMessage = message;[m
+[32m+[m[32m    setTimeout(() => (this.toastMessage = null), 2500);[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/header.component/header.component.html b/src/app/components/header.component/header.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6b9fad4[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/header.component/header.component.html[m
+[36m@@ -0,0 +1,33 @@[m
+[32m+[m[32m<header class="header">[m
+[32m+[m[32m  <div class="header-container">[m
+[32m+[m
+[32m+[m[32m    <!-- LOGO -->[m
+[32m+[m[32m    <div class="logo" routerLink="/" (click)="cerrarMenu()">[m
+[32m+[m[32m      <img src="assets/img/logo.png" alt="Logo">[m
+[32m+[m[32m      <span>TiendaPro</span>[m
+[32m+[m[32m    </div>[m
+[32m+[m
+[32m+[m[32m    <!-- NAV normal (desktop) -->[m
+[32m+[m[32m    <nav class="nav-desktop">[m
+[32m+[m[32m      <a routerLink="/" routerLinkActive="active">Inicio</a>[m
+[32m+[m[32m      <a routerLink="/productos" routerLinkActive="active">Productos</a>[m
+[32m+[m[32m      <a routerLink="/carrito" routerLinkActive="active">Carrito</a>[m
+[32m+[m[32m      <a routerLink="/compras" routerLinkActive="active">Compras</a>[m
+[32m+[m[32m    </nav>[m
+[32m+[m
+[32m+[m[32m    <!-- BOTÓN HAMBURGUESA -->[m
+[32m+[m[32m    <button class="menu-btn" (click)="toggleMenu()">[m
+[32m+[m[32m      <span [class.open]="menuAbierto()"></span>[m
+[32m+[m[32m      <span [class.open]="menuAbierto()"></span>[m
+[32m+[m[32m      <span [class.open]="menuAbierto()"></span>[m
+[32m+[m[32m    </button>[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <!-- MENÚ MÓVIL -->[m
+[32m+[m[32m  <nav class="nav-mobile" [class.open]="menuAbierto()">[m
+[32m+[m[32m    <a routerLink="/" (click)="cerrarMenu()">Inicio</a>[m
+[32m+[m[32m    <a routerLink="/productos" (click)="cerrarMenu()">Productos</a>[m
+[32m+[m[32m    <a routerLink="/carrito" (click)="cerrarMenu()">Carrito</a>[m
+[32m+[m[32m    <a routerLink="/compras" (click)="cerrarMenu()">Compras</a>[m
+[32m+[m[32m  </nav>[m
+[32m+[m[32m</header>[m
+[1mdiff --git a/src/app/components/header.component/header.component.scss b/src/app/components/header.component/header.component.scss[m
+[1mnew file mode 100644[m
+[1mindex 0000000..afc1fe3[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/header.component/header.component.scss[m
+[36m@@ -0,0 +1,161 @@[m
+[32m+[m[32m/* ====== ESTILOS HEADER ====== */[m
+[32m+[m
+[32m+[m[32m.header {[m
+[32m+[m[32m  position: sticky;[m
+[32m+[m[32m  top: 0;[m
+[32m+[m[32m  width: 100%;[m
+[32m+[m[32m  z-index: 50;[m
+[32m+[m
+[32m+[m[32m  background: rgba(255, 255, 255, 0.75);[m
+[32m+[m[32m  backdrop-filter: blur(12px);[m
+[32m+[m[32m  -webkit-backdrop-filter: blur(12px);[m
+[32m+[m
+[32m+[m[32m  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.header-container {[m
+[32m+[m[32m  max-width: 1500px;[m
+[32m+[m[32m  margin: auto;[m
+[32m+[m[32m  padding: 1rem 2rem;[m
+[32m+[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  align-items: center;[m
+[32m+[m[32m  justify-content: space-between;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* ====== LOGO ====== */[m
+[32m+[m
+[32m+[m[32m.logo {[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  align-items: center;[m
+[32m+[m[32m  gap: 12px;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m
+[32m+[m[32m  img {[m
+[32m+[m[32m    height: 55px;[m
+[32m+[m[32m    width: auto;[m
+[32m+[m[32m    object-fit: contain;[m
+[32m+[m
+[32m+[m[32m    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  span {[m
+[32m+[m[32m    font-size: 1.6rem;[m
+[32m+[m[32m    font-weight: 700;[m
+[32m+[m[32m    font-family: "Poppins", sans-serif;[m
+[32m+[m[32m    color: #0d3c61;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* ====== NAV DESKTOP ====== */[m
+[32m+[m
+[32m+[m[32m.nav-desktop {[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  gap: 2rem;[m
+[32m+[m
+[32m+[m[32m  a {[m
+[32m+[m[32m    font-size: 1.05rem;[m
+[32m+[m[32m    color: #0e2f47;[m
+[32m+[m[32m    font-weight: 500;[m
+[32m+[m
+[32m+[m[32m    padding: 8px 14px;[m
+[32m+[m[32m    border-radius: 8px;[m
+[32m+[m[32m    transition: 0.25s ease;[m
+[32m+[m
+[32m+[m[32m    &:hover {[m
+[32m+[m[32m      background: rgba(0, 123, 255, 0.12);[m
+[32m+[m[32m      color: #0057b8;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    &.active {[m
+[32m+[m[32m      background: #0057b8;[m
+[32m+[m[32m      color: white;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @media (max-width: 900px) {[m
+[32m+[m[32m    display: none;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* ====== BOTÓN HAMBURGUESA ====== */[m
+[32m+[m
+[32m+[m[32m.menu-btn {[m
+[32m+[m[32m  width: 38px;[m
+[32m+[m[32m  height: 32px;[m
+[32m+[m[32m  display: none;[m
+[32m+[m[32m  flex-direction: column;[m
+[32m+[m[32m  justify-content: space-between;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m
+[32m+[m[32m  background: none;[m
+[32m+[m[32m  border: none;[m
+[32m+[m[32m  padding: 0;[m
+[32m+[m
+[32m+[m[32m  span {[m
+[32m+[m[32m    display: block;[m
+[32m+[m[32m    width: 100%;[m
+[32m+[m[32m    height: 4px;[m
+[32m+[m[32m    background: #0d3c61;[m
+[32m+[m[32m    border-radius: 4px;[m
+[32m+[m[32m    transition: 0.3s ease;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  span.open:nth-child(1) {[m
+[32m+[m[32m    transform: translateY(10px) rotate(45deg);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  span.open:nth-child(2) {[m
+[32m+[m[32m    opacity: 0;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  span.open:nth-child(3) {[m
+[32m+[m[32m    transform: translateY(-10px) rotate(-45deg);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @media (max-width: 900px) {[m
+[32m+[m[32m    display: flex;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/* ====== MENÚ MÓVIL ====== */[m
+[32m+[m
+[32m+[m[32m.nav-mobile {[m
+[32m+[m[32m  position: absolute;[m
+[32m+[m[32m  top: 100%;[m
+[32m+[m[32m  right: 0;[m
+[32m+[m
+[32m+[m[32m  width: 250px;[m
+[32m+[m[32m  height: 0;[m
+[32m+[m[32m  overflow: hidden;[m
+[32m+[m
+[32m+[m[32m  background: rgba(255, 255, 255, 0.95);[m
+[32m+[m[32m  backdrop-filter: blur(14px);[m
+[32m+[m[32m  -webkit-backdrop-filter: blur(14px);[m
+[32m+[m
+[32m+[m[32m  border-bottom-left-radius: 16px;[m
+[32m+[m[32m  box-shadow: -4px 10px 20px rgba(0, 0, 0, 0.15);[m
+[32m+[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  flex-direction: column;[m
+[32m+[m
+[32m+[m[32m  transition: height 0.35s ease;[m
+[32m+[m
+[32m+[m[32m  a {[m
+[32m+[m[32m    padding: 14px 20px;[m
+[32m+[m[32m    color: #0e2f47;[m
+[32m+[m[32m    font-size: 1.1rem;[m
+[32m+[m[32m    font-weight: 500;[m
+[32m+[m[32m    border-bottom: 1px solid rgba(0, 0, 0, 0.07);[m
+[32m+[m[32m    transition: 0.25s;[m
+[32m+[m
+[32m+[m[32m    &:hover {[m
+[32m+[m[32m      background: rgba(0, 123, 255, 0.2);[m
+[32m+[m[32m      padding-left: 28px;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.nav-mobile.open {[m
+[32m+[m[32m  height: 220px;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/header.component/header.component.spec.ts b/src/app/components/header.component/header.component.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..acb8a4d[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/header.component/header.component.spec.ts[m
+[36m@@ -0,0 +1,23 @@[m
+[32m+[m[32mimport { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m
+[32m+[m[32mimport { HeaderComponent } from './header.component';[m
+[32m+[m
+[32m+[m[32mdescribe('HeaderComponent', () => {[m
+[32m+[m[32m  let component: HeaderComponent;[m
+[32m+[m[32m  let fixture: ComponentFixture<HeaderComponent>;[m
+[32m+[m
+[32m+[m[32m  beforeEach(async () => {[m
+[32m+[m[32m    await TestBed.configureTestingModule({[m
+[32m+[m[32m      imports: [HeaderComponent][m
+[32m+[m[32m    })[m
+[32m+[m[32m    .compileComponents();[m
+[32m+[m
+[32m+[m[32m    fixture = TestBed.createComponent(HeaderComponent);[m
+[32m+[m[32m    component = fixture.componentInstance;[m
+[32m+[m[32m    await fixture.whenStable();[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  it('should create', () => {[m
+[32m+[m[32m    expect(component).toBeTruthy();[m
+[32m+[m[32m  });[m
+[32m+[m[32m});[m
+[1mdiff --git a/src/app/components/header.component/header.component.ts b/src/app/components/header.component/header.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..0d005a1[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/header.component/header.component.ts[m
+[36m@@ -0,0 +1,22 @@[m
+[32m+[m[32m// header.component.ts[m
+[32m+[m[32mimport { Component, signal } from '@angular/core';[m
+[32m+[m[32mimport { RouterModule } from '@angular/router';[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  selector: 'app-header',[m
+[32m+[m[32m  standalone: true,[m
+[32m+[m[32m  imports: [RouterModule],[m
+[32m+[m[32m  templateUrl: './header.component.html',[m
+[32m+[m[32m  styleUrls: ['./header.component.scss'][m
+[32m+[m[32m})[m
+[32m+[m[32mexport class HeaderComponent {[m
+[32m+[m[32m  menuAbierto = signal(false);[m
+[32m+[m
+[32m+[m[32m  toggleMenu() {[m
+[32m+[m[32m    this.menuAbierto.set(!this.menuAbierto());[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  cerrarMenu() {[m
+[32m+[m[32m    this.menuAbierto.set(false);[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/producto-form.component/producto-form.component.html b/src/app/components/producto-form.component/producto-form.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f3a9d86[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/producto-form.component/producto-form.component.html[m
+[36m@@ -0,0 +1,50 @@[m
+[32m+[m[32m<div class="form-container">[m
+[32m+[m[32m  <h2 class="form-title">Agregar Nuevo Producto</h2>[m
+[32m+[m
+[32m+[m[32m  <form [formGroup]="productoForm" (ngSubmit)="submitForm()">[m
+[32m+[m[32m    <div class="form-group">[m
+[32m+[m[32m      <label for="nombre">Nombre</label>[m
+[32m+[m[32m      <input id="nombre" formControlName="nombre" type="text" placeholder="Nombre del producto" />[m
+[32m+[m[32m      <small *ngIf="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched">[m
+[32m+[m[32m        Nombre obligatorio[m
+[32m+[m[32m      </small>[m
+[32m+[m[32m    </div>[m
+[32m+[m
+[32m+[m[32m    <div class="form-group">[m
+[32m+[m[32m      <label for="descripcion">Descripción</label>[m
+[32m+[m[32m      <textarea id="descripcion" formControlName="descripcion" placeholder="Descripción del producto"></textarea>[m
+[32m+[m[32m      <small *ngIf="productoForm.get('descripcion')?.invalid && productoForm.get('descripcion')?.touched">[m
+[32m+[m[32m        Descripción obligatoria[m
+[32m+[m[32m      </small>[m
+[32m+[m[32m    </div>[m
+[32m+[m
+[32m+[m[32m    <div class="form-row">[m
+[32m+[m[32m      <div class="form-group">[m
+[32m+[m[32m        <label for="precio">Precio</label>[m
+[32m+[m[32m        <input id="precio" formControlName="precio" type="number" min="0" />[m
+[32m+[m[32m        <small *ngIf="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched">[m
+[32m+[m[32m          Precio válido requerido[m
+[32m+[m[32m        </small>[m
+[32m+[m[32m      </div>[m
+[32m+[m
+[32m+[m[32m      <div class="form-group">[m
+[32m+[m[32m        <label for="stock">Stock</label>[m
+[32m+[m[32m        <input id="stock" formControlName="stock" type="number" min="0" />[m
+[32m+[m[32m        <small *ngIf="productoForm.get('stock')?.invalid && productoForm.get('stock')?.touched">[m
+[32m+[m[32m          Stock válido requerido[m
+[32m+[m[32m        </small>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </div>[m
+[32m+[m
+[32m+[m[32m    <div class="form-group">[m
+[32m+[m[32m      <label for="imagen">Imagen (opcional)</label>[m
+[32m+[m[32m      <input id="imagen" formControlName="imagen" type="text" placeholder="URL o nombre de archivo" />[m
+[32m+[m[32m    </div>[m
+[32m+[m
+[32m+[m[32m    <button type="submit" class="btn-submit" [disabled]="productoForm.invalid || cargando">[m
+[32m+[m[32m      {{ cargando ? 'Guardando...' : 'Agregar Producto' }}[m
+[32m+[m[32m    </button>[m
+[32m+[m
+[32m+[m[32m    <p class="mensaje" *ngIf="mensaje">{{ mensaje }}</p>[m
+[32m+[m[32m  </form>[m
+[32m+[m[32m</div>[m
+[1mdiff --git a/src/app/components/producto-form.component/producto-form.component.scss b/src/app/components/producto-form.component/producto-form.component.scss[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6349c47[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/producto-form.component/producto-form.component.scss[m
+[36m@@ -0,0 +1,84 @@[m
+[32m+[m[32m.form-container {[m
+[32m+[m[32m  max-width: 500px;[m
+[32m+[m[32m  margin: 2rem auto;[m
+[32m+[m[32m  padding: 2rem;[m
+[32m+[m[32m  background: #fff;[m
+[32m+[m[32m  border-radius: 15px;[m
+[32m+[m[32m  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.form-title {[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m  margin-bottom: 1.5rem;[m
+[32m+[m[32m  font-size: 1.8rem;[m
+[32m+[m[32m  color: #333;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.form-group {[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  flex-direction: column;[m
+[32m+[m[32m  margin-bottom: 1rem;[m
+[32m+[m
+[32m+[m[32m  label {[m
+[32m+[m[32m    font-weight: 600;[m
+[32m+[m[32m    margin-bottom: 0.5rem;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  input,[m
+[32m+[m[32m  textarea {[m
+[32m+[m[32m    padding: 0.5rem 0.75rem;[m
+[32m+[m[32m    border-radius: 8px;[m
+[32m+[m[32m    border: 1px solid #ccc;[m
+[32m+[m[32m    font-size: 1rem;[m
+[32m+[m
+[32m+[m[32m    &:focus {[m
+[32m+[m[32m      outline: none;[m
+[32m+[m[32m      border-color: #007bff;[m
+[32m+[m[32m      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  small {[m
+[32m+[m[32m    color: red;[m
+[32m+[m[32m    margin-top: 0.25rem;[m
+[32m+[m[32m    font-size: 0.85rem;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.form-row {[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  gap: 1rem;[m
+[32m+[m[32m  justify-content: space-between;[m
+[32m+[m
+[32m+[m[32m  .form-group {[m
+[32m+[m[32m    flex: 1;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.btn-submit {[m
+[32m+[m[32m  width: 100%;[m
+[32m+[m[32m  padding: 0.75rem;[m
+[32m+[m[32m  border: none;[m
+[32m+[m[32m  border-radius: 10px;[m
+[32m+[m[32m  background-color: #007bff;[m
+[32m+[m[32m  color: #fff;[m
+[32m+[m[32m  font-size: 1.1rem;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  transition: 0.3s;[m
+[32m+[m
+[32m+[m[32m  &:hover {[m
+[32m+[m[32m    background-color: #0056b3;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  &:disabled {[m
+[32m+[m[32m    background-color: #999;[m
+[32m+[m[32m    cursor: not-allowed;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.mensaje {[m
+[32m+[m[32m  margin-top: 1rem;[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m  font-weight: 500;[m
+[32m+[m[32m  color: green;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/producto-form.component/producto-form.component.spec.ts b/src/app/components/producto-form.component/producto-form.component.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8a29056[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/producto-form.component/producto-form.component.spec.ts[m
+[36m@@ -0,0 +1,23 @@[m
+[32m+[m[32mimport { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m
+[32m+[m[32mimport { ProductoFormComponent } from './producto-form.component';[m
+[32m+[m
+[32m+[m[32mdescribe('ProductoFormComponent', () => {[m
+[32m+[m[32m  let component: ProductoFormComponent;[m
+[32m+[m[32m  let fixture: ComponentFixture<ProductoFormComponent>;[m
+[32m+[m
+[32m+[m[32m  beforeEach(async () => {[m
+[32m+[m[32m    await TestBed.configureTestingModule({[m
+[32m+[m[32m      imports: [ProductoFormComponent][m
+[32m+[m[32m    })[m
+[32m+[m[32m    .compileComponents();[m
+[32m+[m
+[32m+[m[32m    fixture = TestBed.createComponent(ProductoFormComponent);[m
+[32m+[m[32m    component = fixture.componentInstance;[m
+[32m+[m[32m    await fixture.whenStable();[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  it('should create', () => {[m
+[32m+[m[32m    expect(component).toBeTruthy();[m
+[32m+[m[32m  });[m
+[32m+[m[32m});[m
+[1mdiff --git a/src/app/components/producto-form.component/producto-form.component.ts b/src/app/components/producto-form.component/producto-form.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8326fb8[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/producto-form.component/producto-form.component.ts[m
+[36m@@ -0,0 +1,53 @@[m
+[32m+[m[32mimport { Component, OnInit } from '@angular/core';[m
+[32m+[m[32mimport { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';[m
+[32m+[m[32mimport { CommonModule } from '@angular/common';[m
+[32m+[m[32mimport { ProductoService } from '../../services/producto.service';[m
+[32m+[m[32mimport { Producto } from '../../models/producto';[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  selector: 'app-producto-form',[m
+[32m+[m[32m  standalone: true,[m
+[32m+[m[32m  imports: [CommonModule, ReactiveFormsModule],[m
+[32m+[m[32m  templateUrl: './producto-form.component.html',[m
+[32m+[m[32m  styleUrls: ['./producto-form.component.scss'][m
+[32m+[m[32m})[m
+[32m+[m[32mexport class ProductoFormComponent implements OnInit {[m
+[32m+[m[32m  productoForm!: FormGroup;[m
+[32m+[m[32m  cargando = false;[m
+[32m+[m[32m  mensaje = '';[m
+[32m+[m
+[32m+[m[32m  constructor(private fb: FormBuilder, private productoService: ProductoService) {}[m
+[32m+[m
+[32m+[m[32m  ngOnInit(): void {[m
+[32m+[m[32m    this.productoForm = this.fb.group({[m
+[32m+[m[32m      nombre: ['', Validators.required],[m
+[32m+[m[32m      descripcion: ['', Validators.required],[m
+[32m+[m[32m      precio: [0, [Validators.required, Validators.min(0)]],[m
+[32m+[m[32m      stock: [0, [Validators.required, Validators.min(0)]],[m
+[32m+[m[32m      imagen: [''][m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  submitForm() {[m
+[32m+[m[32m    if (this.productoForm.invalid) {[m
+[32m+[m[32m      this.mensaje = 'Por favor completa todos los campos correctamente';[m
+[32m+[m[32m      return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    this.cargando = true;[m
+[32m+[m[32m    const producto: Producto = this.productoForm.value;[m
+[32m+[m
+[32m+[m[32m    this.productoService.crearProducto(producto).subscribe({[m
+[32m+[m[32m      next: (res) => {[m
+[32m+[m[32m        this.mensaje = `Producto "${res.nombre}" creado correctamente`;[m
+[32m+[m[32m        this.cargando = false;[m
+[32m+[m[32m        this.productoForm.reset({ precio: 0, stock: 0 });[m
+[32m+[m[32m      },[m
+[32m+[m[32m      error: (err) => {[m
+[32m+[m[32m        console.error('Error al crear producto:', err);[m
+[32m+[m[32m        this.mensaje = 'Error al crear producto';[m
+[32m+[m[32m        this.cargando = false;[m
+[32m+[m[32m      }[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/producto-list.component/producto-list.component.html b/src/app/components/producto-list.component/producto-list.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..ce5ff53[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/producto-list.component/producto-list.component.html[m
+[36m@@ -0,0 +1,37 @@[m
+[32m+[m[32m<div class="catalogo-container container py-4">[m
+[32m+[m[32m  <h2 class="catalogo-title mb-4">Catálogo de Productos</h2>[m
+[32m+[m
+[32m+[m[32m  <!-- Spinner -->[m
+[32m+[m[32m  <div *ngIf="cargando" class="d-flex justify-content-center my-5">[m
+[32m+[m[32m    <div class="spinner-border text-primary" role="status"></div>[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <!-- Grid de productos -->[m
+[32m+[m[32m  <div class="row g-4" *ngIf="!cargando && productos.length">[m
+[32m+[m[32m    <div class="col-md-4 col-lg-3" *ngFor="let producto of productos">[m
+[32m+[m[32m      <div class="card h-100 shadow-sm" [class.flipped]="producto.flipped">[m
+[32m+[m[32m        <img [src]="producto.imagen" class="card-img-top" [alt]="producto.nombre">[m
+[32m+[m[32m        <div class="card-body d-flex flex-column">[m
+[32m+[m[32m          <h5 class="card-title">{{ producto.nombre }}</h5>[m
+[32m+[m[32m          <p class="card-text text-truncate">{{ producto.descripcion }}</p>[m
+[32m+[m[32m          <p class="card-text fw-bold">$ {{ producto.precioNumber | number:'1.2-2' }}</p>[m
+[32m+[m[32m          <button class="btn btn-success mt-auto" (click)="agregarAlCarrito(producto)">🛒 Agregar</button>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m  </div>[m
+[32m+[m[32m</div>[m
+[32m+[m
+[32m+[m[32m<!-- Mini carrito flotante -->[m
+[32m+[m[32m<div class="mini-carrito position-fixed bottom-0 end-0 m-4 p-2 shadow rounded bg-white border" *ngIf="carrito.length">[m
+[32m+[m[32m  <button class="btn btn-success w-100 d-flex justify-content-between align-items-center" (click)="irACarrito()">[m
+[32m+[m[32m    <span>🛒 Carrito</span>[m
+[32m+[m[32m    <span class="badge bg-light text-dark rounded-pill px-2">{{ cantidadTotal() }}</span>[m
+[32m+[m[32m    <span class="fw-bold">$ {{ obtenerTotal() }}</span>[m
+[32m+[m[32m  </button>[m
+[32m+[m[32m</div>[m
+[32m+[m
+[32m+[m[32m<!-- Toast -->[m
+[32m+[m[32m<div class="toast position-fixed bottom-0 start-50 translate-middle-x mb-3 show" *ngIf="toastMessage">[m
+[32m+[m[32m  <div class="toast-body bg-success text-white">{{ toastMessage }}</div>[m
+[32m+[m[32m</div>[m
+[1mdiff --git a/src/app/components/producto-list.component/producto-list.component.scss b/src/app/components/producto-list.component/producto-list.component.scss[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4daa12c[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/producto-list.component/producto-list.component.scss[m
+[36m@@ -0,0 +1,36 @@[m
+[32m+[m[32m.catalogo-container {[m
+[32m+[m[32m  .card {[m
+[32m+[m[32m    transition: transform 0.3s, box-shadow 0.3s;[m
+[32m+[m
+[32m+[m[32m    &:hover {[m
+[32m+[m[32m      transform: translateY(-5px);[m
+[32m+[m[32m      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.mini-carrito {[m
+[32m+[m[32m  z-index: 1050;[m
+[32m+[m[32m  width: 240px;[m
+[32m+[m
+[32m+[m[32m  button {[m
+[32m+[m[32m    font-weight: bold;[m
+[32m+[m[32m    font-size: 1rem;[m
+[32m+[m[32m    display: flex;[m
+[32m+[m[32m    justify-content: space-between;[m
+[32m+[m[32m    align-items: center;[m
+[32m+[m[32m    padding: 0.5rem 1rem;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .badge {[m
+[32m+[m[32m    font-size: 0.9rem;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.toast {[m
+[32m+[m[32m  z-index: 1100;[m
+[32m+[m[32m  min-width: 250px;[m
+[32m+[m[32m  border-radius: 0.5rem;[m
+[32m+[m[32m  font-weight: 500;[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/components/producto-list.component/producto-list.component.spec.ts b/src/app/components/producto-list.component/producto-list.component.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..76586a3[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/producto-list.component/producto-list.component.spec.ts[m
+[36m@@ -0,0 +1,23 @@[m
+[32m+[m[32mimport { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m
+[32m+[m[32mimport { ProductoListComponent } from './producto-list.component';[m
+[32m+[m
+[32m+[m[32mdescribe('ProductoListComponent', () => {[m
+[32m+[m[32m  let component: ProductoListComponent;[m
+[32m+[m[32m  let fixture: ComponentFixture<ProductoListComponent>;[m
+[32m+[m
+[32m+[m[32m  beforeEach(async () => {[m
+[32m+[m[32m    await TestBed.configureTestingModule({[m
+[32m+[m[32m      imports: [ProductoListComponent][m
+[32m+[m[32m    })[m
+[32m+[m[32m    .compileComponents();[m
+[32m+[m
+[32m+[m[32m    fixture = TestBed.createComponent(ProductoListComponent);[m
+[32m+[m[32m    component = fixture.componentInstance;[m
+[32m+[m[32m    await fixture.whenStable();[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  it('should create', () => {[m
+[32m+[m[32m    expect(component).toBeTruthy();[m
+[32m+[m[32m  });[m
+[32m+[m[32m});[m
+[1mdiff --git a/src/app/components/producto-list.component/producto-list.component.ts b/src/app/components/producto-list.component/producto-list.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..13f7d7c[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/components/producto-list.component/producto-list.component.ts[m
+[36m@@ -0,0 +1,128 @@[m
+[32m+[m[32mimport { Component, OnInit } from '@angular/core';[m
+[32m+[m[32mimport { CommonModule } from '@angular/common';[m
+[32m+[m[32mimport { RouterModule, Router } from '@angular/router';[m
+[32m+[m[32mimport { ProductoService } from '../../services/producto.service';[m
+[32m+[m[32mimport { CarritoService } from '../../services/carrito.service';[m
+[32m+[m[32mimport { Producto } from '../../models/producto';[m
+[32m+[m
+[32m+[m[32minterface ProductoUI extends Producto {[m
+[32m+[m[32m  flipped?: boolean;[m
+[32m+[m[32m  precioNumber: number;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32minterface CarritoItem {[m
+[32m+[m[32m  producto: Producto;[m
+[32m+[m[32m  cantidad: number;[m
+[32m+[m[32m  precioNumber: number;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  selector: 'app-producto-list',[m
+[32m+[m[32m  standalone: true,[m
+[32m+[m[32m  imports: [CommonModule, RouterModule],[m
+[32m+[m[32m  templateUrl: './producto-list.component.html',[m
+[32m+[m[32m  styleUrls: ['./producto-list.component.scss'],[m
+[32m+[m[32m})[m
+[32m+[m[32mexport class ProductoListComponent implements OnInit {[m
+[32m+[m[32m  productos: ProductoUI[] = [];[m
+[32m+[m[32m  carrito: CarritoItem[] = [];[m
+[32m+[m[32m  cargando = true;[m
+[32m+[m[32m  toastMessage: string | null = null;[m
+[32m+[m
+[32m+[m[32m  constructor([m
+[32m+[m[32m    private productoService: ProductoService,[m
+[32m+[m[32m    private carritoService: CarritoService,[m
+[32m+[m[32m    private router: Router[m
+[32m+[m[32m  ) {}[m
+[32m+[m
+[32m+[m[32m  ngOnInit(): void {[m
+[32m+[m[32m    this.cargarProductos();[m
+[32m+[m[32m    this.cargarCarrito();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  cargarProductos() {[m
+[32m+[m[32m    this.productoService.getProductos().subscribe({[m
+[32m+[m[32m      next: (data) => {[m
+[32m+[m[32m        this.productos = data.map((p) => ({[m
+[32m+[m[32m          ...p,[m
+[32m+[m[32m          flipped: false,[m
+[32m+[m[32m          precioNumber: Number(p.precio) || 0,[m
+[32m+[m[32m          imagen: `assets/img/${p.imagen}`,[m
+[32m+[m[32m        }));[m
+[32m+[m[32m        this.cargando = false;[m
+[32m+[m[32m      },[m
+[32m+[m[32m      error: (err) => {[m
+[32m+[m[32m        console.error('Error al cargar productos:', err);[m
+[32m+[m[32m        this.cargando = false;[m
+[32m+[m[32m      },[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  cargarCarrito() {[m
+[32m+[m[32m    this.carritoService.getCarrito().subscribe({[m
+[32m+[m[32m      next: (data) => {[m
+[32m+[m[32m        this.carrito = (data.productos || []).map((item: any) => ({[m
+[32m+[m[32m          producto: item.producto,[m
+[32m+[m[32m          cantidad: item.cantidad || 1,[m
+[32m+[m[32m          precioNumber: Number(item.producto.precio) || 0,[m
+[32m+[m[32m        }));[m
+[32m+[m[32m      },[m
+[32m+[m[32m      error: (err) => console.error('Error al cargar carrito', err),[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  agregarAlCarrito(producto: ProductoUI) {[m
+[32m+[m[32m    if (producto.stock <= 0) return;[m
+[32m+[m
+[32m+[m[32m    // Actualizar localmente[m
+[32m+[m[32m    const itemExistente = this.carrito.find(i => i.producto._id === producto._id);[m
+[32m+[m[32m    if (itemExistente) {[m
+[32m+[m[32m      itemExistente.cantidad += 1;[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m      this.carrito.push({[m
+[32m+[m[32m        producto,[m
+[32m+[m[32m        cantidad: 1,[m
+[32m+[m[32m        precioNumber: Number(producto.precio) || 0[m
+[32m+[m[32m      });[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    this.showToast(`"${producto.nombre}" agregado al carrito`);[m
+[32m+[m
+[32m+[m[32m    // Actualizar backend[m
+[32m+[m[32m    this.carritoService.agregarAlCarrito(producto._id!, 1).subscribe({[m
+[32m+[m[32m      next: (carritoActualizado) => {[m
+[32m+[m[32m        this.carrito = (carritoActualizado.productos || []).map((item: any) => ({[m
+[32m+[m[32m          producto: item.producto,[m
+[32m+[m[32m          cantidad: item.cantidad || 1,[m
+[32m+[m[32m          precioNumber: Number(item.producto.precio) || 0,[m
+[32m+[m[32m        }));[m
+[32m+[m[32m      },[m
+[32m+[m[32m      error: (err) => console.error('Error al agregar al carrito', err),[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  toggleFlip(producto: ProductoUI) {[m
+[32m+[m[32m    producto.flipped = !producto.flipped;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  obtenerSubtotal(item: CarritoItem) {[m
+[32m+[m[32m    return ((item.precioNumber || 0) * (item.cantidad || 1)).toFixed(2);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  obtenerTotal() {[m
+[32m+[m[32m    return this.carrito.reduce((sum, item) => sum + (item.precioNumber || 0) * (item.cantidad || 1), 0).toFixed(2);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  cantidadTotal() {[m
+[32m+[m[32m    return this.carrito.reduce((sum, item) => sum + (item.cantidad || 0), 0);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  irACarrito() {[m
+[32m+[m[32m    this.router.navigate(['/carrito']);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  showToast(message: string) {[m
+[32m+[m[32m    this.toastMessage = message;[m
+[32m+[m[32m    setTimeout(() => (this.toastMessage = null), 2500);[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/models/carrito.ts b/src/app/models/carrito.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..98352d8[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/models/carrito.ts[m
+[36m@@ -0,0 +1,12 @@[m
+[32m+[m[32mimport { Producto } from './producto';[m
+[32m+[m
+[32m+[m[32mexport interface CarritoItem {[m
+[32m+[m[32m  producto: Producto;[m
+[32m+[m[32m  cantidad: number;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport interface Carrito {[m
+[32m+[m[32m  _id?: string;[m
+[32m+[m[32m  productos: CarritoItem[];[m
+[32m+[m[32m  total: number;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/models/producto.ts b/src/app/models/producto.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d201e2f[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/models/producto.ts[m
+[36m@@ -0,0 +1,12 @@[m
+[32m+[m[32mexport interface Producto {[m
+[32m+[m[32m  _id?: string;[m
+[32m+[m[32m  nombre: string;[m
+[32m+[m[32m  descripcion: string;[m
+[32m+[m[32m  precio: number;[m
+[32m+[m[32m  stock: number;[m
+[32m+[m[32m  imagen?: string;[m
+[32m+[m
+[32m+[m[32m  // propiedades extra para UI[m
+[32m+[m[32m  flipped?: boolean;[m
+[32m+[m[32m  mostrarDetalles?: boolean;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/page/home/home.component/home.component.html b/src/app/page/home/home.component/home.component.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..26c9e37[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/page/home/home.component/home.component.html[m
+[36m@@ -0,0 +1,149 @@[m
+[32m+[m[32m<div class="container mt-5">[m
+[32m+[m
+[32m+[m[32m  <!-- Banner Principal -->[m
+[32m+[m[32m  <div class="banner text-center rounded-4 shadow-lg p-5 mb-5">[m
+[32m+[m[32m    <h1 class="display-3 mb-3">👕 Bienvenido a Tienda de Ropa</h1>[m
+[32m+[m[32m    <p class="lead mb-4">[m
+[32m+[m[32m      Explora nuestras últimas colecciones y compra con estilo y seguridad.[m
+[32m+[m[32m    </p>[m
+[32m+[m[32m    <div class="d-flex justify-content-center gap-3">[m
+[32m+[m[32m      <a routerLink="/productos" class="btn btn-light btn-lg shadow">[m
+[32m+[m[32m        Ver Productos[m
+[32m+[m[32m      </a>[m
+[32m+[m[32m      <a routerLink="/carrito" class="btn btn-outline-light btn-lg shadow">[m
+[32m+[m[32m        Ir al Carrito[m
+[32m+[m[32m      </a>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <!-- Carrusel de Productos Destacados -->[m
+[32m+[m[32m  <h2 class="mb-4 text-center">Productos Destacados</h2>[m
+[32m+[m[32m  <div id="productosCarousel" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-pause="hover">[m
+[32m+[m[32m    <div class="carousel-inner">[m
+[32m+[m
+[32m+[m[32m      <div class="carousel-item active">[m
+[32m+[m[32m        <div class="row justify-content-center">[m
+[32m+[m[32m          <div class="col-md-4">[m
+[32m+[m[32m            <div class="card shadow-sm border-0 product-card">[m
+[32m+[m[32m              <img src="https://tse1.mm.bing.net/th/id/OIP.awvNlU-KeNJX5RlsIZPNFAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100 rounded" alt="Pantalón Jeans">[m
+[32m+[m[32m              <div class="card-body text-center">[m
+[32m+[m[32m                <h5 class="card-title">Pantalón Jeans</h5>[m
+[32m+[m[32m                <p class="card-text">Comodidad y estilo para tu día a día. Material resistente y diseño moderno.</p>[m
+[32m+[m[32m                <p class="fw-bold text-primary">$49.99</p>[m
+[32m+[m[32m                <a routerLink="/productos" class="btn btn-primary btn-sm">Ver Producto</a>[m
+[32m+[m[32m              </div>[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m
+[32m+[m[32m      <div class="carousel-item">[m
+[32m+[m[32m        <div class="row justify-content-center">[m
+[32m+[m[32m          <div class="col-md-4">[m
+[32m+[m[32m            <div class="card shadow-sm border-0 product-card">[m
+[32m+[m[32m              <img src="https://tse4.mm.bing.net/th/id/OIP.inQguAUd4TZPXvSZjT_9wgHaJA?rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100 rounded" alt="Camisa Casual">[m
+[32m+[m[32m              <div class="card-body text-center">[m
+[32m+[m[32m                <h5 class="card-title">Camisa Casual</h5>[m
+[32m+[m[32m                <p class="card-text">Perfecta para oficina o salidas casuales. Tela ligera y transpirable.</p>[m
+[32m+[m[32m                <p class="fw-bold text-primary">$35.00</p>[m
+[32m+[m[32m                <a routerLink="/productos" class="btn btn-primary btn-sm">Ver Producto</a>[m
+[32m+[m[32m              </div>[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m
+[32m+[m[32m      <div class="carousel-item">[m
+[32m+[m[32m        <div class="row justify-content-center">[m
+[32m+[m[32m          <div class="col-md-4">[m
+[32m+[m[32m            <div class="card shadow-sm border-0 product-card">[m
+[32m+[m[32m              <img src="https://images.unsplash.com/photo-1611078488126-621d3e8be6db?auto=format&fit=crop&w=400&q=80" class="d-block w-100 rounded" alt="Zapatos Deportivos">[m
+[32m+[m[32m              <div class="card-body text-center">[m
+[32m+[m[32m                <h5 class="card-title">Zapatos Deportivos</h5>[m
+[32m+[m[32m                <p class="card-text">Estilo y confort en cada paso. Ideal para deportes o uso diario.</p>[m
+[32m+[m[32m                <p class="fw-bold text-primary">$69.99</p>[m
+[32m+[m[32m                <a routerLink="/productos" class="btn btn-primary btn-sm">Ver Producto</a>[m
+[32m+[m[32m              </div>[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m
+[32m+[m[32m      <div class="carousel-item">[m
+[32m+[m[32m        <div class="row justify-content-center">[m
+[32m+[m[32m          <div class="col-md-4">[m
+[32m+[m[32m            <div class="card shadow-sm border-0 product-card">[m
+[32m+[m[32m              <img src="https://images.unsplash.com/photo-1593032465170-1b7f88207310?auto=format&fit=crop&w=400&q=80" class="d-block w-100 rounded" alt="Chaqueta Elegante">[m
+[32m+[m[32m              <div class="card-body text-center">[m
+[32m+[m[32m                <h5 class="card-title">Chaqueta Elegante</h5>[m
+[32m+[m[32m                <p class="card-text">Para ocasiones especiales. Diseño premium y material de alta calidad.</p>[m
+[32m+[m[32m                <p class="fw-bold text-primary">$89.99</p>[m
+[32m+[m[32m                <a routerLink="/productos" class="btn btn-primary btn-sm">Ver Producto</a>[m
+[32m+[m[32m              </div>[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m
+[32m+[m[32m      <div class="carousel-item">[m
+[32m+[m[32m        <div class="row justify-content-center">[m
+[32m+[m[32m          <div class="col-md-4">[m
+[32m+[m[32m            <div class="card shadow-sm border-0 product-card">[m
+[32m+[m[32m              <img src="https://images.unsplash.com/photo-1602810311534-d1e828f40e7a?auto=format&fit=crop&w=400&q=80" class="d-block w-100 rounded" alt="Bolso de Moda">[m
+[32m+[m[32m              <div class="card-body text-center">[m
+[32m+[m[32m                <h5 class="card-title">Bolso de Moda</h5>[m
+[32m+[m[32m                <p class="card-text">Complemento perfecto para cualquier outfit. Diseño elegante y funcional.</p>[m
+[32m+[m[32m                <p class="fw-bold text-primary">$59.99</p>[m
+[32m+[m[32m                <a routerLink="/productos" class="btn btn-primary btn-sm">Ver Producto</a>[m
+[32m+[m[32m              </div>[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m
+[32m+[m[32m    </div>[m
+[32m+[m
+[32m+[m[32m    <button class="carousel-control-prev" type="button" data-bs-target="#productosCarousel" data-bs-slide="prev">[m
+[32m+[m[32m      <span class="carousel-control-prev-icon" aria-hidden="true"></span>[m
+[32m+[m[32m      <span class="visually-hidden">Anterior</span>[m
+[32m+[m[32m    </button>[m
+[32m+[m[32m    <button class="carousel-control-next" type="button" data-bs-target="#productosCarousel" data-bs-slide="next">[m
+[32m+[m[32m      <span class="carousel-control-next-icon" aria-hidden="true"></span>[m
+[32m+[m[32m      <span class="visually-hidden">Siguiente</span>[m
+[32m+[m[32m    </button>[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m  <!-- Beneficios / Características -->[m
+[32m+[m[32m  <div class="row text-center g-4 mb-5">[m
+[32m+[m[32m    <div class="col-md-4">[m
+[32m+[m[32m      <div class="card p-3 shadow-sm h-100 border-0 feature-card">[m
+[32m+[m[32m        <img src="https://tse1.mm.bing.net/th/id/OIP.abks1ZZ9oNIEvRX7z1KzFAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top rounded" alt="Ofertas">[m
+[32m+[m[32m        <div class="card-body">[m
+[32m+[m[32m          <h5 class="card-title">Ofertas Exclusivas</h5>[m
+[32m+[m[32m          <p class="card-text">Descuentos semanales en productos seleccionados. ¡Aprovecha antes que se agoten!</p>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </div>[m
+[32m+[m
+[32m+[m[32m    <div class="col-md-4">[m
+[32m+[m[32m      <div class="card p-3 shadow-sm h-100 border-0 feature-card">[m
+[32m+[m[32m        <img src="https://th.bing.com/th/id/R.562c5406b674cc1b394983c872080c09?rik=mLcr1S7PzQWOcg&riu=http%3a%2f%2fstylelovely.com%2fwp-content%2fuploads%2fropa_nueva_coleccion-entrada.jpg&ehk=JUqt6Uu8RBF8FX7u9fZCptY0AbAZOk%2b5KkmiKvOfvnU%3d&risl=&pid=ImgRaw&r=0" class="card-img-top rounded" alt="Nuevos Productos">[m
+[32m+[m[32m        <div class="card-body">[m
+[32m+[m[32m          <h5 class="card-title">Nuevos Productos</h5>[m
+[32m+[m[32m          <p class="card-text">Siempre agregamos nuevas colecciones de temporada para que vistas con estilo.</p>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </div>[m
+[32m+[m
+[32m+[m[32m    <div class="col-md-4">[m
+[32m+[m[32m      <div class="card p-3 shadow-sm h-100 border-0 feature-card">[m
+[32m+[m[32m        <img src="https://th.bing.com/th/id/R.edc943b92cfb2b7da0b8d29ec0a7fe31?rik=aKWV8rWookAF9Q&pid=ImgRaw&r=0" class="card-img-top rounded" alt="Compras Seguras">[m
+[32m+[m[32m        <div class="card-body">[m
+[32m+[m[32m          <h5 class="card-title">Compras Seguras</h5>[m
+[32m+[m[32m          <p class="card-text">Pago seguro y rápido. Garantizamos envíos confiables a todo el país.</p>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m  </div>[m
+[32m+[m
+[32m+[m[32m</div>[m
+[1mdiff --git a/src/app/page/home/home.component/home.component.scss b/src/app/page/home/home.component/home.component.scss[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2d77668[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/page/home/home.component/home.component.scss[m
+[36m@@ -0,0 +1,30 @@[m
+[32m+[m[32m.banner {[m
+[32m+[m[32m  background: linear-gradient(135deg, #0d6efd, #0056b3);[m
+[32m+[m[32m  color: white;[m
+[32m+[m[32m  padding: 4rem 2rem;[m
+[32m+[m[32m  border-radius: 2rem;[m
+[32m+[m[32m  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);[m
+[32m+[m[32m  h1 { font-weight: 700; }[m
+[32m+[m[32m  p.lead { font-size: 1.25rem; margin-bottom: 2rem; }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.product-card {[m
+[32m+[m[32m  transition: transform 0.3s ease, box-shadow 0.3s ease;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  &:hover {[m
+[32m+[m[32m    transform: translateY(-5px) scale(1.03);[m
+[32m+[m[32m    box-shadow: 0 12px 24px rgba(0,0,0,0.2);[m
+[32m+[m[32m  }[m
+[32m+[m[32m  img { height: 250px; object-fit: cover; border-radius: 0.5rem; }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.feature-card {[m
+[32m+[m[32m  transition: transform 0.3s ease;[m
+[32m+[m[32m  &:hover { transform: scale(1.05); }[m
+[32m+[m[32m  img { height: 180px; object-fit: cover; border-radius: 0.5rem; }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.carousel-control-prev-icon,[m
+[32m+[m[32m.carousel-control-next-icon {[m
+[32m+[m[32m  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/page/home/home.component/home.component.spec.ts b/src/app/page/home/home.component/home.component.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2974b7e[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/page/home/home.component/home.component.spec.ts[m
+[36m@@ -0,0 +1,23 @@[m
+[32m+[m[32mimport { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m
+[32m+[m[32mimport { HomeComponent } from './home.component';[m
+[32m+[m
+[32m+[m[32mdescribe('HomeComponent', () => {[m
+[32m+[m[32m  let component: HomeComponent;[m
+[32m+[m[32m  let fixture: ComponentFixture<HomeComponent>;[m
+[32m+[m
+[32m+[m[32m  beforeEach(async () => {[m
+[32m+[m[32m    await TestBed.configureTestingModule({[m
+[32m+[m[32m      imports: [HomeComponent][m
+[32m+[m[32m    })[m
+[32m+[m[32m    .compileComponents();[m
+[32m+[m
+[32m+[m[32m    fixture = TestBed.createComponent(HomeComponent);[m
+[32m+[m[32m    component = fixture.componentInstance;[m
+[32m+[m[32m    await fixture.whenStable();[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  it('should create', () => {[m
+[32m+[m[32m    expect(component).toBeTruthy();[m
+[32m+[m[32m  });[m
+[32m+[m[32m});[m
+[1mdiff --git a/src/app/page/home/home.component/home.component.ts b/src/app/page/home/home.component/home.component.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a5cd5db[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/page/home/home.component/home.component.ts[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32mimport { Component } from '@angular/core';[m
+[32m+[m[32mimport { RouterLink } from '@angular/router';[m
+[32m+[m
+[32m+[m[32m@Component({[m
+[32m+[m[32m  selector: 'app-home',[m
+[32m+[m[32m  standalone: true,[m
+[32m+[m[32m  imports: [RouterLink], // mantenlo solo si usas [routerLink] en el HTML[m
+[32m+[m[32m  templateUrl: './home.component.html',[m
+[32m+[m[32m  styleUrls: ['./home.component.scss'], // corregido[m
+[32m+[m[32m})[m
+[32m+[m[32mexport class HomeComponent {}[m
+[1mdiff --git a/src/app/services/carrito.service.spec.ts b/src/app/services/carrito.service.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..bb5f8e3[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/services/carrito.service.spec.ts[m
+[36m@@ -0,0 +1,16 @@[m
+[32m+[m[32mimport { TestBed } from '@angular/core/testing';[m
+[32m+[m
+[32m+[m[32mimport { CarritoService } from './carrito.service';[m
+[32m+[m
+[32m+[m[32mdescribe('CarritoService', () => {[m
+[32m+[m[32m  let service: CarritoService;[m
+[32m+[m
+[32m+[m[32m  beforeEach(() => {[m
+[32m+[m[32m    TestBed.configureTestingModule({});[m
+[32m+[m[32m    service = TestBed.inject(CarritoService);[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  it('should be created', () => {[m
+[32m+[m[32m    expect(service).toBeTruthy();[m
+[32m+[m[32m  });[m
+[32m+[m[32m});[m
+[1mdiff --git a/src/app/services/carrito.service.ts b/src/app/services/carrito.service.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f19f584[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/services/carrito.service.ts[m
+[36m@@ -0,0 +1,38 @@[m
+[32m+[m[32mimport { Injectable } from '@angular/core';[m
+[32m+[m[32mimport { HttpClient } from '@angular/common/http';[m
+[32m+[m[32mimport { Observable } from 'rxjs';[m
+[32m+[m
+[32m+[m[32m@Injectable({ providedIn: 'root' })[m
+[32m+[m[32mexport class CarritoService {[m
+[32m+[m[32m  private url = 'http://localhost:5000/api/carrito';[m
+[32m+[m[32m  private carritoId: string = '6921adff62a6916bb12ef210';[m
+[32m+[m
+[32m+[m[32m  constructor(private http: HttpClient) {}[m
+[32m+[m
+[32m+[m[32m  // Obtener carrito[m
+[32m+[m[32m  getCarrito(): Observable<any> {[m
+[32m+[m[32m    return this.http.get(`${this.url}/${this.carritoId}`);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  // Agregar producto al carrito[m
+[32m+[m[32m  agregarAlCarrito(productoId: string, cantidad: number): Observable<any> {[m
+[32m+[m[32m    return this.http.post(`${this.url}/${this.carritoId}/productos`, { productoId, cantidad });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  // Eliminar producto del carrito[m
+[32m+[m[32m  eliminarDelCarrito(productoId: string): Observable<any> {[m
+[32m+[m[32m    return this.http.delete(`${this.url}/${this.carritoId}/productos`, { body: { productoId } });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  // Vaciar carrito[m
+[32m+[m[32m  vaciarCarrito(): Observable<any> {[m
+[32m+[m[32m    return this.http.delete(`${this.url}/${this.carritoId}`);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  // -------------------------------[m
+[32m+[m[32m  // Nuevo: obtener compras realizadas[m
+[32m+[m[32m  // -------------------------------[m
+[32m+[m[32m  getComprasRealizadas(): Observable<any> {[m
+[32m+[m[32m    return this.http.get(`${this.url}/${this.carritoId}/compras`);[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/services/categoria.service.ts b/src/app/services/categoria.service.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..230445c[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/services/categoria.service.ts[m
+[36m@@ -0,0 +1,18 @@[m
+[32m+[m[32mimport { Injectable } from '@angular/core';[m
+[32m+[m[32mimport { HttpClient } from '@angular/common/http';[m
+[32m+[m[32mimport { Observable } from 'rxjs';[m
+[32m+[m
+[32m+[m[32m@Injectable({ providedIn: 'root' })[m
+[32m+[m[32mexport class CategoriaService {[m
+[32m+[m[32m  private url = 'http://localhost:5000/api/categorias';[m
+[32m+[m
+[32m+[m[32m  constructor(private http: HttpClient) {}[m
+[32m+[m
+[32m+[m[32m  getCategorias(): Observable<any> {[m
+[32m+[m[32m    return this.http.get(this.url);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  crearCategoria(nombre: string): Observable<any> {[m
+[32m+[m[32m    return this.http.post(this.url, { nombre });[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/services/producto.service.spec.ts b/src/app/services/producto.service.spec.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..14326d5[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/services/producto.service.spec.ts[m
+[36m@@ -0,0 +1,16 @@[m
+[32m+[m[32mimport { TestBed } from '@angular/core/testing';[m
+[32m+[m
+[32m+[m[32mimport { ProductoService } from './producto.service';[m
+[32m+[m
+[32m+[m[32mdescribe('ProductoService', () => {[m
+[32m+[m[32m  let service: ProductoService;[m
+[32m+[m
+[32m+[m[32m  beforeEach(() => {[m
+[32m+[m[32m    TestBed.configureTestingModule({});[m
+[32m+[m[32m    service = TestBed.inject(ProductoService);[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  it('should be created', () => {[m
+[32m+[m[32m    expect(service).toBeTruthy();[m
+[32m+[m[32m  });[m
+[32m+[m[32m});[m
+[1mdiff --git a/src/app/services/producto.service.ts b/src/app/services/producto.service.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d81bf5c[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/services/producto.service.ts[m
+[36m@@ -0,0 +1,36 @@[m
+[32m+[m[32mimport { Injectable } from '@angular/core';[m
+[32m+[m[32mimport { HttpClient } from '@angular/common/http';[m
+[32m+[m[32mimport { Observable } from 'rxjs';[m
+[32m+[m[32mimport { Producto } from '../models/producto';[m
+[32m+[m
+[32m+[m[32m@Injectable({ providedIn: 'root' })[m
+[32m+[m[32mexport class ProductoService {[m
+[32m+[m[32m  private url = 'http://localhost:5000/api/productos';[m
+[32m+[m
+[32m+[m[32m  constructor(private http: HttpClient) {}[m
+[32m+[m
+[32m+[m[32m  // Obtener todos los productos[m
+[32m+[m[32m  getProductos(): Observable<Producto[]> {[m
+[32m+[m[32m    return this.http.get<Producto[]>(this.url);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  // Obtener un producto por ID[m
+[32m+[m[32m  getProducto(id: string): Observable<Producto> {[m
+[32m+[m[32m    return this.http.get<Producto>(`${this.url}/${id}`);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  // Crear producto[m
+[32m+[m[32m  crearProducto(producto: Producto): Observable<Producto> {[m
+[32m+[m[32m    return this.http.post<Producto>(this.url, producto);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  // Actualizar producto[m
+[32m+[m[32m  actualizarProducto(id: string, producto: Producto): Observable<Producto> {[m
+[32m+[m[32m    return this.http.put<Producto>(`${this.url}/${id}`, producto);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  // Eliminar producto[m
+[32m+[m[32m  eliminarProducto(id: string): Observable<any> {[m
+[32m+[m[32m    return this.http.delete(`${this.url}/${id}`);[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/app/services/proveedor.service.ts b/src/app/services/proveedor.service.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c6463b9[m
+[1m--- /dev/null[m
+[1m+++ b/src/app/services/proveedor.service.ts[m
+[36m@@ -0,0 +1,29 @@[m
+[32m+[m[32mimport { Injectable } from '@angular/core';[m
+[32m+[m[32mimport { HttpClient } from '@angular/common/http';[m
+[32m+[m[32mimport { Observable } from 'rxjs';[m
+[32m+[m
+[32m+[m[32mexport interface Proveedor {[m
+[32m+[m[32m  _id?: string;[m
+[32m+[m[32m  nombre: string;[m
+[32m+[m[32m  telefono?: string;[m
+[32m+[m[32m  email?: string;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@Injectable({ providedIn: 'root' })[m
+[32m+[m[32mexport class ProveedorService {[m
+[32m+[m[32m  private url = 'http://localhost:5000/api/proveedores';[m
+[32m+[m
+[32m+[m[32m  constructor(private http: HttpClient) {}[m
+[32m+[m
+[32m+[m[32m  getProveedores(): Observable<Proveedor[]> {[m
+[32m+[m[32m    return this.http.get<Proveedor[]>(this.url);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  agregarProveedor(proveedor: Proveedor): Observable<Proveedor> {[m
+[32m+[m[32m    return this.http.post<Proveedor>(this.url, proveedor);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  eliminarProveedor(id: string): Observable<any> {[m
+[32m+[m[32m    return this.http.delete(`${this.url}/${id}`);[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/assets/img/Jeans.png b/src/assets/img/Jeans.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..acbf15d[m
+Binary files /dev/null and b/src/assets/img/Jeans.png differ
+[1mdiff --git a/src/assets/img/logo.png b/src/assets/img/logo.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..bf6ae52[m
+Binary files /dev/null and b/src/assets/img/logo.png differ
+[1mdiff --git a/src/assets/img/roja.png b/src/assets/img/roja.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2390f72[m
+Binary files /dev/null and b/src/assets/img/roja.png differ
+[1mdiff --git a/src/assets/img/zapatos.png b/src/assets/img/zapatos.png[m
+[1mnew file mode 100644[m
+[1mindex 0000000..8b21758[m
+Binary files /dev/null and b/src/assets/img/zapatos.png differ
+[1mdiff --git a/src/main.ts b/src/main.ts[m
+[1mindex 5df75f9..dafd34b 100644[m
+[1m--- a/src/main.ts[m
+[1m+++ b/src/main.ts[m
+[36m@@ -1,6 +1,10 @@[m
+ import { bootstrapApplication } from '@angular/platform-browser';[m
+[31m-import { appConfig } from './app/app.config';[m
+ import { App } from './app/app';[m
+[32m+[m[32mimport { routes } from './app/app.routes';[m
+[32m+[m[32mimport { provideRouter } from '@angular/router';[m
+ [m
+[31m-bootstrapApplication(App, appConfig)[m
+[31m-  .catch((err) => console.error(err));[m
+[32m+[m[32mbootstrapApplication(App, {[m
+[32m+[m[32m  providers: [[m
+[32m+[m[32m    provideRouter(routes)[m
+[32m+[m[32m  ][m
+[32m+[m[32m}).catch(err => console.error(err));[m

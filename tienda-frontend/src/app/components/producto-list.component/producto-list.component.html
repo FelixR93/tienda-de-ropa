@@ -1,0 +1,92 @@
+<div class="container py-4">
+  <!-- WIZARD -->
+  <div class="wizard-container">
+    <div class="wizard-steps">
+      <div class="step" [class.active]="step === 1">1. Catálogo</div>
+      <div class="step" [class.active]="step === 2">2. Detalles</div>
+      <div class="step" [class.active]="step === 3">3. Confirmación</div>
+    </div>
+
+    <div class="wizard-card shadow-lg p-4">
+      <!-- PASO 1 -->
+      <div *ngIf="step === 1" class="text-center">
+        <h4 class="fw-bold mb-2">Explora la colección</h4>
+        <p class="text-muted">Haz clic en un producto para ver más detalles.</p>
+        <button (click)="next()" class="btn btn-dark mt-3">Continuar</button>
+      </div>
+
+      <!-- PASO 2 -->
+      <div *ngIf="step === 2" class="text-center">
+        <h4 class="fw-bold mb-2">Detalles del producto</h4>
+        <p class="text-muted">Selecciona un artículo y agrégalo al carrito.</p>
+        <div class="mt-3 d-flex justify-content-between">
+          <button class="btn btn-secondary" (click)="prev()">Atrás</button>
+          <button class="btn btn-dark" (click)="next()">Siguiente</button>
+        </div>
+      </div>
+
+      <!-- PASO 3 -->
+      <div *ngIf="step === 3" class="text-center">
+        <h4 class="fw-bold mb-2">Resumen</h4>
+        <p class="text-muted">Productos: {{ cantidadTotal() }}</p>
+        <p class="fw-bold fs-3 text-success">$ {{ obtenerTotal() }}</p>
+
+        <button class="btn btn-success px-4" (click)="irACarrito()">Ir al carrito</button>
+
+        <div class="mt-3">
+          <button class="btn btn-secondary" (click)="prev()">Atrás</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATÁLOGO PREMIUM -->
+  <div class="catalog-section mt-5" *ngIf="step >= 1">
+    <h3 class="text-center fw-bold mb-4 catalog-title">NUEVA COLECCIÓN</h3>
+
+    <div class="row justify-content-center g-4">
+      <div class="col-md-4 col-lg-3" *ngFor="let producto of productos">
+        <div class="premium-card" (click)="toggleFlip(producto)">
+          <div class="premium-inner" [class.flipped]="producto.flipped">
+            <!-- FRONT -->
+            <div class="premium-front shadow-sm">
+              <div class="image-wrapper">
+                <img [src]="producto.imagen" class="product-img" />
+              </div>
+
+              <div class="info">
+                <h5 class="name">{{ producto.nombre }}</h5>
+                <p class="desc text-muted text-truncate">{{ producto.descripcion }}</p>
+
+                <p class="price">$ {{ producto.precioNumber | number : '1.2-2' }}</p>
+              </div>
+            </div>
+
+            <!-- BACK -->
+            <div class="premium-back shadow-lg">
+              <div class="info-back">
+                <h5 class="name-back">{{ producto.nombre }}</h5>
+
+                <p class="small mt-2">{{ producto.descripcion }}</p>
+
+                <p class="mt-3"><strong>Stock:</strong> {{ producto.stock }}</p>
+              </div>
+
+              <button
+                class="btn btn-light w-100 fw-semibold mt-3"
+                (click)="agregarAlCarrito(producto); $event.stopPropagation()"
+              >
+                Añadir al carrito 🛒
+              </button>
+              <button (click)="editar(producto._id!)">Editar</button>
+              <button (click)="eliminar(producto._id!)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div *ngIf="toastMessage" class="toast-message">{{ toastMessage }}</div>

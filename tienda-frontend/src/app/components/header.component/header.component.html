@@ -1,0 +1,35 @@
+<header class="header">
+  <div class="header-container">
+
+    <!-- LOGO -->
+    <div class="logo" routerLink="/" (click)="cerrarMenu()">
+      <img src="assets/img/logo.png" alt="Logo">
+      <span>TIENDA DE ROPA XIXI</span>
+    </div>
+
+    <!-- NAV DESKTOP -->
+    <nav class="nav-desktop">
+      <a routerLink="/" routerLinkActive="active">Inicio</a>
+      <a routerLink="/productos" routerLinkActive="active">Productos</a>
+      <a routerLink="/carrito" routerLinkActive="active" class="cart-link">
+        Carrito <span class="cart-count">{{ cantidadTotal() }}</span>
+      </a>
+      <a routerLink="/compras" routerLinkActive="active">Compras</a>
+    </nav>
+
+    <!-- HAMBURGER -->
+    <button class="menu-btn" (click)="toggleMenu()">
+      <span [class.open]="menuAbierto()"></span>
+      <span [class.open]="menuAbierto()"></span>
+      <span [class.open]="menuAbierto()"></span>
+    </button>
+  </div>
+
+  <!-- NAV MOBILE -->
+  <nav class="nav-mobile" [class.open]="menuAbierto()">
+    <a routerLink="/" (click)="cerrarMenu()">Inicio</a>
+    <a routerLink="/productos" (click)="cerrarMenu()">Productos</a>
+    <a routerLink="/carrito" (click)="cerrarMenu()">Carrito <span class="cart-count">{{ cantidadTotal() }}</span></a>
+    <a routerLink="/compras" (click)="cerrarMenu()">Compras</a>
+  </nav>
+</header>

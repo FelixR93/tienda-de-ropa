@@ -1,0 +1,52 @@
+<!-- compras-realizadas.component.html -->
+<div class="container py-4">
+  <h2 class="mb-4 text-primary">Mis Compras Realizadas</h2>
+
+  <!-- Spinner -->
+  <div *ngIf="cargando" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>
+
+  <!-- Mensaje si no hay compras -->
+  <div *ngIf="!cargando && compras.length === 0" class="alert alert-info">
+    No has realizado ninguna compra todavía.
+  </div>
+
+  <!-- Lista de compras -->
+  <div class="row" *ngIf="compras.length > 0">
+    <div class="col-md-6 mb-4" *ngFor="let compra of compras">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-primary text-white">
+          Compra ID: {{ compra._id | slice:0:8 }}... | Fecha: {{ compra.fecha | date:'short' }}
+        </div>
+        <div class="card-body p-3">
+          <table class="table table-sm table-borderless mb-2">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of compra.productos">
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>$ {{ obtenerSubtotal(item) }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <div class="d-flex justify-content-end fw-bold">
+            Total: $ {{ compra.total | number:'1.2-2' }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast position-fixed bottom-0 end-0 m-3" *ngIf="toastMessage" role="alert">
+  <div class="toast-body bg-danger text-white">{{ toastMessage }}</div>
+</div>

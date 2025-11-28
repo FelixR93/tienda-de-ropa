@@ -37,7 +37,15 @@
         <label>Imagen del producto</label>
 
         <div class="upload-area">
-          <input type="file" accept="image/*" (change)="onFileSelected($event)">
+          
+          <!-- CORREGIDO: AGREGADO name="imagen" -->
+          <input 
+            type="file"
+            name="imagen"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+          >
+
           <span class="upload-text">Seleccionar imagen</span>
         </div>
 
@@ -51,6 +59,9 @@
       <button type="submit" class="btn-save" [disabled]="cargando || productoForm.invalid">
         {{ cargando ? (modoEdicion ? 'Actualizando...' : 'Guardando...') : (modoEdicion ? 'Actualizar Producto' : 'Guardar Producto') }}
       </button>
+
+      <!-- Botón Cancelar -->
+      <button type="button" class="btn-cancelar" (click)="redirigir()">Cancelar</button>
 
       <!-- Mensaje de estado -->
       <p *ngIf="mensaje" class="msg mt-2">{{ mensaje }}</p>

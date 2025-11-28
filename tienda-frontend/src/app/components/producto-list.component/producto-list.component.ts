@@ -8,6 +8,7 @@ import { Producto } from '../../models/producto';
 interface ProductoUI extends Producto {
   flipped?: boolean;
   precioNumber: number;
+  cantidadSeleccionada?: number;
 }
 
 interface CarritoItem {
@@ -41,23 +42,22 @@ export class ProductoListComponent implements OnInit {
     this.cargarCarrito();
   }
 
-  next() {
-    if (this.step < 3) this.step++;
-  }
-  prev() {
-    if (this.step > 1) this.step--;
-  }
+  // Wizard
+  next() { if (this.step < 3) this.step++; }
+  prev() { if (this.step > 1) this.step--; }
 
   cargarProductos() {
     this.productoService.getProductos().subscribe({
       next: (data) => {
-        this.productos = data.map((p) => ({
-          ...p,
-          flipped: false,
-          precioNumber: Number(p.precio),
-          imagen: `http://localhost:5000${p.imagen}`, // ← ✔ ruta real
-        }));
-
+        this.productos = data
+          .filter(p => p) // evita null
+          .map((p) => ({
+            ...p,
+            flipped: false,
+            precioNumber: Number(p.precio || 0),
+            cantidadSeleccionada: 1,
+            imagen: `http://localhost:5000${p.imagen}`, 
+          }));
         this.cargando = false;
       },
       error: () => (this.cargando = false),
@@ -76,24 +76,35 @@ export class ProductoListComponent implements OnInit {
     });
   }
 
-  toggleFlip(p: ProductoUI) {
-    p.flipped = !p.flipped;
+  toggleFlip(producto: ProductoUI) {
+    producto.flipped = !producto.flipped;
   }
 
-  agregarAlCarrito(producto: ProductoUI) {
+  // Cantidad
+  aumentarCantidad(producto: ProductoUI) {
+    producto.cantidadSeleccionada = (producto.cantidadSeleccionada || 1) + 1;
+  }
+
+  disminuirCantidad(producto: ProductoUI) {
+    if ((producto.cantidadSeleccionada || 1) > 1) {
+      producto.cantidadSeleccionada = (producto.cantidadSeleccionada || 1) - 1;
+    }
+  }
+
+  agregarAlCarrito(producto: ProductoUI, cantidad: number = 1) {
     const existe = this.carrito.find((i) => i.producto._id === producto._id);
 
-    if (existe) existe.cantidad++;
+    if (existe) existe.cantidad += cantidad;
     else {
       this.carrito.push({
         producto,
-        cantidad: 1,
-        precioNumber: Number(producto.precio),
+        cantidad,
+        precioNumber: Number(producto.precioNumber),
       });
     }
 
     this.showToast(`"${producto.nombre}" agregado al carrito`);
-    this.carritoService.agregarAlCarrito(producto._id!, 1).subscribe();
+    this.carritoService.agregarAlCarrito(producto._id!, cantidad).subscribe();
   }
 
   obtenerTotal() {
@@ -119,7 +130,6 @@ export class ProductoListComponent implements OnInit {
 
   eliminar(id: string) {
     if (!confirm('¿Seguro deseas eliminar este producto?')) return;
-
     this.productoService.eliminarProducto(id).subscribe(() => {
       this.productos = this.productos.filter((p) => p._id !== id);
     });

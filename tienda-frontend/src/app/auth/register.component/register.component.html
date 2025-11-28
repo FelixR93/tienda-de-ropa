@@ -1,0 +1,88 @@
+<div class="register-container">
+  <div class="register-card">
+    <h1 class="titulo">XIXI - Crea tu cuenta</h1>
+    <p class="subtitulo">Regístrate para empezar a comprar ropa exclusiva</p>
+
+    <form [formGroup]="form" (ngSubmit)="register()">
+      <div class="row">
+        <div class="input-group">
+          <input formControlName="nombre" required />
+          <label>Nombre</label>
+        </div>
+        <div class="input-group">
+          <input formControlName="apellido" required />
+          <label>Apellido</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <input formControlName="email" type="email" required />
+        <label>Email</label>
+      </div>
+
+      <div class="input-group">
+        <input formControlName="password" type="password" required />
+        <label>Contraseña</label>
+      </div>
+
+      <div class="input-group">
+        <input formControlName="confirmarPassword" type="password" required />
+        <label>Confirmar contraseña</label>
+      </div>
+
+      <div class="input-group">
+        <input formControlName="telefono" required />
+        <label>Teléfono</label>
+      </div>
+
+      <div class="input-group">
+        <input formControlName="direccion" required />
+        <label>Dirección</label>
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <input formControlName="ciudad" required />
+          <label>Ciudad</label>
+        </div>
+        <div class="input-group">
+          <input formControlName="estado" required />
+          <label>Estado</label>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <input formControlName="codigoPostal" required />
+        <label>Código Postal</label>
+      </div>
+
+      <div class="input-group">
+        <input formControlName="fechaNacimiento" type="date" required />
+        <label>Fecha de nacimiento</label>
+      </div>
+
+      <div class="input-group">
+        <select formControlName="genero" required>
+          <option value="" disabled selected>Selecciona tu género</option>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
+        <label>Género</label>
+      </div>
+
+      <label class="terminos">
+        <input type="checkbox" formControlName="aceptarTerminos" required />
+        Acepto términos y condiciones
+      </label>
+
+      <div class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+      <button type="submit" [disabled]="cargando">
+        {{ cargando ? 'Registrando...' : 'Registrarse' }}
+      </button>
+
+      <p class="login-link">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+    </form>
+  </div>
+</div>

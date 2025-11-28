@@ -40,7 +40,6 @@ export class ProductoFormComponent implements OnInit {
       imagen: ['']
     });
 
-    // Obtener id de la ruta
     this.idProducto = this.route.snapshot.paramMap.get('id');
 
     if (this.idProducto) {
@@ -51,7 +50,6 @@ export class ProductoFormComponent implements OnInit {
 
   cargarProducto() {
     this.productoService.getProducto(this.idProducto!).subscribe(prod => {
-      // Ajuste para que funcione aunque el backend devuelva { producto: {...} }
       const p = prod.producto || prod;
 
       this.productoForm.patchValue({
@@ -59,7 +57,7 @@ export class ProductoFormComponent implements OnInit {
         descripcion: p.descripcion,
         precio: p.precio,
         stock: p.stock,
-        imagen: p.imagen // opcional: mantener referencia a la imagen existente
+        imagen: p.imagen
       });
 
       if (p.imagen) {
@@ -72,6 +70,7 @@ export class ProductoFormComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.imagenFile = file;
+
       const reader = new FileReader();
       reader.onload = () => this.imagenURL = reader.result as string;
       reader.readAsDataURL(file);
@@ -93,7 +92,7 @@ export class ProductoFormComponent implements OnInit {
     formData.append('stock', this.productoForm.value.stock);
 
     if (this.imagenFile) {
-      formData.append('imagen', this.imagenFile);
+      formData.append('imagen', this.imagenFile); // nombre EXACTO que multer requiere
     }
 
     if (this.modoEdicion) {
@@ -122,5 +121,9 @@ export class ProductoFormComponent implements OnInit {
         }
       });
     }
+  }
+
+  redirigir() {
+    this.router.navigate(['/productos']);
   }
 }

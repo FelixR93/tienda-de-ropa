@@ -1,20 +1,22 @@
-// Colores y variables
-$primary: #2c3e50;
-$secondary: #7f8c8d;
-$accent: #3498db;
+// Variables de colores y estilo
+$primary: #1a1a1a;
+$secondary: #777;
+$accent: #e60023;
 $success: #27ae60;
 $error: #e74c3c;
-$light-bg: #f8f9fa;
+$light-bg: #f9f9f9;
 $card-radius: 1rem;
-$shadow: 0 10px 30px rgba(0,0,0,0.15);
-$transition: all 0.3s ease;
+$shadow: 0 10px 25px rgba(0,0,0,0.15);
+$transition: all 0.4s ease;
 
-// Container general
+// Contenedor general
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  font-family: 'Inter', sans-serif;
 
+  // Wizard
   .wizard-container {
     background: #fff;
     border-radius: $card-radius;
@@ -30,15 +32,15 @@ $transition: all 0.3s ease;
       .step {
         flex: 1;
         text-align: center;
+        font-weight: bold;
         padding: 0.5rem 1rem;
         border-bottom: 3px solid lighten($secondary, 20%);
-        font-weight: bold;
         color: $secondary;
-        transition: all 0.3s ease;
+        transition: $transition;
 
         &.active {
-          color: $primary;
           border-color: $accent;
+          color: $primary;
         }
       }
     }
@@ -48,21 +50,19 @@ $transition: all 0.3s ease;
       border-radius: $card-radius;
       padding: 2rem;
       text-align: center;
-      transition: $transition;
 
       button {
         padding: 0.75rem 1.5rem;
         border-radius: $card-radius/2;
         border: none;
         cursor: pointer;
-        font-weight: bold;
+        font-weight: 600;
         text-transform: uppercase;
         transition: $transition;
 
         &.btn-dark {
           background: $primary;
           color: #fff;
-
           &:hover {
             background: darken($primary, 10%);
           }
@@ -71,7 +71,6 @@ $transition: all 0.3s ease;
         &.btn-secondary {
           background: $secondary;
           color: #fff;
-
           &:hover {
             background: darken($secondary, 10%);
           }
@@ -80,7 +79,6 @@ $transition: all 0.3s ease;
         &.btn-success {
           background: $success;
           color: #fff;
-
           &:hover {
             background: darken($success, 10%);
           }
@@ -110,11 +108,11 @@ $transition: all 0.3s ease;
 
     .premium-card {
       perspective: 1200px;
+      margin-bottom: 1.5rem;
 
       .premium-inner {
         position: relative;
         width: 100%;
-        height: 100%;
         transition: transform 0.8s ease;
         transform-style: preserve-3d;
         cursor: pointer;
@@ -142,7 +140,7 @@ $transition: all 0.3s ease;
 
           .image-wrapper {
             width: 100%;
-            height: 200px;
+            height: 220px;
             overflow: hidden;
             border-radius: $card-radius/2;
             margin-bottom: 1rem;
@@ -151,10 +149,9 @@ $transition: all 0.3s ease;
               width: 100%;
               height: 100%;
               object-fit: cover;
-              transition: transform 0.3s ease;
-
+              transition: transform 0.4s ease;
               &:hover {
-                transform: scale(1.05);
+                transform: scale(1.08);
               }
             }
           }
@@ -163,8 +160,9 @@ $transition: all 0.3s ease;
             text-align: center;
 
             .name {
-              font-weight: bold;
+              font-weight: 700;
               color: $primary;
+              font-size: 1.1rem;
             }
 
             .desc {
@@ -174,7 +172,7 @@ $transition: all 0.3s ease;
             }
 
             .price {
-              font-weight: bold;
+              font-weight: 700;
               color: $accent;
               margin-top: 0.5rem;
             }
@@ -191,9 +189,10 @@ $transition: all 0.3s ease;
             text-align: center;
 
             .name-back {
-              font-weight: bold;
+              font-weight: 700;
               color: $primary;
               margin-bottom: 0.5rem;
+              font-size: 1.1rem;
             }
 
             .small {
@@ -212,7 +211,7 @@ $transition: all 0.3s ease;
             border-radius: $card-radius/2;
             border: none;
             width: 100%;
-            font-weight: bold;
+            font-weight: 600;
             transition: $transition;
 
             &:hover {
@@ -224,7 +223,6 @@ $transition: all 0.3s ease;
               background: #fff;
               border: 1px solid $accent;
               color: $accent;
-
               &:hover {
                 background: $accent;
                 color: #fff;
@@ -262,14 +260,8 @@ $transition: all 0.3s ease;
   }
 
   @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
@@ -285,4 +277,28 @@ $transition: all 0.3s ease;
   .catalog-section {
     padding: 1rem;
   }
+
+  .premium-inner {
+    .premium-front, .premium-back {
+      height: auto;
+    }
+  }
+}
+.toast-message {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: $primary;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: $card-radius/2;
+  box-shadow: $shadow;
+  font-weight: bold;
+  animation: slideIn 0.4s ease forwards;
+  z-index: 999;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

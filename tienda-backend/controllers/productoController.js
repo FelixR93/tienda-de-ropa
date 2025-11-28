@@ -16,7 +16,8 @@ const obtenerProducto = async (req, res) => {
   try {
     const producto = await Producto.findById(req.params.id);
     if (!producto) return res.status(404).json({ message: 'Producto no encontrado' });
-    res.json(producto);
+
+    res.json({ producto });
   } catch (error) {
     res.status(500).json({ message: 'Error al obtener producto' });
   }
@@ -35,7 +36,14 @@ const crearProducto = async (req, res) => {
   const imagen = req.file ? `/uploads/${req.file.filename}` : null;
 
   try {
-    const producto = new Producto({ nombre, descripcion, precio, stock, imagen });
+    const producto = new Producto({
+      nombre,
+      descripcion,
+      precio,
+      stock,
+      imagen
+    });
+
     await producto.save();
     res.status(201).json(producto);
   } catch (error) {
@@ -53,23 +61,33 @@ const actualizarProducto = async (req, res) => {
   if (req.body.stock && !esNumeroPositivo(req.body.stock))
     return res.status(400).json({ message: 'Stock debe ser positivo' });
 
-  const data = { ...req.body };
-  if (req.file) data.imagen = `/uploads/${req.file.filename}`;
+  const data = {
+    nombre: req.body.nombre,
+    descripcion: req.body.descripcion,
+    precio: req.body.precio,
+    stock: req.body.stock
+  };
+
+  if (req.file) {
+    data.imagen = `/uploads/${req.file.filename}`;
+  }
 
   try {
     const producto = await Producto.findByIdAndUpdate(id, data, { new: true });
     if (!producto) return res.status(404).json({ message: 'Producto no encontrado' });
+
     res.json(producto);
   } catch (error) {
     res.status(500).json({ message: 'Error al actualizar producto' });
   }
 };
 
-// Eliminar producto
+// Eliminar
 const eliminarProducto = async (req, res) => {
   try {
     const producto = await Producto.findByIdAndDelete(req.params.id);
     if (!producto) return res.status(404).json({ message: 'Producto no encontrado' });
+
     res.json({ message: 'Producto eliminado correctamente' });
   } catch (error) {
     res.status(500).json({ message: 'Error al eliminar producto' });

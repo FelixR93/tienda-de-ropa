@@ -1,143 +1,188 @@
+/* ========= RESET ========= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========= VARIABLES ========= */
+$color-primary: #111;
+$color-secondary: #555;
+$color-accent: #0a84ff;
+$bg-light: #fff;
+$transition: 0.3s ease;
+
+/* ========= HEADER ========= */
 .header {
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  background: $bg-light;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
   position: sticky;
   top: 0;
   z-index: 1000;
+}
 
-  .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
+/* ========= CONTAINER ========= */
+.header-container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ========= LOGO ========= */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+  }
+
+  span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $color-primary;
+    letter-spacing: 1px;
+    transition: $transition;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+}
+
+/* ========= NAV DESKTOP ========= */
+.nav-desktop {
+  display: flex;
+  gap: 28px;
+
+  a {
+    font-size: 1rem;
+    color: $color-secondary;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: $transition;
+
+    &:hover {
+      color: $color-primary;
+    }
+
+    /* Línea animada KOAJ abajo */
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background: $color-primary;
+      transition: $transition;
+    }
+
+    &:hover::after,
+    &.active::after {
+      width: 100%;
+    }
+  }
+
+  .cart-link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0.8rem 1rem;
+    gap: 6px;
 
-    .logo {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      img {
-        height: 40px;
-        margin-right: 0.5rem;
-        transition: transform 0.3s ease;
-      }
-      span {
-        font-weight: 700;
-        font-size: 1.3rem;
-        color: #333;
-      }
-      &:hover img {
-        transform: scale(1.1);
-      }
-    }
-
-    .nav-desktop {
-      display: flex;
-      gap: 2rem;
-
-      a {
-        position: relative;
-        font-weight: 500;
-        color: #333;
-        text-decoration: none;
-        padding: 0.5rem 0;
-        transition: color 0.3s;
-
-        &:hover {
-          color: #27ae60;
-        }
-
-        &.active::after {
-          content: '';
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          width: 100%;
-          height: 3px;
-          background: #27ae60;
-          border-radius: 2px;
-        }
-
-        .cart-count {
-          background: #e74c3c;
-          color: #fff;
-          font-size: 0.75rem;
-          font-weight: 600;
-          padding: 0 6px;
-          border-radius: 12px;
-          margin-left: 5px;
-        }
-      }
-    }
-
-    .menu-btn {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 28px;
-      height: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      span {
-        display: block;
-        height: 3px;
-        width: 100%;
-        background: #333;
-        border-radius: 2px;
-        transition: 0.3s;
-      }
-      span.open:nth-child(1) { transform: rotate(45deg) translate(5px,5px);}
-      span.open:nth-child(2) { opacity: 0; }
-      span.open:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px);}
+    .cart-count {
+      background: $color-primary;
+      color: #fff;
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
     }
   }
+}
 
-  .nav-mobile {
-    display: none;
-    flex-direction: column;
-    background: #fff;
-    position: absolute;
-    top: 100%;
-    left: 0;
+/* ========= HAMBURGER ========= */
+.menu-btn {
+  width: 34px;
+  height: 26px;
+  border: none;
+  background: none;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+
+  span {
     width: 100%;
-    padding: 1rem 0;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    transition: max-height 0.4s ease;
-    overflow: hidden;
-    max-height: 0;
+    height: 3px;
+    background: $color-primary;
+    border-radius: 5px;
+    transition: $transition;
 
-    &.open {
-      display: flex;
-      max-height: 500px;
+    &.open:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
     }
-
-    a {
-      padding: 0.8rem 1.5rem;
-      font-weight: 500;
-      color: #333;
-      text-decoration: none;
-      transition: background 0.3s;
-
-      &:hover {
-        background: #f5f5f5;
-      }
-
-      .cart-count {
-        background: #e74c3c;
-        color: #fff;
-        font-size: 0.75rem;
-        font-weight: 600;
-        padding: 0 6px;
-        border-radius: 12px;
-        margin-left: 5px;
-      }
+    &.open:nth-child(2) {
+      opacity: 0;
+    }
+    &.open:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
     }
   }
+}
 
-  @media(max-width: 992px) {
-    .nav-desktop { display: none; }
-    .menu-btn { display: flex; }
+/* ========= NAV MOBILE ========= */
+.nav-mobile {
+  display: flex;
+  flex-direction: column;
+  background: $bg-light;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height $transition;
+
+  &.open {
+    max-height: 300px;
+  }
+
+  a {
+    padding: 15px 22px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: $color-primary;
+    font-weight: 500;
+    transition: $transition;
+
+    &:hover {
+      background: #fafafa;
+    }
+
+    .cart-count {
+      background: $color-primary;
+      color: #fff;
+      padding: 2px 7px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+  }
+}
+
+/* ========= RESPONSIVE ========= */
+@media (max-width: 900px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .menu-btn {
+    display: flex;
   }
 }

@@ -1,45 +1,64 @@
 // ------------------------------------------------------
-// Modelo de carrito de compras.
-//
-// Cada usuario tiene UN carrito:
-// - user: referencia al usuario dueño del carrito
-// - items: productos con cantidad
+// Modelo de carrito XI-XI
+// - Un carrito por usuario
+// - items: [{ product, quantity, price }]
+// - totalAmount: suma de (quantity * price)
 // ------------------------------------------------------
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
-
-const CartItemSchema = new Schema(
+const cartItemSchema = new mongoose.Schema(
   {
     product: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'Product',
       required: true,
     },
     quantity: {
       type: Number,
       required: true,
-      min: [1, 'La cantidad mínima es 1'],
+      min: 1,
+    },
+    price: {
+      // precio unitario al momento de agregar
+      type: Number,
+      required: true,
+      min: 0,
     },
   },
-  { _id: false } // no necesitamos _id interno para cada item
+  { _id: false }
 );
 
-const CartSchema = new Schema(
+const cartSchema = new mongoose.Schema(
   {
     user: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      unique: true, // un carrito por usuario
+      unique: true,
       required: true,
     },
-    items: [CartItemSchema],
+    items: {
+      type: [cartItemSchema],
+      default: [],
+    },
+    totalAmount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const Cart = mongoose.model('Cart', CartSchema);
+// Método para recalcular totalAmount
+cartSchema.methods.recalculateTotal = function () {
+  this.totalAmount = this.items.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
+};
+
+const Cart = mongoose.model('Cart', cartSchema);
 
 module.exports = Cart;

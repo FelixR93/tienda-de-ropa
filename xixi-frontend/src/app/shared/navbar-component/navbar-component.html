@@ -1,16 +1,21 @@
 <nav class="navbar">
   <div class="navbar-inner">
     <!-- Logo -->
-    <a routerLink="/" class="logo">
+    <a routerLink="/" class="logo" (click)="isMenuOpen = false">
       <span class="logo-mark">XI</span>
       <span class="logo-text">XI</span>
     </a>
 
     <!-- Links principales -->
     <div class="nav-links" [class.open]="isMenuOpen">
-      <a routerLink="/" routerLinkActive="active" (click)="isMenuOpen = false">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        (click)="isMenuOpen = false"
+      >
         Inicio
       </a>
+
       <a
         routerLink="/products"
         routerLinkActive="active"
@@ -18,14 +23,23 @@
       >
         Productos
       </a>
-      <a
-        routerLink="/category/alguna"
-        (click)="$event.preventDefault()"
-        class="disabled"
-        title="Ejemplo de enlace a categoría. Ajustar luego."
+
+      <!-- Bloque de categorías (solo si hay categorías) -->
+      <div
+        class="nav-categories"
+        *ngIf="categories && categories.length > 0"
       >
-        Categorías
-      </a>
+        <span class="nav-categories-label">Categorías:</span>
+
+        <a
+          *ngFor="let category of categories"
+          [routerLink]="['/category', category._id]"
+          routerLinkActive="active"
+          (click)="isMenuOpen = false"
+        >
+          {{ category.name }}
+        </a>
+      </div>
 
       <!-- Link admin solo para ADMIN -->
       <a
@@ -41,16 +55,26 @@
     <!-- Lado derecho -->
     <div class="nav-right">
       <!-- Carrito -->
-      <a routerLink="/cart" class="cart">
+      <a
+        routerLink="/cart"
+        class="cart"
+        (click)="isMenuOpen = false"
+      >
         <span class="cart-icon">🛒</span>
-        <span class="cart-count" *ngIf="cartCount > 0">{{ cartCount }}</span>
+        <span class="cart-count" *ngIf="cartCount > 0">
+          {{ cartCount }}
+        </span>
       </a>
 
       <!-- Si hay usuario logueado -->
       <div class="user" *ngIf="currentUser; else authLinks">
         <span class="user-name">Hola, {{ currentUser.name }}</span>
 
-        <a routerLink="/my-orders" class="btn-link">
+        <a
+          routerLink="/my-orders"
+          class="btn-link"
+          (click)="isMenuOpen = false"
+        >
           Mis pedidos
         </a>
 
@@ -59,17 +83,32 @@
         </button>
       </div>
 
-
       <!-- Si NO hay usuario logueado -->
       <ng-template #authLinks>
         <div class="auth-links">
-          <a routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
-          <a routerLink="/register" class="btn-primary">Registrarse</a>
+          <a
+            routerLink="/login"
+            routerLinkActive="active"
+            (click)="isMenuOpen = false"
+          >
+            Iniciar sesión
+          </a>
+          <a
+            routerLink="/register"
+            class="btn-primary"
+            (click)="isMenuOpen = false"
+          >
+            Registrarse
+          </a>
         </div>
       </ng-template>
 
       <!-- Botón hamburguesa (mobile) -->
-      <button class="menu-toggle" type="button" (click)="toggleMenu()">
+      <button
+        class="menu-toggle"
+        type="button"
+        (click)="toggleMenu()"
+      >
         <span></span>
         <span></span>
       </button>

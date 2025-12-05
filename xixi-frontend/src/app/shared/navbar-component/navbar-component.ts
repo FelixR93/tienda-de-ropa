@@ -3,14 +3,19 @@
 // - Muestra links de navegación
 // - Muestra login/register o nombre + logout
 // - Muestra contador del carrito
+// - Muestra categorías en el menú
 // ------------------------------------------------------
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
+
 import { AuthService } from '../../services/auth-service';
 import { CartService } from '../../services/cart-service';
+import { CategoryService } from '../../services/category-service';
+
 import { User } from '../../models/user.model';
+import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'app-navbar',
@@ -24,12 +29,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   cartCount = 0;
   isMenuOpen = false;
 
+  categories: Category[] = [];
+
   private subs: Subscription[] = [];
 
   constructor(
     private authService: AuthService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +57,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.authService.isLoggedIn()) {
       this.cartService.loadCart().subscribe();
     }
+
+    // Cargar categorías para el menú
+    this.loadCategories();
   }
 
   ngOnDestroy(): void {
@@ -70,5 +81,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   isAdmin(): boolean {
     return this.authService.isAdmin();
+  }
+
+  loadCategories(): void {
+    this.categoryService.getCategories().subscribe({
+      next: (resp: any) => {
+        if (resp.success && Array.isArray(resp.data)) {
+          this.categories = resp.data;
+        }
+      },
+      error: (err: any) => {
+        console.error('Error al cargar categorías en navbar:', err);
+        // no mostramos error al usuario, solo dejamos el navbar sin categorías
+      },
+    });
   }
 }

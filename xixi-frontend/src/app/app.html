@@ -1,3 +1,7 @@
-<app-navbar> </app-navbar>
+<app-navbar></app-navbar>
 
-<router-outlet />
+<app-loader *ngIf="loading"></app-loader>
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>

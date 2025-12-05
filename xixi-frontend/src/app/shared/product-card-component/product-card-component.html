@@ -1,1 +1,36 @@
-<p>product-card-component works!</p>
+<div class="product-card">
+  <div class="card-image" (click)="goToDetail()">
+    <img [src]="mainImage" [alt]="product.name" />
+  </div>
+
+  <div class="card-body">
+    <h3>{{ product.name }}</h3>
+
+    <p class="price">
+      {{ product.price | currency: 'USD':'symbol':'1.2-2' }}
+    </p>
+
+    <p class="stock" [class.out]="product.stock <= 0">
+      {{ product.stock > 0 ? ('Stock: ' + product.stock) : 'Agotado' }}
+    </p>
+  </div>
+
+  <div class="card-actions">
+    <button
+      type="button"
+      class="btn-outline"
+      (click)="goToDetail()"
+    >
+      Ver detalle
+    </button>
+
+    <button
+      type="button"
+      class="btn-primary"
+      [disabled]="adding || product.stock <= 0"
+      (click)="addToCart()"
+    >
+      {{ adding ? 'Agregando...' : 'Agregar al carrito' }}
+    </button>
+  </div>
+</div>

@@ -5,8 +5,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+
 import { ProductService } from '../../services/product-service';
 import { CategoryService } from '../../services/category-service';
+import { CartService } from '../../services/cart-service';
+
 import { Product } from '../../models/product.model';
 import { Category } from '../../models/category.model';
 
@@ -20,13 +23,18 @@ import { Category } from '../../models/category.model';
 export class CategoryProductsComponent implements OnInit {
   products: Product[] = [];
   category: Category | null = null;
+
   loading = false;
   errorMessage = '';
+
+  // para manejar estado de botones "Agregar al carrito"
+  adding: { [productId: string]: boolean } = {};
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -41,13 +49,13 @@ export class CategoryProductsComponent implements OnInit {
 
   loadCategory(id: string): void {
     this.categoryService.getCategoryById(id).subscribe({
-      next: (resp) => {
+      next: (resp: any) => {
         if (resp.success) {
           this.category = resp.data;
         }
       },
       error: () => {
-        // no bloqueamos la vista si solo falla el nombre de la categoría
+        // si falla el nombre de la categoría no rompemos la vista
       },
     });
   }
@@ -59,7 +67,7 @@ export class CategoryProductsComponent implements OnInit {
     this.productService
       .getProducts({ categoryId })
       .subscribe({
-        next: (resp) => {
+        next: (resp: any) => {
           this.loading = false;
           if (resp.success) {
             this.products = resp.data;
@@ -80,5 +88,46 @@ export class CategoryProductsComponent implements OnInit {
     return product.images && product.images.length > 0
       ? product.images[0]
       : 'https://via.placeholder.com/300x300?text=XI-XI';
+  }
+
+  // --------- Agregar al carrito desde categoría ----------
+  addToCart(product: Product): void {
+    if (!product._id) {
+      console.error('Producto sin _id, no se puede agregar al carrito', product);
+      alert('Producto inválido, no se pudo agregar al carrito.');
+      return;
+    }
+
+    this.adding[product._id] = true;
+
+    this.cartService.addToCart(product._id, 1).subscribe({
+      next: (resp: any) => {
+        this.adding[product._id] = false;
+
+        if (!resp.success) {
+          // mensaje amigable si backend devuelve success: false
+          alert(resp.message || 'No se pudo agregar al carrito.');
+          return;
+        }
+
+        // Opcional: Toast, snackbar, etc.
+        console.log('Producto agregado al carrito desde categoría', resp);
+      },
+      error: (err) => {
+        this.adding[product._id] = false;
+
+        // Analizamos error típico
+        const status = err?.status;
+        const backendMessage = err?.error?.message;
+
+        if (status === 401) {
+          alert('Debes iniciar sesión para agregar productos al carrito.');
+        } else {
+          alert(backendMessage || 'No se pudo agregar al carrito.');
+        }
+
+        console.error('Error al agregar al carrito:', err);
+      },
+    });
   }
 }

@@ -1,12 +1,25 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterModule } from '@angular/router';
+
 import { NavbarComponent } from './shared/navbar-component/navbar-component';
+import { LoaderComponent } from './shared/loader-component/loader-component';
+import { FooterComponent } from './shared/footer-component/footer-component';
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent],
+  standalone: true,
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss'],
+  imports: [
+    CommonModule,      // para *ngIf, *ngFor, etc.
+    RouterOutlet,
+    RouterModule,
+    NavbarComponent,
+    LoaderComponent,   // ahora Angular reconoce <app-loader>
+    FooterComponent,   // ahora reconoce <app-footer>
+  ],
 })
 export class App {
-  protected readonly title = signal('xixi-frontend');
+  loading = false;    // usado en *ngIf="loading" en app.html
 }

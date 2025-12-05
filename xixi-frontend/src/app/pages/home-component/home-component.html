@@ -1,48 +1,139 @@
 <div class="home-page">
+  <!-- Loader global para el home -->
+  <app-loader *ngIf="loadingProducts || loadingCategories"></app-loader>
+
+  <!-- HERO / CARRUSEL -->
   <section class="hero">
-    <div class="hero-content">
-      <h1>Bienvenido a XI-XI</h1>
-      <p>
-        Tienda de ropa moderna para todos los estilos. Explora nuestras colecciones y
-        renueva tu outfit.
-      </p>
-      <a routerLink="/products" class="btn-primary">Ver todos los productos</a>
+    <div class="hero-inner">
+      <!-- Slide actual -->
+      <div class="hero-image">
+        <img
+          [src]="bannerSlides[currentBannerIndex].image"
+          [alt]="bannerSlides[currentBannerIndex].title"
+        />
+      </div>
+
+      <div class="hero-content">
+        <h1>{{ bannerSlides[currentBannerIndex].title }}</h1>
+        <p>{{ bannerSlides[currentBannerIndex].subtitle }}</p>
+
+        <div class="hero-actions">
+          <a
+            [routerLink]="bannerSlides[currentBannerIndex].ctaLink"
+            class="btn-primary"
+          >
+            {{ bannerSlides[currentBannerIndex].ctaText }}
+          </a>
+
+          <button type="button" class="btn-secondary" (click)="goToLogin()">
+            Iniciar sesión
+          </button>
+        </div>
+
+        <div class="hero-dots">
+          <button
+            type="button"
+            *ngFor="let slide of bannerSlides; index as i"
+            [class.active]="i === currentBannerIndex"
+            (click)="goToBanner(i)"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <button class="hero-nav prev" type="button" (click)="prevBanner()">
+      ‹
+    </button>
+    <button class="hero-nav next" type="button" (click)="nextBanner()">
+      ›
+    </button>
+  </section>
+
+  <!-- BLOQUES GRANDES (entrada tipo KOAJ) -->
+  <section class="landing-blocks">
+    <h2>Explora la tienda XI-XI</h2>
+    <p class="subtitle">
+      Descubre colecciones para cada estilo. Regístrate para disfrutar la
+      experiencia completa.
+    </p>
+
+    <div class="blocks-grid">
+      <div
+        class="block"
+        *ngFor="let block of landingBlocks"
+        (click)="onLandingBlockClick(block)"
+      >
+        <div class="block-image">
+          <img [src]="block.image" [alt]="block.label" />
+        </div>
+        <div class="block-body">
+          <h3>{{ block.label }}</h3>
+          <p>{{ block.description }}</p>
+          <span class="block-cta">
+            {{ isLoggedIn() ? 'Ver productos' : 'Regístrate para ver más' }}
+          </span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="products-section">
+  <!-- CATEGORÍAS (para usuarios logueados) -->
+  <section class="categories-section" *ngIf="isLoggedIn()">
     <div class="section-header">
-      <h2>Últimos productos</h2>
-      <a routerLink="/products" class="link-all">Ver todos</a>
+      <h2>Categorías</h2>
+      <a routerLink="/products" class="link-all">Ver todos los productos</a>
     </div>
 
-    <div *ngIf="loading" class="info-text">Cargando productos...</div>
-    <div *ngIf="errorMessage" class="error-text">
-      {{ errorMessage }}
+    <div *ngIf="loadingCategories" class="info-text">
+      Cargando categorías...
+    </div>
+    <div *ngIf="errorMessageCategories" class="error-text">
+      {{ errorMessageCategories }}
     </div>
 
-    <div class="products-grid" *ngIf="!loading && !errorMessage">
-      <div *ngIf="products.length === 0" class="info-text">
-        No hay productos disponibles por el momento.
-      </div>
-
-      <div class="product-card" *ngFor="let product of products">
-        <img [src]="getProductImage(product)" [alt]="product.name" />
-
-        <div class="product-body">
-          <h3>{{ product.name }}</h3>
-          <p class="price">
-            {{ product.price | currency: 'USD':'symbol':'1.2-2' }}
-          </p>
-          <p class="description">
-            {{ product.description || 'Sin descripción' }}
-          </p>
-
-          <a [routerLink]="['/products', product._id]" class="btn-outline">
-            Ver detalle
+    <div class="categories-grid" *ngIf="!loadingCategories && !errorMessageCategories">
+      <div class="category-card" *ngFor="let cat of categories">
+        <div class="category-body">
+          <h3>{{ cat.name }}</h3>
+          <p>{{ cat.description || 'Descubre productos de esta categoría.' }}</p>
+          <a [routerLink]="['/category', cat._id]" class="btn-outline">
+            Ver categoría
           </a>
         </div>
       </div>
+
+      <div *ngIf="categories.length === 0" class="info-text">
+        No hay categorías registradas todavía.
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTACADOS (para usuarios logueados) -->
+  <section class="featured-section" *ngIf="isLoggedIn()">
+    <div class="section-header">
+      <h2>Productos destacados</h2>
+      <a routerLink="/products" class="link-all">Ver catálogo completo</a>
+    </div>
+
+    <div *ngIf="loadingProducts" class="info-text">
+      Cargando productos destacados...
+    </div>
+    <div *ngIf="errorMessageProducts" class="error-text">
+      {{ errorMessageProducts }}
+    </div>
+
+    <div
+      class="featured-grid"
+      *ngIf="!loadingProducts && !errorMessageProducts"
+    >
+      <div *ngIf="featuredProducts.length === 0" class="info-text">
+        No hay productos destacados todavía.
+      </div>
+
+      <app-product-card
+        *ngFor="let p of featuredProducts"
+        [product]="p"
+      ></app-product-card>
     </div>
   </section>
 </div>

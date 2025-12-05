@@ -1,226 +1,427 @@
-// LISTA DE PRODUCTOS - con efecto flip
+/* ==========================================================
+   LISTA DE PRODUCTOS XI-XI
+   - Flip cards 3D
+   - Hover zoom
+   - Dark mode friendly
+========================================================== */
 
+:host {
+  display: block;
+  background: #f5f5f7;
+}
+
+/* ---------------------------
+   Layout principal
+--------------------------- */
 .product-list-page {
-  min-height: 100vh;
-  padding: 2rem 5vw 3rem;
-  background: #f3f4f6;
+  padding: 40px 5%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Poppins",
+    "Segoe UI", sans-serif;
+  color: #111827;
 
   h1 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    color: #111827;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 }
 
-/* Barra de búsqueda */
-
+/* ---------------------------
+   Barra de búsqueda
+--------------------------- */
 .search-bar {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1.25rem;
+  gap: 10px;
+  margin-bottom: 24px;
 
   input {
     flex: 1;
-    min-width: 200px;
-    padding: 0.55rem 0.75rem;
+    min-width: 210px;
+    padding: 10px 12px;
     border-radius: 999px;
-    border: 1px solid #d1d5db;
-    font-size: 0.9rem;
-    outline: none;
+    border: 1px solid #d4d4d8;
+    font-size: 14px;
     background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s;
 
     &:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+      outline: none;
+      border-color: #111827;
+      box-shadow: 0 0 0 1px #11182711, 0 0 0 4px #1118271a;
+      background: #fff;
     }
   }
 
   button {
-    padding: 0.55rem 1.2rem;
+    padding: 10px 16px;
     border-radius: 999px;
     border: none;
     background: #111827;
-    color: #f9fafb;
-    font-size: 0.9rem;
-    font-weight: 500;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     cursor: pointer;
-    transition: background 0.18s ease, transform 0.18s ease;
+    transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.2s;
+    white-space: nowrap;
 
     &:hover {
-      background: #0b1120;
+      background: #000;
       transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
     }
   }
 }
 
-/* Mensajes */
-
-.info-text {
-  font-size: 0.95rem;
-  color: #6b7280;
-}
-
-.error-text {
-  font-size: 0.95rem;
-  color: #b91c1c;
-}
-
-/* GRID con tarjetas flip */
-
+/* ---------------------------
+   Grid de productos
+--------------------------- */
 .products-grid {
-  margin-top: 0.75rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 1.4rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+  margin-top: 10px;
 }
 
-/* Tarjeta flip */
-
+/* ==========================================================
+   FLIP CARD
+========================================================== */
 .product-card {
-  perspective: 1100px; // crea la sensación 3D
-}
-
-.product-card-inner {
-  position: relative;
-  width: 100%;
-  height: 280px;
-  transition: transform 0.6s ease;
-  transform-style: preserve-3d;
+  perspective: 1100px;
+  height: 360px;
   border-radius: 16px;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
-  overflow: hidden;
-  background: #111827;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16);
+  }
+
+  .product-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  &:hover .product-card-inner {
+    transform: rotateY(180deg);
+  }
 }
 
-/* Al pasar el mouse, rotar */
-
-.product-card:hover .product-card-inner {
-  transform: rotateY(180deg);
-}
-
-/* Caras */
-
+/* ---------------------------
+   Caras base
+--------------------------- */
 .product-card-front,
 .product-card-back {
   position: absolute;
   inset: 0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
   backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* Frente de la tarjeta */
-
-.product-card-front {
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+}
+
+/* ---------------------------
+   Cara frontal
+--------------------------- */
+.product-card-front {
+  .image-wrapper {
+    position: relative;
+    height: 60%;
+    overflow: hidden;
+  }
 
   img {
     width: 100%;
-    height: 160px;
+    height: 100%;
     object-fit: cover;
-    background: #e5e7eb;
+    transform: scale(1.02);
+    transition: transform 0.6s ease, filter 0.4s ease;
+  }
+
+  .product-card-inner:hover & img {
+    transform: scale(1.08);
+    filter: brightness(1.03);
   }
 
   .front-body {
-    padding: 0.7rem 0.85rem;
+    flex: 1;
+    padding: 10px 12px 12px;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 3px;
 
     h3 {
-      font-size: 0.95rem;
+      font-size: 15px;
       font-weight: 600;
       color: #111827;
       margin: 0;
-      min-height: 2.3em;
+      line-height: 1.3;
+      max-height: 2.6em;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .price {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #16a34a;
+      font-size: 14px;
+      font-weight: 700;
+      color: #111827;
     }
 
     .category {
-      font-size: 0.8rem;
+      font-size: 11px;
       color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
   }
 }
 
-/* Reverso de la tarjeta */
-
+/* ---------------------------
+   Cara trasera
+--------------------------- */
 .product-card-back {
   transform: rotateY(180deg);
-  background: #111827;
-  color: #f9fafb;
-  padding: 0.9rem 0.85rem;
-  display: flex;
-  flex-direction: column;
+  padding: 12px 12px 10px;
   justify-content: space-between;
 
   .back-header {
+    text-align: left;
+
     h3 {
-      font-size: 0.95rem;
+      font-size: 15px;
       font-weight: 600;
-      margin-bottom: 0.35rem;
+      margin-bottom: 3px;
+      color: #111827;
     }
 
     .price {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: #22c55e;
-      margin-bottom: 0.4rem;
+      font-size: 14px;
+      font-weight: 700;
+      color: #111827;
     }
   }
 
   .description {
-    font-size: 0.8rem;
-    color: #e5e7eb;
-    line-height: 1.4;
-    max-height: 5em;
+    flex: 1;
+    margin: 8px 0 10px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #4b5563;
     overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .back-footer {
-    margin-top: 0.7rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 6px;
 
     .stock {
-      font-size: 0.8rem;
-      color: #9ca3af;
+      font-size: 12px;
+      font-weight: 600;
+      color: #16a34a;
+
+      &.out {
+        color: #dc2626;
+      }
     }
 
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.3rem 0.85rem;
-      border-radius: 999px;
-      border: 1px solid #f9fafb;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #f9fafb;
-      text-decoration: none;
-      transition: background 0.18s ease, color 0.18s ease;
-
-      &:hover {
-        background: #f9fafb;
-        color: #111827;
-      }
+    .back-actions {
+      display: flex;
+      gap: 6px;
     }
   }
 }
 
+/* ---------------------------
+   Botones compactos
+--------------------------- */
+.btn-outline,
+.btn-primary {
+  flex: 1;
+  padding: 7px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.22s ease;
+}
+
+/* Ver detalle */
+.btn-outline {
+  border: 1px solid #111827;
+  background: transparent;
+  color: #111827;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: #111827;
+    color: #ffffff;
+  }
+}
+
+/* Agregar al carrito */
+.btn-primary {
+  border: none;
+  background: #111827;
+  color: #ffffff;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: #000000;
+    box-shadow: 0 6px 15px rgba(15, 23, 42, 0.3);
+  }
+
+  &:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+/* ---------------------------
+   Mensajes de estado
+--------------------------- */
+.info-text,
+.error-text {
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.info-text {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.error-text {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+  .product-card {
+    height: 340px;
+  }
+
+  .product-card-back .back-footer .back-actions {
+    flex-direction: column; /* en pantallas pequeñas, botones uno debajo del otro */
+  }
+}
+
 @media (max-width: 768px) {
-  .product-card-inner {
-    height: 260px;
+  .product-list-page {
+    padding-inline: 16px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 18px;
+  }
+}
+
+/* ==========================================================
+   DARK MODE
+========================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    background: #020617;
+  }
+
+  .product-list-page {
+    color: #e5e7eb;
+  }
+
+  .search-bar input {
+    background: #020617;
+    border-color: #334155;
+    color: #e5e7eb;
+
+    &:focus {
+      border-color: #e5e7eb;
+      box-shadow: 0 0 0 1px #e5e7eb11, 0 0 0 4px #e5e7eb1c;
+    }
+  }
+
+  .products-grid .product-card-front,
+  .products-grid .product-card-back {
+    background: #020617;
+    box-shadow: 0 15px 40px rgba(15, 23, 42, 0.85);
+  }
+
+  .product-card-front .front-body h3,
+  .product-card-back .back-header h3,
+  .product-card-front .front-body .price,
+  .product-card-back .back-header .price {
+    color: #f9fafb;
+  }
+
+  .product-card-front .front-body .category,
+  .product-card-back .description {
+    color: #9ca3af;
+  }
+
+  .btn-outline {
+    border-color: #e5e7eb;
+    color: #e5e7eb;
+
+    &:hover {
+      background: #e5e7eb;
+      color: #020617;
+    }
+  }
+
+  .btn-primary {
+    background: #e5e7eb;
+    color: #020617;
+
+    &:hover:not(:disabled) {
+      background: #ffffff;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.7);
+    }
+
+    &:disabled {
+      background: #6b7280;
+      color: #020617;
+    }
+  }
+
+  .info-text {
+    background: #0f172a;
+    color: #e5e7eb;
+  }
+
+  .error-text {
+    background: #7f1d1d;
+    color: #fee2e2;
   }
 }

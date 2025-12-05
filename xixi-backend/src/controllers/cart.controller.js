@@ -1,39 +1,34 @@
 // ------------------------------------------------------
-// Lógica de carrito de compras.
-// Todas las rutas de carrito requieren que el usuario
-// esté autenticado (authMiddleware).
+// Controlador de carrito XI-XI
+// Rutas esperadas por el frontend:
 //
-// Funciones:
-// - getCart: obtener carrito del usuario
-// - addItem: agregar producto al carrito
-// - updateItem: actualizar cantidad de un producto
-// - removeItem: eliminar un producto del carrito
-// - clearCart: vaciar carrito
+// GET    /api/cart            -> getCart
+// POST   /api/cart/add        -> addItem
+// PUT    /api/cart/update     -> updateItem
+// DELETE /api/cart/item/:id   -> removeItem
+// DELETE /api/cart/clear      -> clearCart
 // ------------------------------------------------------
-const { validationResult } = require('express-validator');
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
 const { ApiError } = require('../middlewares/error.middleware');
 
-// Helper: obtener o crear carrito para un usuario
-const findOrCreateCart = async (userId) => {
+// Asegura que el usuario tenga un carrito
+const ensureUserCart = async (userId) => {
   let cart = await Cart.findOne({ user: userId }).populate('items.product');
   if (!cart) {
-    cart = new Cart({ user: userId, items: [] });
-    await cart.save();
-    cart = await Cart.findOne({ user: userId }).populate('items.product');
+    cart = await Cart.create({ user: userId, items: [], totalAmount: 0 });
+    cart = await cart.populate('items.product');
   }
   return cart;
 };
 
 // GET /api/cart
-// Obtener carrito del usuario autenticado
 const getCart = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const cart = await findOrCreateCart(userId);
+    const cart = await ensureUserCart(userId);
 
-    res.json({
+    return res.json({
       success: true,
       data: cart,
     });
@@ -42,140 +37,160 @@ const getCart = async (req, res, next) => {
   }
 };
 
-// POST /api/cart/items
-// Agregar producto al carrito
+// POST /api/cart/add
 // body: { productId, quantity }
 const addItem = async (req, res, next) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      throw new ApiError(400, 'Datos inválidos para agregar al carrito');
-    }
-
     const userId = req.user.id;
-    const { productId, quantity } = req.body;
+    const { productId, quantity = 1 } = req.body;
 
-    // Verificar que el producto exista y esté activo
-    const product = await Product.findById(productId);
-    if (!product || !product.isActive) {
-      throw new ApiError(404, 'Producto no encontrado o inactivo');
+    if (!productId) {
+      throw new ApiError(400, 'productId es requerido');
     }
 
-    let cart = await findOrCreateCart(userId);
+    const qty = Number(quantity) || 1;
+    if (qty <= 0) {
+      throw new ApiError(400, 'La cantidad debe ser mayor que 0');
+    }
 
-    // Buscar si el producto ya está en el carrito
-    const existingItem = cart.items.find(
-      (item) => item.product.toString() === productId
+    const product = await Product.findById(productId);
+    if (!product) {
+      throw new ApiError(404, 'Producto no encontrado');
+    }
+
+    // Opcional: validar stock
+    if (product.stock < qty) {
+      throw new ApiError(400, 'No hay stock suficiente para este producto');
+    }
+
+    let cart = await ensureUserCart(userId);
+
+    const existingIndex = cart.items.findIndex(
+      (item) => String(item.product._id || item.product) === String(productId)
     );
 
-    if (existingItem) {
-      existingItem.quantity += quantity;
+    if (existingIndex >= 0) {
+      cart.items[existingIndex].quantity += qty;
     } else {
       cart.items.push({
-        product: productId,
-        quantity,
+        product: product._id,
+        quantity: qty,
+        price: product.price,
       });
     }
 
+    // Recalcular total
+    cart.recalculateTotal();
     await cart.save();
-    cart = await Cart.findOne({ user: userId }).populate('items.product');
+    cart = await cart.populate('items.product');
 
-    res.status(201).json({
+    return res.json({
       success: true,
-      message: 'Producto agregado al carrito',
       data: cart,
+      message: 'Producto agregado al carrito',
     });
   } catch (error) {
     next(error);
   }
 };
 
-// PUT /api/cart/items/:productId
-// Actualizar cantidad de un producto en el carrito
-// body: { quantity }
+// PUT /api/cart/update
+// body: { productId, quantity }
 const updateItem = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const { productId } = req.params;
-    const { quantity } = req.body;
+    const { productId, quantity } = req.body;
 
-    let cart = await findOrCreateCart(userId);
+    if (!productId) {
+      throw new ApiError(400, 'productId es requerido');
+    }
 
-    const itemIndex = cart.items.findIndex(
-      (item) => item.product.toString() === productId
+    const qty = Number(quantity);
+    if (isNaN(qty)) {
+      throw new ApiError(400, 'quantity inválido');
+    }
+
+    let cart = await ensureUserCart(userId);
+
+    const idx = cart.items.findIndex(
+      (item) => String(item.product._id || item.product) === String(productId)
     );
 
-    if (itemIndex === -1) {
+    if (idx === -1) {
       throw new ApiError(404, 'El producto no está en el carrito');
     }
 
-    // Si la cantidad <= 0, lo quitamos del carrito
-    if (quantity <= 0) {
-      cart.items.splice(itemIndex, 1);
+    if (qty <= 0) {
+      // eliminar item si cantidad <= 0
+      cart.items.splice(idx, 1);
     } else {
-      cart.items[itemIndex].quantity = quantity;
+      cart.items[idx].quantity = qty;
     }
 
+    cart.recalculateTotal();
     await cart.save();
-    cart = await Cart.findOne({ user: userId }).populate('items.product');
+    cart = await cart.populate('items.product');
 
-    res.json({
+    return res.json({
       success: true,
-      message: 'Carrito actualizado',
       data: cart,
+      message: 'Carrito actualizado',
     });
   } catch (error) {
     next(error);
   }
 };
 
-// DELETE /api/cart/items/:productId
-// Eliminar un producto del carrito
+// DELETE /api/cart/item/:productId
 const removeItem = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const { productId } = req.params;
 
-    let cart = await findOrCreateCart(userId);
+    if (!productId) {
+      throw new ApiError(400, 'productId es requerido');
+    }
 
-    const newItems = cart.items.filter(
-      (item) => item.product.toString() !== productId
+    let cart = await ensureUserCart(userId);
+
+    const before = cart.items.length;
+    cart.items = cart.items.filter(
+      (item) => String(item.product._id || item.product) !== String(productId)
     );
 
-    cart.items = newItems;
-    await cart.save();
-    cart = await Cart.findOne({ user: userId }).populate('items.product');
+    if (cart.items.length === before) {
+      throw new ApiError(404, 'El producto no estaba en el carrito');
+    }
 
-    res.json({
+    cart.recalculateTotal();
+    await cart.save();
+    cart = await cart.populate('items.product');
+
+    return res.json({
       success: true,
-      message: 'Producto eliminado del carrito',
       data: cart,
+      message: 'Producto eliminado del carrito',
     });
   } catch (error) {
     next(error);
   }
 };
 
-// DELETE /api/cart
-// Vaciar carrito
+// DELETE /api/cart/clear
 const clearCart = async (req, res, next) => {
   try {
     const userId = req.user.id;
-
-    const cart = await Cart.findOne({ user: userId });
-    if (!cart) {
-      return res.json({
-        success: true,
-        message: 'El carrito ya está vacío',
-      });
-    }
+    let cart = await ensureUserCart(userId);
 
     cart.items = [];
+    cart.totalAmount = 0;
     await cart.save();
+    cart = await cart.populate('items.product');
 
-    res.json({
+    return res.json({
       success: true,
-      message: 'Carrito vaciado correctamente',
+      data: cart,
+      message: 'Carrito vacío',
     });
   } catch (error) {
     next(error);

@@ -1,1 +1,28 @@
-<p>footer-component works!</p>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-section brand">
+      <h2>XI-XI</h2>
+      <p>Tu tienda de ropa moderna y accesible.</p>
+    </div>
+
+    <div class="footer-section">
+      <h3>Enlaces</h3>
+      <ul>
+        <li><a routerLink="/">Inicio</a></li>
+        <li><a routerLink="/products">Productos</a></li>
+        <li><a routerLink="/cart">Carrito</a></li>
+        <li><a routerLink="/my-orders">Mis pedidos</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Contacto</h3>
+      <p>Email: soporte@xixi.com</p>
+      <p>Tel: +593 987 654 321</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © {{ currentYear }} XI-XI — Todos los derechos reservados
+  </div>
+</footer>

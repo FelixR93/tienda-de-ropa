@@ -1,13 +1,3 @@
-// ------------------------------------------------------
-// Servicio de carrito XI-XI.
-// Maneja:
-// - get cart
-// - add item
-// - update item
-// - remove item
-// - clear
-// Y expone un observable cartCount$ para mostrar el total.
-// ------------------------------------------------------
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
@@ -18,7 +8,7 @@ const API_BASE_URL = 'http://localhost:4000/api';
 export interface CartItem {
   product: Product | string;
   quantity: number;
-  price: number; // precio unitario
+  price: number;
   subtotal?: number;
 }
 
@@ -42,52 +32,36 @@ export class CartService {
 
   constructor(private http: HttpClient) {}
 
-  // ------------------ obtener carrito ------------------
-  // GET /api/cart
   loadCart(): Observable<CartResponse> {
     return this.http
       .get<CartResponse>(`${API_BASE_URL}/cart`)
       .pipe(tap((resp) => this.updateCountFromCart(resp)));
   }
 
-  // ------------------ agregar item ---------------------
-  // POST /api/cart/items
   addToCart(productId: string, quantity = 1): Observable<CartResponse> {
     return this.http
-      .post<CartResponse>(`${API_BASE_URL}/cart/items`, {
-        productId,
-        quantity,
-      })
+      .post<CartResponse>(`${API_BASE_URL}/cart/items`, { productId, quantity })
       .pipe(tap((resp) => this.updateCountFromCart(resp)));
   }
 
-  // ------------------ actualizar cantidad --------------
-  // PUT /api/cart/items/:productId
   updateItem(productId: string, quantity: number): Observable<CartResponse> {
     return this.http
-      .put<CartResponse>(`${API_BASE_URL}/cart/items/${productId}`, {
-        quantity,
-      })
+      .put<CartResponse>(`${API_BASE_URL}/cart/items/${productId}`, { quantity })
       .pipe(tap((resp) => this.updateCountFromCart(resp)));
   }
 
-  // ------------------ eliminar item --------------------
-  // DELETE /api/cart/items/:productId
   removeItem(productId: string): Observable<CartResponse> {
     return this.http
       .delete<CartResponse>(`${API_BASE_URL}/cart/items/${productId}`)
       .pipe(tap((resp) => this.updateCountFromCart(resp)));
   }
 
-  // ------------------ vaciar carrito -------------------
-  // DELETE /api/cart
   clearCart(): Observable<CartResponse> {
     return this.http
       .delete<CartResponse>(`${API_BASE_URL}/cart`)
       .pipe(tap((resp) => this.updateCountFromCart(resp)));
   }
 
-  // ------------------ helpers privados -----------------
   private updateCountFromCart(resp: CartResponse): void {
     if (!resp.success || !resp.data) {
       this.cartCountSubject.next(0);

@@ -1,28 +1,78 @@
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-section brand">
-      <h2>XI-XI</h2>
-      <p>Tu tienda de ropa moderna y accesible.</p>
+    <!-- Columna 1: Marca -->
+    <div class="footer-column">
+      <div class="footer-logo">
+        <span class="logo-mark">XI</span>
+        <span class="logo-text">XI</span>
+      </div>
+      <p class="footer-description">
+        XI-XI es tu tienda de moda urbana y casual. Encuentra prendas
+        cómodas, actuales y listas para acompañar tu día a día.
+      </p>
+      <div class="footer-contact">
+        <span>📧 {{ contactEmail }}</span>
+        <span>📞 {{ contactPhone }}</span>
+      </div>
     </div>
 
-    <div class="footer-section">
-      <h3>Enlaces</h3>
+    <!-- Columna 2: Navegación -->
+    <div class="footer-column">
+      <h3>Explorar</h3>
       <ul>
-        <li><a routerLink="/">Inicio</a></li>
-        <li><a routerLink="/products">Productos</a></li>
-        <li><a routerLink="/cart">Carrito</a></li>
-        <li><a routerLink="/my-orders">Mis pedidos</a></li>
+        <li>
+          <a routerLink="/">Inicio</a>
+        </li>
+        <li>
+          <a routerLink="/products">Productos</a>
+        </li>
+        <li>
+          <a routerLink="/cart">Carrito</a>
+        </li>
+        <li>
+          <a routerLink="/my-orders">Mis pedidos</a>
+        </li>
       </ul>
     </div>
 
-    <div class="footer-section">
-      <h3>Contacto</h3>
-      <p>Email: soporte@xixi.com</p>
-      <p>Tel: +593 987 654 321</p>
+    <!-- Columna 3: Cuenta -->
+    <div class="footer-column">
+      <h3>Mi cuenta</h3>
+      <ul>
+        <li>
+          <a routerLink="/login">Iniciar sesión</a>
+        </li>
+        <li>
+          <a routerLink="/register">Registrarse</a>
+        </li>
+        <li>
+          <a routerLink="/profile">Perfil</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Columna 4: Redes -->
+    <div class="footer-column">
+      <h3>Síguenos</h3>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="TikTok">TT</a>
+      </div>
+
+      <p class="footer-note">
+        Horario de atención:<br />
+        Lun - Sáb, 09h00 a 19h00
+      </p>
     </div>
   </div>
 
   <div class="footer-bottom">
-    © {{ currentYear }} XI-XI — Todos los derechos reservados
+    <span>© {{ currentYear }} XI-XI. Todos los derechos reservados.</span>
+    <span class="footer-bottom-links">
+      <a href="#">Política de privacidad</a>
+      <span class="dot">•</span>
+      <a href="#">Términos y condiciones</a>
+    </span>
   </div>
 </footer>

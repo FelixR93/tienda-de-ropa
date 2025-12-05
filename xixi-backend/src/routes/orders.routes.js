@@ -1,44 +1,32 @@
 // ------------------------------------------------------
-// Rutas para órdenes (pedidos).
+// Rutas de órdenes XI-XI
 // ------------------------------------------------------
 const express = require('express');
-const { body } = require('express-validator');
-
+const { authMiddleware } = require('../middlewares/auth.middleware');
+const { adminMiddleware } = require('../middlewares/admin.middleware');
 const {
   createOrderFromCart,
   getMyOrders,
-  getOrderById,
   getAllOrders,
+  getOrderById,
   updateOrderStatus,
 } = require('../controllers/order.controller');
 
-const { authMiddleware } = require('../middlewares/auth.middleware');
-const { adminMiddleware } = require('../middlewares/admin.middleware');
-
 const router = express.Router();
 
-// Crear orden a partir del carrito del usuario
-router.post(
-  '/checkout',
-  authMiddleware,
-  [
-    // Validaciones básicas opcionales
-    body('shippingAddress').optional().isObject(),
-    body('paymentMethod').optional().isString(),
-  ],
-  createOrderFromCart
-);
+// Crear orden desde el carrito
+router.post('/checkout', authMiddleware, createOrderFromCart);
 
-// Listar órdenes del usuario autenticado
+// Órdenes del usuario actual
 router.get('/my', authMiddleware, getMyOrders);
 
-// Obtener una orden por id (usuario dueño o admin)
-router.get('/:id', authMiddleware, getOrderById);
-
-// Listar todas las órdenes (ADMIN)
+// Todas las órdenes (solo admin)
 router.get('/', authMiddleware, adminMiddleware, getAllOrders);
 
-// Actualizar estado de una orden (ADMIN)
-router.put('/:id/status', authMiddleware, adminMiddleware, updateOrderStatus);
+// Detalle de una orden
+router.get('/:id', authMiddleware, getOrderById);
+
+// Actualizar estado (solo admin)
+router.patch('/:id/status', authMiddleware, adminMiddleware, updateOrderStatus);
 
 module.exports = router;

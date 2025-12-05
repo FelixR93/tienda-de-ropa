@@ -16,10 +16,10 @@ import { FooterComponent } from './shared/footer-component/footer-component';
     RouterOutlet,
     RouterModule,
     NavbarComponent,
-    LoaderComponent,   // ahora Angular reconoce <app-loader>
-    FooterComponent,   // ahora reconoce <app-footer>
+    LoaderComponent,
+    FooterComponent,
   ],
 })
 export class App {
-  loading = false;    // usado en *ngIf="loading" en app.html
+  loading = false;
 }

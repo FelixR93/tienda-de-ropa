@@ -1,7 +1,5 @@
 <div class="category-products-page">
-  <h1 *ngIf="category; else defaultTitle">
-    Categoría: {{ category.name }}
-  </h1>
+  <h1 *ngIf="category; else defaultTitle">Categoría: {{ category.name }}</h1>
   <ng-template #defaultTitle>
     <h1>Productos por categoría</h1>
   </ng-template>
@@ -13,9 +11,7 @@
   </div>
 
   <div class="products-grid" *ngIf="!loading && !errorMessage">
-    <div *ngIf="products.length === 0" class="info-text">
-      No hay productos en esta categoría.
-    </div>
+    <div *ngIf="products.length === 0" class="info-text">No hay productos en esta categoría.</div>
 
     <div class="product-card" *ngFor="let product of products">
       <div class="product-card-inner">
@@ -26,28 +22,20 @@
           <div class="front-body">
             <h3>{{ product.name }}</h3>
             <p class="price">
-              {{ product.price | currency: 'USD':'symbol':'1.2-2' }}
+              {{ product.price | currency : 'USD' : 'symbol' : '1.2-2' }}
             </p>
           </div>
         </div>
 
         <!-- Pie: stock + botones -->
         <div class="back-footer">
-          <span
-            class="stock"
-            [class.out]="product.stock <= 0"
-          >
+          <span class="stock" [class.out]="product.stock <= 0">
             Stock: {{ product.stock > 0 ? product.stock : 'Agotado' }}
           </span>
 
           <div class="actions">
             <!-- Ojo: si tu ruta es /products/:id usa /products -->
-            <a
-              [routerLink]="['/products', product._id]"
-              class="btn-outline"
-            >
-              Ver detalle
-            </a>
+            <a [routerLink]="['/products', product._id]" class="btn-outline"> Ver detalle </a>
 
             <button
               type="button"

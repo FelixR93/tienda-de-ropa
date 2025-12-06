@@ -1,119 +1,188 @@
-// src/app/pages/auth/register-component/register-component.scss
+/* ============================================
+   REGISTER XI-XI – Fondo elegante + card glass
+============================================ */
 
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+/* Fondo con foto */
 .register-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
-  padding: 1rem;
+  padding: 1.5rem;
+
+  background:
+    linear-gradient(to bottom right, rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.35)),
+    url('https://images.unsplash.com/photo-1718985342149-7178154e0aee?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?auto=compress&cs=tinysrgb&w=1600')
+      center center / cover no-repeat fixed;
 }
 
+/* Card tipo vidrio */
 .register-card {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 2rem 2.5rem;
-  max-width: 420px;
   width: 100%;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  max-width: 440px;
+  padding: 2.4rem 2.6rem;
+  border-radius: 22px;
+
+  background: rgba(249, 250, 251, 0.88);
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 18px 36px rgba(15, 23, 42, 0.45),
+    0 0 0 1px rgba(148, 163, 184, 0.2);
+
+  display: flex;
+  flex-direction: column;
 }
 
+/* Encabezados */
 .title {
   margin: 0;
   text-align: center;
-  font-size: 1.8rem;
-  letter-spacing: 0.2em;
+  font-size: 2rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #0f172a;
 }
 
 .subtitle {
   text-align: center;
-  margin-top: 0.2rem;
-  margin-bottom: 1.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.6rem;
   font-size: 1.1rem;
-  color: #666;
+  color: #6b7280;
 }
 
+/* Campos del formulario */
 .form-group {
   margin-bottom: 1rem;
 
   label {
     display: block;
     margin-bottom: 0.25rem;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: #111827;
   }
 
   input {
     width: 100%;
-    padding: 0.55rem 0.7rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 0.65rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
     outline: none;
+    background: #f9fafb;
     font-size: 0.95rem;
+    transition: all 0.2s ease;
 
     &:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+      border-color: #0f172a;
+      background: #ffffff;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.2),
+        0 0 0 6px rgba(15, 23, 42, 0.08);
     }
 
     &.is-invalid {
-      border-color: #e11d48;
+      border-color: #dc2626;
+      box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.4);
     }
   }
 }
 
+/* Mensajes de error */
 .error-text {
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
   font-size: 0.8rem;
-  color: #e11d48;
+  color: #dc2626;
 }
 
+/* Botón principal */
 .btn-primary {
   width: 100%;
-  padding: 0.65rem;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
   border: none;
-  font-size: 1rem;
+  background: linear-gradient(135deg, #0f172a, #1f2937);
+  color: #f9fafb;
+  font-size: 0.95rem;
   font-weight: 600;
-  background: #16a34a;
-  color: #fff;
   cursor: pointer;
-  transition: background 0.2s ease;
+
+  transition:
+    background 0.25s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
 
   &:hover:not(:disabled) {
-    background: #15803d;
+    filter: brightness(1.05);
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.45);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: none;
   }
 
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+    box-shadow: none;
   }
 }
 
+/* Alertas */
 .alert {
-  border-radius: 4px;
-  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
   font-size: 0.9rem;
   margin-bottom: 1rem;
 
   &.alert-error {
-    background: #fee2e2;
+    background: #fef2f2;
     border: 1px solid #fecaca;
     color: #b91c1c;
   }
 }
 
+/* Pie de formulario */
 .extra {
-  margin-top: 1.25rem;
+  margin-top: 1.4rem;
   text-align: center;
   font-size: 0.9rem;
+  color: #4b5563;
 
   a {
-    color: #2563eb;
+    font-weight: 600;
+    color: #111827;
     text-decoration: none;
-    font-weight: 500;
 
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .register-page {
+    padding: 1.2rem;
+    background:
+      linear-gradient(to bottom, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.7)),
+      url('https://images.unsplash.com/photo-1718985342149-7178154e0aee?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?auto=compress&cs=tinysrgb&w=1200')
+        center center / cover no-repeat;
+  }
+
+  .register-card {
+    padding: 2rem 1.6rem;
+  }
+
+  .title {
+    font-size: 1.7rem;
   }
 }

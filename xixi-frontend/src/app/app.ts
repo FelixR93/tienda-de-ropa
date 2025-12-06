@@ -5,6 +5,8 @@ import { RouterOutlet, RouterModule } from '@angular/router';
 import { NavbarComponent } from './shared/navbar-component/navbar-component';
 import { LoaderComponent } from './shared/loader-component/loader-component';
 import { FooterComponent } from './shared/footer-component/footer-component';
+import { LoadingService } from './services/loading-service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ import { FooterComponent } from './shared/footer-component/footer-component';
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
   imports: [
-    CommonModule,      // para *ngIf, *ngFor, etc.
+    CommonModule,
     RouterOutlet,
     RouterModule,
     NavbarComponent,
@@ -21,5 +23,10 @@ import { FooterComponent } from './shared/footer-component/footer-component';
   ],
 })
 export class App {
-  loading = false;
+  // ahora viene del servicio global
+  loading$: Observable<boolean>;
+
+  constructor(private loadingService: LoadingService) {
+    this.loading$ = this.loadingService.loading$;
+  }
 }

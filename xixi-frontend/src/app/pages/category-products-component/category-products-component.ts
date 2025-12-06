@@ -4,11 +4,12 @@
 // ------------------------------------------------------
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 
 import { ProductService } from '../../services/product-service';
 import { CategoryService } from '../../services/category-service';
 import { CartService } from '../../services/cart-service';
+import { AuthService } from '../../services/auth-service';
 
 import { Product } from '../../models/product.model';
 import { Category } from '../../models/category.model';
@@ -34,7 +35,9 @@ export class CategoryProductsComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private categoryService: CategoryService,
-    private cartService: CartService
+    private cartService: CartService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,24 +67,22 @@ export class CategoryProductsComponent implements OnInit {
     this.loading = true;
     this.errorMessage = '';
 
-    this.productService
-      .getProducts({ categoryId })
-      .subscribe({
-        next: (resp: any) => {
-          this.loading = false;
-          if (resp.success) {
-            this.products = resp.data;
-          } else {
-            this.errorMessage =
-              resp.message || 'No se pudieron cargar los productos';
-          }
-        },
-        error: (err) => {
-          this.loading = false;
+    this.productService.getProducts({ categoryId }).subscribe({
+      next: (resp: any) => {
+        this.loading = false;
+        if (resp.success) {
+          this.products = resp.data;
+        } else {
           this.errorMessage =
-            err?.error?.message || 'Error al cargar productos';
-        },
-      });
+            resp.message || 'No se pudieron cargar los productos';
+        }
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage =
+          err?.error?.message || 'Error al cargar productos';
+      },
+    });
   }
 
   getProductImage(product: Product): string {
@@ -93,8 +94,19 @@ export class CategoryProductsComponent implements OnInit {
   // --------- Agregar al carrito desde categoría ----------
   addToCart(product: Product): void {
     if (!product._id) {
-      console.error('Producto sin _id, no se puede agregar al carrito', product);
+      console.error(
+        'Producto sin _id, no se puede agregar al carrito',
+        product
+      );
       alert('Producto inválido, no se pudo agregar al carrito.');
+      return;
+    }
+
+    // Igual que en la lista general: si no está logueado → login
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: this.router.url },
+      });
       return;
     }
 
@@ -105,18 +117,15 @@ export class CategoryProductsComponent implements OnInit {
         this.adding[product._id] = false;
 
         if (!resp.success) {
-          // mensaje amigable si backend devuelve success: false
           alert(resp.message || 'No se pudo agregar al carrito.');
           return;
         }
 
-        // Opcional: Toast, snackbar, etc.
         console.log('Producto agregado al carrito desde categoría', resp);
       },
       error: (err) => {
         this.adding[product._id] = false;
 
-        // Analizamos error típico
         const status = err?.status;
         const backendMessage = err?.error?.message;
 

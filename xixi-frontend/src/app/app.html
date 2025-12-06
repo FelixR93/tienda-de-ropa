@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
 
-<app-loader *ngIf="loading"></app-loader>
+<!-- Loader global: se muestra SOLO mientras haya requests activos -->
+<app-loader *ngIf="loading$ | async"></app-loader>
 
 <main class="app-main">
   <router-outlet></router-outlet>

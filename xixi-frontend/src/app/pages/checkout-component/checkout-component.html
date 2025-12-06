@@ -1,75 +1,101 @@
-<div class="checkout-page">
+<div class="checkout-page" [formGroup]="checkoutForm">
   <h1>Checkout</h1>
 
-  <div *ngIf="loadingCart" class="info-text">Cargando carrito...</div>
-  <div *ngIf="errorMessage" class="error-text">{{ errorMessage }}</div>
-  <div *ngIf="successMessage" class="success-text">{{ successMessage }}</div>
+  <!-- Mensaje de error general -->
+  <div *ngIf="errorMessage" class="error-text">
+    {{ errorMessage }}
+  </div>
 
-  <div *ngIf="!loadingCart && cart && cart.items.length > 0" class="checkout-layout">
-    <!-- Formulario -->
-    <div class="checkout-form">
-      <h2>Datos de envío</h2>
+  <!-- Sin carrito -->
+  <section *ngIf="cart && cart.items.length === 0">
+    <p class="info-text">
+      No tienes productos en el carrito.
+      <a routerLink="/products">Ver productos</a>
+    </p>
+  </section>
 
-      <div class="form-group">
-        <label for="shippingAddress">Dirección de envío</label>
-        <textarea
-          id="shippingAddress"
-          [(ngModel)]="shippingAddress"
-          rows="3"
-          placeholder="Calle, número, ciudad, referencia..."
-        ></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="notes">Notas adicionales (opcional)</label>
-        <textarea
-          id="notes"
-          [(ngModel)]="notes"
-          rows="2"
-          placeholder="Instrucciones para la entrega, horario, etc."
-        ></textarea>
-      </div>
-
-      <button
-        type="button"
-        class="btn-primary"
-        (click)="onSubmit()"
-        [disabled]="submitting || !cart || cart.items.length === 0"
-      >
-        <ng-container *ngIf="!submitting">Confirmar pedido</ng-container>
-        <ng-container *ngIf="submitting">Procesando...</ng-container>
-      </button>
-    </div>
-
-    <!-- Resumen -->
-    <div class="checkout-summary">
-      <h2>Resumen del pedido</h2>
+  <!-- Layout en dos columnas: resumen + formulario -->
+  <div
+    class="checkout-layout"
+    *ngIf="cart && cart.items.length > 0"
+  >
+    <!-- Resumen del carrito -->
+    <section class="checkout-summary">
+      <h2>Resumen de tu compra</h2>
 
       <div class="summary-items">
         <div
           class="summary-item"
           *ngFor="let item of cart.items"
         >
-          <div class="summary-name">
-            {{ getItemName(item) }}
+          <div class="item-main">
+            <span class="item-name">
+              {{ getItemName(item) }}
+            </span>
+            <span class="item-qty">
+              x{{ item.quantity }}
+            </span>
           </div>
-          <div class="summary-meta">
-            x{{ item.quantity }}
-            ·
-            {{ item.price | currency: 'USD':'symbol':'1.2-2' }}
-          </div>
-          <div class="summary-subtotal">
-            {{ (item.price * item.quantity) | currency: 'USD':'symbol':'1.2-2' }}
+
+          <div class="item-prices">
+            <span class="item-price">
+              {{ item.price | currency: 'USD':'symbol':'1.2-2' }}
+            </span>
+            <span class="item-subtotal">
+              {{
+                (item.subtotal || (item.price * item.quantity))
+                  | currency: 'USD':'symbol':'1.2-2'
+              }}
+            </span>
           </div>
         </div>
       </div>
 
-      <div class="summary-row total">
-        <span>Total</span>
-        <span>
-          {{ cartTotal | currency: 'USD':'symbol':'1.2-2' }}
-        </span>
+      <div class="summary-total">
+        <span>Total:</span>
+        <strong>
+          {{ cart.totalAmount | currency: 'USD':'symbol':'1.2-2' }}
+        </strong>
       </div>
-    </div>
+    </section>
+
+    <!-- Datos de envío -->
+    <section class="checkout-form">
+      <h2>Datos de envío</h2>
+
+      <div class="form-group">
+        <label>Dirección de envío</label>
+        <textarea
+          formControlName="shippingAddress"
+          rows="3"
+          placeholder="Ej: Calle 123, Ciudad, Referencia..."
+        ></textarea>
+        <div
+          class="field-error"
+          *ngIf="checkoutForm.get('shippingAddress')?.invalid
+                 && checkoutForm.get('shippingAddress')?.touched"
+        >
+          La dirección de envío es obligatoria.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Notas adicionales (opcional)</label>
+        <textarea
+          formControlName="notes"
+          rows="2"
+          placeholder="Algún detalle adicional para la entrega..."
+        ></textarea>
+      </div>
+
+      <button
+        type="button"
+        class="btn-primary full"
+        (click)="onSubmit()"
+        [disabled]="submitting || checkoutForm.invalid"
+      >
+        {{ submitting ? 'Procesando...' : 'Confirmar compra' }}
+      </button>
+    </section>
   </div>
 </div>

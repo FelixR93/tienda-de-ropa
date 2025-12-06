@@ -1,70 +1,83 @@
 <nav class="navbar">
   <div class="navbar-inner">
-    <!-- Logo -->
-    <a
-      routerLink="/"
-      class="logo"
-      (click)="isMenuOpen = false"
-    >
-      <span class="logo-mark">XI</span>
-      <span class="logo-text">XI</span>
-    </a>
-
-    <!-- Links principales (desktop + mobile cuando isMenuOpen = true) -->
-    <div class="nav-links" [class.open]="isMenuOpen">
+    <!-- LADO IZQUIERDO: LOGO + LINKS -->
+    <div class="nav-left">
+      <!-- Logo -->
       <a
         routerLink="/"
-        routerLinkActive="active"
-        (click)="isMenuOpen = false"
+        class="logo"
+        (click)="closeMenus()"
       >
-        Inicio
+        <span class="logo-mark">XI</span>
+        <span class="logo-text">XI STORE</span>
       </a>
 
-      <a
-        routerLink="/products"
-        routerLinkActive="active"
-        (click)="isMenuOpen = false"
-      >
-        Productos
-      </a>
-
-      <!-- Bloque de categorías -->
-      <div
-        class="nav-categories"
-        *ngIf="categories && categories.length > 0"
-      >
-        <span class="nav-categories-label">
-          Categorías:
-        </span>
+      <!-- Links principales (desktop) -->
+      <div class="nav-main-links">
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          (click)="closeMenus()"
+        >
+          Inicio
+        </a>
 
         <a
-          *ngFor="let category of categories"
-          [routerLink]="['/category', category._id]"
+          routerLink="/products"
           routerLinkActive="active"
-          (click)="isMenuOpen = false"
+          (click)="closeMenus()"
         >
-          {{ category.name }}
+          Productos
+        </a>
+
+        <!-- Dropdown de categorías -->
+        <div
+          class="nav-dropdown"
+          *ngIf="categories && categories.length > 0"
+        >
+          <button
+            type="button"
+            class="nav-dropdown-toggle"
+            (click)="toggleCategories()"
+            [class.open]="isCategoriesOpen"
+          >
+            Categorías
+            <span class="chevron"></span>
+          </button>
+
+          <div
+            class="nav-dropdown-menu"
+            *ngIf="isCategoriesOpen"
+          >
+            <a
+              *ngFor="let category of categories"
+              [routerLink]="['/category', category._id]"
+              (click)="closeMenus()"
+            >
+              {{ category.name }}
+            </a>
+          </div>
+        </div>
+
+        <!-- Link admin solo para ADMIN -->
+        <a
+          *ngIf="isAdmin()"
+          routerLink="/admin"
+          routerLinkActive="active"
+          (click)="goToAdmin()"
+        >
+          Panel admin
         </a>
       </div>
-
-      <!-- Link admin solo para ADMIN -->
-      <a
-        *ngIf="isAdmin()"
-        routerLink="/admin"
-        routerLinkActive="active"
-        (click)="isMenuOpen = false"
-      >
-        Panel admin
-      </a>
     </div>
 
-    <!-- Lado derecho -->
+    <!-- LADO DERECHO: CARRITO + USUARIO + AUTH + MENÚ MOBILE -->
     <div class="nav-right">
       <!-- Carrito -->
       <a
         routerLink="/cart"
         class="cart"
-        (click)="isMenuOpen = false"
+        (click)="closeMenus()"
       >
         <span class="cart-icon">🛒</span>
         <span class="cart-count" *ngIf="cartCount > 0">
@@ -85,7 +98,7 @@
         <a
           routerLink="/my-orders"
           class="btn-link secondary"
-          (click)="isMenuOpen = false"
+          (click)="closeMenus()"
         >
           Mis pedidos
         </a>
@@ -105,14 +118,14 @@
           <a
             routerLink="/login"
             routerLinkActive="active"
-            (click)="isMenuOpen = false"
+            (click)="closeMenus()"
           >
             Iniciar sesión
           </a>
           <a
             routerLink="/register"
             class="btn-primary"
-            (click)="isMenuOpen = false"
+            (click)="closeMenus()"
           >
             Registrarse
           </a>
@@ -127,7 +140,56 @@
       >
         <span></span>
         <span></span>
+        <span></span>
       </button>
+    </div>
+  </div>
+
+  <!-- Menú móvil (panel desplegable) -->
+  <div
+    class="mobile-menu"
+    *ngIf="isMenuOpen"
+  >
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      (click)="closeMenus()"
+    >
+      Inicio
+    </a>
+
+    <a
+      routerLink="/products"
+      routerLinkActive="active"
+      (click)="closeMenus()"
+    >
+      Productos
+    </a>
+
+    <a
+      *ngIf="isAdmin()"
+      routerLink="/admin"
+      routerLinkActive="active"
+      (click)="goToAdmin()"
+    >
+      Panel admin
+    </a>
+
+    <!-- Categorías listadas en mobile -->
+    <div
+      class="mobile-categories"
+      *ngIf="categories && categories.length > 0"
+    >
+      <div class="mobile-categories-label">
+        Categorías
+      </div>
+      <a
+        *ngFor="let category of categories"
+        [routerLink]="['/category', category._id]"
+        (click)="closeMenus()"
+      >
+        {{ category.name }}
+      </a>
     </div>
   </div>
 </nav>

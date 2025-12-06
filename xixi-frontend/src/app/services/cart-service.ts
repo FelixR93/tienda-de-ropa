@@ -32,30 +32,40 @@ export class CartService {
 
   constructor(private http: HttpClient) {}
 
+  // GET /api/cart
   loadCart(): Observable<CartResponse> {
     return this.http
       .get<CartResponse>(`${API_BASE_URL}/cart`)
       .pipe(tap((resp) => this.updateCountFromCart(resp)));
   }
 
+  // POST /api/cart/items   body: { productId, quantity }
   addToCart(productId: string, quantity = 1): Observable<CartResponse> {
     return this.http
       .post<CartResponse>(`${API_BASE_URL}/cart/items`, { productId, quantity })
       .pipe(tap((resp) => this.updateCountFromCart(resp)));
   }
 
+  // PUT /api/cart/items/:productId   body: { productId, quantity }
   updateItem(productId: string, quantity: number): Observable<CartResponse> {
     return this.http
-      .put<CartResponse>(`${API_BASE_URL}/cart/items/${productId}`, { quantity })
+      .put<CartResponse>(`${API_BASE_URL}/cart/items/${productId}`, {
+        productId,
+        quantity,
+      })
       .pipe(tap((resp) => this.updateCountFromCart(resp)));
   }
 
+  // DELETE /api/cart/items/:productId
   removeItem(productId: string): Observable<CartResponse> {
     return this.http
       .delete<CartResponse>(`${API_BASE_URL}/cart/items/${productId}`)
       .pipe(tap((resp) => this.updateCountFromCart(resp)));
   }
 
+  // ESTE DEPENDE DE TU ROUTER, pero si tienes:
+  // router.delete('/cart', clearCart);
+  // entonces:
   clearCart(): Observable<CartResponse> {
     return this.http
       .delete<CartResponse>(`${API_BASE_URL}/cart`)

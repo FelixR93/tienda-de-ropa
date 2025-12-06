@@ -1,20 +1,38 @@
-// ADMIN - Órdenes - Lista
+/* ==========================================================
+   ADMIN XI-XI – Lista de Órdenes
+   Estilo dashboard moderno, consistente con usuarios/productos
+========================================================== */
 
-.admin-orders-page {
-  padding: 1.5rem 5vw 3rem;
+:host {
+  display: block;
 }
 
+/* ---------------------------
+   Contenedor principal
+--------------------------- */
+.admin-orders-page {
+  padding: 1.8rem 6vw 3rem;
+  background: #f3f4f6;
+  min-height: calc(100vh - 64px);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------------------------
+   Header (Título + Filtros)
+--------------------------- */
 .header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.4rem;
   gap: 1rem;
 
   h1 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin: 0;
     color: #111827;
+    font-weight: 700;
+    letter-spacing: 0.05em;
   }
 
   p {
@@ -24,6 +42,7 @@
   }
 }
 
+/* Filtros */
 .filters {
   label {
     font-size: 0.85rem;
@@ -36,10 +55,11 @@
   select {
     border-radius: 999px;
     border: 1px solid #d1d5db;
-    padding: 0.25rem 0.6rem;
+    padding: 0.28rem 0.7rem;
     font-size: 0.85rem;
     background: #ffffff;
     outline: none;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
 
     &:focus {
       border-color: #2563eb;
@@ -48,25 +68,44 @@
   }
 }
 
+/* ---------------------------
+   Mensajes
+--------------------------- */
+.info-text,
+.error-text {
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+
 .info-text {
-  font-size: 0.95rem;
-  color: #6b7280;
+  background: #e5e7eb;
+  color: #111827;
 }
 
 .error-text {
-  font-size: 0.95rem;
+  background: #fee2e2;
   color: #b91c1c;
 }
 
+/* ---------------------------
+   Tabla contenedora
+--------------------------- */
 .table-wrapper {
-  margin-top: 0.75rem;
+  margin-top: 0.3rem;
   background: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 16px 36px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(229, 231, 235, 0.7);
   padding: 0.9rem 1rem;
   overflow-x: auto;
 }
 
+/* ---------------------------
+   Tabla
+--------------------------- */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -74,17 +113,18 @@ table {
 
   th,
   td {
-    padding: 0.55rem 0.4rem;
+    padding: 0.6rem 0.45rem;
     text-align: left;
     border-bottom: 1px solid #e5e7eb;
     vertical-align: middle;
   }
 
   th {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: #6b7280;
+    white-space: nowrap;
   }
 
   tbody tr:last-child td {
@@ -96,18 +136,23 @@ table {
   }
 }
 
+/* ---------------------------
+   Celda de estado
+--------------------------- */
 .status-cell {
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  flex-wrap: wrap;
 
   select {
     border-radius: 999px;
     border: 1px solid #d1d5db;
-    padding: 0.15rem 0.45rem;
-    font-size: 0.8rem;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.78rem;
     background: #ffffff;
     outline: none;
+    max-width: 140px;
 
     &:focus {
       border-color: #2563eb;
@@ -116,15 +161,19 @@ table {
   }
 }
 
+/* Dirección: cortar con ellipsis */
 .address-cell {
   max-width: 260px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 0.86rem;
+  color: #374151;
 }
 
-/* Badges */
-
+/* ---------------------------
+   Badges de estado
+--------------------------- */
 .badge {
   display: inline-flex;
   padding: 0.15rem 0.6rem;
@@ -133,37 +182,62 @@ table {
   font-weight: 600;
 }
 
+/* Pendiente */
 .badge.pending {
   background: #fef9c3;
   color: #854d0e;
 }
 
+/* Pagada */
 .badge.paid {
   background: #dcfce7;
   color: #166534;
 }
 
+/* Enviada */
 .badge.shipped {
   background: #e0f2fe;
   color: #075985;
 }
 
+/* Completada */
 .badge.completed {
   background: #e4e4e7;
   color: #27272a;
 }
 
+/* Cancelada */
 .badge.cancelled {
   background: #fee2e2;
   color: #b91c1c;
 }
 
+/* ---------------------------
+   Responsive
+--------------------------- */
 @media (max-width: 768px) {
   .admin-orders-page {
-    padding-inline: 1.25rem;
+    padding-inline: 1.3rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filters {
+    width: 100%;
+
+    label {
+      justify-content: space-between;
+    }
+
+    select {
+      flex: 0 0 auto;
+    }
   }
 
   .address-cell {
-    max-width: 160px;
+    max-width: 180px;
   }
 }

@@ -11,6 +11,7 @@ import { ProductService } from '../../services/product-service';
 import { Product } from '../../models/product.model';
 import { CartService } from '../../services/cart-service';
 import { AuthService } from '../../services/auth-service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -27,6 +28,9 @@ export class ProductListComponent implements OnInit {
 
   // estado por producto para el botón
   adding: { [productId: string]: boolean } = {};
+
+  // estado de flip por producto
+  flipped: { [productId: string]: boolean } = {};
 
   constructor(
     private productService: ProductService,
@@ -47,18 +51,26 @@ export class ProductListComponent implements OnInit {
       .getProducts({
         search: this.searchTerm || undefined,
       })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
       .subscribe({
         next: (resp) => {
-          this.loading = false;
+          console.log('Respuesta productos:', resp);
+
           if (resp.success) {
             this.products = resp.data;
+            // resetear flips cuando cambia la lista
+            this.flipped = {};
           } else {
             this.errorMessage =
               resp.message || 'No se pudieron cargar los productos';
           }
         },
         error: (err) => {
-          this.loading = false;
+          console.error('Error al cargar los productos', err);
           this.errorMessage =
             err?.error?.message || 'Error al cargar los productos';
         },
@@ -87,10 +99,34 @@ export class ProductListComponent implements OnInit {
     return category.name || '';
   }
 
+  // -----------------------------
+  // Flip por click
+  // -----------------------------
+  isFlipped(product: Product): boolean {
+    const id = product._id as string;
+    return !!this.flipped[id];
+  }
+
+  toggleFlip(product: Product, event?: MouseEvent): void {
+    if (!product || !product._id) return;
+
+    if (event) {
+      event.stopPropagation();
+    }
+
+    const id = product._id as string;
+    this.flipped[id] = !this.flipped[id];
+  }
+
   // --------------------------------------------------
   // Agregar al carrito desde la lista
   // --------------------------------------------------
-  addToCart(product: Product): void {
+  addToCart(product: Product, event?: MouseEvent): void {
+    if (event) {
+      // para que el click en el botón no dispare el flip
+      event.stopPropagation();
+    }
+
     if (!product || !product._id) {
       console.warn('Producto sin _id, no se puede agregar al carrito');
       return;

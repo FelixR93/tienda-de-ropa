@@ -1,21 +1,40 @@
-// ADMIN DASHBOARD XI-XI
+/* ==========================================================
+   ADMIN XI-XI – Dashboard
+   Resumen general + órdenes recientes
+========================================================== */
 
-.dashboard-page {
-  min-height: 100vh;
-  padding: 2rem 5vw 3rem;
-  background: #f3f4f6;
+:host {
+  display: block;
 }
 
+/* ---------------------------
+   Contenedor principal
+--------------------------- */
+.dashboard-page {
+  min-height: 100vh;
+  padding: 2rem 6vw 3rem;
+  background: radial-gradient(circle at top left, #e5e7eb 0, #f3f4f6 45%, #e5e7eb 100%);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #111827;
+}
+
+/* ---------------------------
+   Header
+--------------------------- */
 .dashboard-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.8rem;
+  gap: 1rem;
 
   h1 {
     font-size: 1.7rem;
     margin: 0;
     color: #111827;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   p {
@@ -25,53 +44,101 @@
   }
 }
 
+/* ---------------------------
+   Mensajes
+--------------------------- */
+.info-text,
+.error-text {
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.9rem;
+}
+
 .info-text {
-  font-size: 0.95rem;
-  color: #6b7280;
+  background: #e5e7eb;
+  color: #111827;
 }
 
 .error-text {
-  font-size: 0.95rem;
+  background: #fee2e2;
   color: #b91c1c;
 }
 
-/* Tarjetas */
-
+/* ---------------------------
+   Tarjetas de resumen
+--------------------------- */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 1.2rem;
+  gap: 1.3rem;
   margin-bottom: 2rem;
 }
 
 .card {
+  position: relative;
   background: #ffffff;
-  border-radius: 16px;
-  padding: 1rem 1.1rem;
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  padding: 1.1rem 1.2rem;
+  box-shadow:
+    0 16px 36px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(229, 231, 235, 0.8);
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.08), transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 20px 45px rgba(15, 23, 42, 0.16),
+      0 0 0 1px rgba(209, 213, 219, 0.9);
+
+    &::before {
+      opacity: 1;
+    }
+  }
 
   .card-label {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: #6b7280;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
   }
 
   .card-value {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: #111827;
+    color: #0f172a;
+    line-height: 1.2;
   }
 
   .card-link {
-    margin-top: 0.3rem;
+    margin-top: 0.35rem;
     font-size: 0.85rem;
     color: #2563eb;
     text-decoration: none;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    &::after {
+      content: "→";
+      font-size: 0.9em;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -79,13 +146,37 @@
   }
 }
 
-/* Órdenes recientes */
+/* Pequeño acento de color por tarjeta */
+.cards-grid .card:nth-child(1) {
+  border-left: 3px solid #0ea5e9;
+}
 
+.cards-grid .card:nth-child(2) {
+  border-left: 3px solid #a855f7;
+}
+
+.cards-grid .card:nth-child(3) {
+  border-left: 3px solid #f97316;
+}
+
+.cards-grid .card:nth-child(4) {
+  border-left: 3px solid #22c55e;
+}
+
+.cards-grid .card:nth-child(5) {
+  border-left: 3px solid #facc15;
+}
+
+/* ---------------------------
+   Órdenes recientes
+--------------------------- */
 .recent-orders {
   background: #ffffff;
   border-radius: 18px;
-  padding: 1.5rem 1.3rem;
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  padding: 1.4rem 1.3rem 1.5rem;
+  box-shadow:
+    0 16px 36px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(229, 231, 235, 0.8);
 }
 
 .section-header {
@@ -93,17 +184,22 @@
   align-items: baseline;
   justify-content: space-between;
   margin-bottom: 1rem;
+  gap: 1rem;
 
   h2 {
     font-size: 1.2rem;
     margin: 0;
+    font-weight: 600;
+    color: #111827;
   }
 
   .link-all {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #2563eb;
     text-decoration: none;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
 
     &:hover {
       text-decoration: underline;
@@ -115,6 +211,7 @@
   overflow-x: auto;
 }
 
+/* Tabla órdenes recientes */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -136,13 +233,18 @@ table {
     letter-spacing: 0.08em;
   }
 
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
   tbody tr:hover {
     background: #f9fafb;
   }
 }
 
-/* Badges de estado */
-
+/* ---------------------------
+   Badges de estado
+--------------------------- */
 .badge {
   display: inline-flex;
   padding: 0.2rem 0.55rem;
@@ -153,37 +255,50 @@ table {
   letter-spacing: 0.06em;
 }
 
+/* Pendiente */
 .badge.pending {
   background: #fef9c3;
   color: #854d0e;
 }
 
+/* Pagada */
 .badge.paid {
   background: #dcfce7;
   color: #166534;
 }
 
+/* Enviada */
 .badge.shipped {
   background: #e0f2fe;
   color: #075985;
 }
 
+/* Completada */
 .badge.completed {
   background: #e4e4e7;
   color: #27272a;
 }
 
+/* Cancelada */
 .badge.cancelled {
   background: #fee2e2;
   color: #b91c1c;
 }
 
+/* ---------------------------
+   Responsive
+--------------------------- */
 @media (max-width: 768px) {
   .dashboard-page {
-    padding: 1.5rem 1.25rem 2.5rem;
+    padding: 1.6rem 1.4rem 2.3rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .recent-orders {
-    padding: 1.25rem 1rem;
+    padding: 1.25rem 1rem 1.3rem;
   }
 }

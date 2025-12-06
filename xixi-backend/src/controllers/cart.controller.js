@@ -8,16 +8,16 @@
 // DELETE /api/cart/item/:id   -> removeItem
 // DELETE /api/cart/clear      -> clearCart
 // ------------------------------------------------------
-const Cart = require('../models/Cart');
-const Product = require('../models/Product');
-const { ApiError } = require('../middlewares/error.middleware');
+const Cart = require("../models/Cart");
+const Product = require("../models/Product");
+const { ApiError } = require("../middlewares/error.middleware");
 
 // Asegura que el usuario tenga un carrito
 const ensureUserCart = async (userId) => {
-  let cart = await Cart.findOne({ user: userId }).populate('items.product');
+  let cart = await Cart.findOne({ user: userId }).populate("items.product");
   if (!cart) {
     cart = await Cart.create({ user: userId, items: [], totalAmount: 0 });
-    cart = await cart.populate('items.product');
+    cart = await cart.populate("items.product");
   }
   return cart;
 };
@@ -45,22 +45,22 @@ const addItem = async (req, res, next) => {
     const { productId, quantity = 1 } = req.body;
 
     if (!productId) {
-      throw new ApiError(400, 'productId es requerido');
+      throw new ApiError(400, "productId es requerido");
     }
 
     const qty = Number(quantity) || 1;
     if (qty <= 0) {
-      throw new ApiError(400, 'La cantidad debe ser mayor que 0');
+      throw new ApiError(400, "La cantidad debe ser mayor que 0");
     }
 
     const product = await Product.findById(productId);
     if (!product) {
-      throw new ApiError(404, 'Producto no encontrado');
+      throw new ApiError(404, "Producto no encontrado");
     }
 
     // Opcional: validar stock
     if (product.stock < qty) {
-      throw new ApiError(400, 'No hay stock suficiente para este producto');
+      throw new ApiError(400, "No hay stock suficiente para este producto");
     }
 
     let cart = await ensureUserCart(userId);
@@ -82,12 +82,12 @@ const addItem = async (req, res, next) => {
     // Recalcular total
     cart.recalculateTotal();
     await cart.save();
-    cart = await cart.populate('items.product');
+    cart = await cart.populate("items.product");
 
     return res.json({
       success: true,
       data: cart,
-      message: 'Producto agregado al carrito',
+      message: "Producto agregado al carrito",
     });
   } catch (error) {
     next(error);
@@ -96,18 +96,22 @@ const addItem = async (req, res, next) => {
 
 // PUT /api/cart/update
 // body: { productId, quantity }
+// PUT /api/cart/update  (o /api/cart/items/:productId si lo mapeas así en las rutas)
+// PUT /api/cart/items/:productId
 const updateItem = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const { productId, quantity } = req.body;
+
+    const productId = req.body.productId || req.params.productId;
+    const { quantity } = req.body;
 
     if (!productId) {
-      throw new ApiError(400, 'productId es requerido');
+      throw new ApiError(400, "productId es requerido");
     }
 
     const qty = Number(quantity);
     if (isNaN(qty)) {
-      throw new ApiError(400, 'quantity inválido');
+      throw new ApiError(400, "quantity inválido");
     }
 
     let cart = await ensureUserCart(userId);
@@ -117,11 +121,10 @@ const updateItem = async (req, res, next) => {
     );
 
     if (idx === -1) {
-      throw new ApiError(404, 'El producto no está en el carrito');
+      throw new ApiError(404, "El producto no está en el carrito");
     }
 
     if (qty <= 0) {
-      // eliminar item si cantidad <= 0
       cart.items.splice(idx, 1);
     } else {
       cart.items[idx].quantity = qty;
@@ -129,12 +132,12 @@ const updateItem = async (req, res, next) => {
 
     cart.recalculateTotal();
     await cart.save();
-    cart = await cart.populate('items.product');
+    cart = await cart.populate("items.product");
 
     return res.json({
       success: true,
       data: cart,
-      message: 'Carrito actualizado',
+      message: "Carrito actualizado",
     });
   } catch (error) {
     next(error);
@@ -148,7 +151,7 @@ const removeItem = async (req, res, next) => {
     const { productId } = req.params;
 
     if (!productId) {
-      throw new ApiError(400, 'productId es requerido');
+      throw new ApiError(400, "productId es requerido");
     }
 
     let cart = await ensureUserCart(userId);
@@ -159,17 +162,17 @@ const removeItem = async (req, res, next) => {
     );
 
     if (cart.items.length === before) {
-      throw new ApiError(404, 'El producto no estaba en el carrito');
+      throw new ApiError(404, "El producto no estaba en el carrito");
     }
 
     cart.recalculateTotal();
     await cart.save();
-    cart = await cart.populate('items.product');
+    cart = await cart.populate("items.product");
 
     return res.json({
       success: true,
       data: cart,
-      message: 'Producto eliminado del carrito',
+      message: "Producto eliminado del carrito",
     });
   } catch (error) {
     next(error);
@@ -185,12 +188,12 @@ const clearCart = async (req, res, next) => {
     cart.items = [];
     cart.totalAmount = 0;
     await cart.save();
-    cart = await cart.populate('items.product');
+    cart = await cart.populate("items.product");
 
     return res.json({
       success: true,
       data: cart,
-      message: 'Carrito vacío',
+      message: "Carrito vacío",
     });
   } catch (error) {
     next(error);

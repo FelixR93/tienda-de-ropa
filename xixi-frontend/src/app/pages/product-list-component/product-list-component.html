@@ -26,18 +26,27 @@
       No se encontraron productos.
     </div>
 
-    <!-- 🔹 Flip-card por cada producto -->
+    <!-- Flip-card por cada producto -->
     <div
       class="product-card"
       *ngFor="let product of products"
     >
-      <div class="product-card-inner">
+      <div
+        class="product-card-inner"
+        [class.flipped]="isFlipped(product)"
+      >
         <!-- Frente -->
-        <div class="product-card-front">
-          <img
-            [src]="getProductImage(product)"
-            [alt]="product.name"
-          />
+        <div
+          class="product-card-front"
+          (click)="toggleFlip(product, $event)"
+        >
+          <div class="front-image">
+            <img
+              [src]="getProductImage(product)"
+              [alt]="product.name"
+            />
+          </div>
+
           <div class="front-body">
             <h3>{{ product.name }}</h3>
             <p class="price">
@@ -50,7 +59,10 @@
         </div>
 
         <!-- Reverso -->
-        <div class="product-card-back">
+        <div
+          class="product-card-back"
+          (click)="toggleFlip(product, $event)"
+        >
           <div class="back-header">
             <h3>{{ product.name }}</h3>
             <p class="price">
@@ -75,6 +87,7 @@
               <a
                 [routerLink]="['/products', product._id]"
                 class="btn-outline"
+                (click)="$event.stopPropagation()"
               >
                 Ver detalle
               </a>
@@ -83,7 +96,7 @@
                 type="button"
                 class="btn-primary"
                 [disabled]="adding[product._id] || product.stock <= 0"
-                (click)="addToCart(product)"
+                (click)="addToCart(product, $event)"
               >
                 {{
                   adding[product._id]

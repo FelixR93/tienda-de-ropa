@@ -1,9 +1,5 @@
 // ------------------------------------------------------
-// Navbar principal de XI-XI.
-// - Muestra links de navegación
-// - Muestra login/register o nombre + logout
-// - Muestra contador del carrito
-// - Muestra categorías en el menú
+// Navbar principal de XI-XI (versión limpia).
 // ------------------------------------------------------
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,7 +23,9 @@ import { Category } from '../../models/category.model';
 export class NavbarComponent implements OnInit, OnDestroy {
   currentUser: User | null = null;
   cartCount = 0;
-  isMenuOpen = false;
+
+  isMenuOpen = false;          // menú mobile
+  isCategoriesOpen = false;    // dropdown de categorías
 
   categories: Category[] = [];
 
@@ -41,24 +39,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Suscribir al usuario actual
     const subUser = this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
     this.subs.push(subUser);
 
-    // Suscribir al contador del carrito
     const subCart = this.cartService.cartCount$.subscribe((count) => {
       this.cartCount = count;
     });
     this.subs.push(subCart);
 
-    // Cargar carrito inicial (si hay sesión)
     if (this.authService.isLoggedIn()) {
       this.cartService.loadCart().subscribe();
     }
 
-    // Cargar categorías para el menú
     this.loadCategories();
   }
 
@@ -68,14 +62,30 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+
+    // si abro menú mobile, cierro dropdown de categorías
+    if (this.isMenuOpen) {
+      this.isCategoriesOpen = false;
+    }
+  }
+
+  toggleCategories(): void {
+    this.isCategoriesOpen = !this.isCategoriesOpen;
+  }
+
+  closeMenus(): void {
+    this.isMenuOpen = false;
+    this.isCategoriesOpen = false;
   }
 
   logout(): void {
     this.authService.logout();
+    this.closeMenus();
     this.router.navigate(['/']);
   }
 
   goToAdmin(): void {
+    this.closeMenus();
     this.router.navigate(['/admin']);
   }
 
@@ -92,7 +102,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       },
       error: (err: any) => {
         console.error('Error al cargar categorías en navbar:', err);
-        // no mostramos error al usuario, solo dejamos el navbar sin categorías
       },
     });
   }

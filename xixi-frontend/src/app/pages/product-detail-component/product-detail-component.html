@@ -9,25 +9,18 @@
 
     <div class="info-wrapper">
       <h1>{{ product.name }}</h1>
-
       <p class="price">
         {{ product.price | currency : 'USD' : 'symbol' : '1.2-2' }}
       </p>
-
       <p class="description">
         {{ product.description || 'Sin descripción disponible' }}
       </p>
 
       <div class="stock">
-        <span *ngIf="product.stock > 0">
-          Stock: {{ product.stock }}
-        </span>
-        <span *ngIf="product.stock <= 0">
-          Agotado
-        </span>
+        <span *ngIf="product.stock > 0">Stock: {{ product.stock }}</span>
+        <span *ngIf="product.stock <= 0">Agotado</span>
       </div>
 
-      <!-- 🔹 ÚNICO botón real de agregar al carrito -->
       <button
         class="btn-primary"
         type="button"
@@ -38,9 +31,7 @@
         <ng-container *ngIf="addingToCart">Agregando...</ng-container>
       </button>
 
-      <a routerLink="/products" class="link-back">
-        Volver a productos
-      </a>
+      <a routerLink="/products" class="link-back">Volver a productos</a>
     </div>
   </div>
 </div>

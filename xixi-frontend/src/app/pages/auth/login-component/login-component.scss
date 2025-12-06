@@ -1,38 +1,59 @@
-// src/app/pages/auth/login-component/login-component.scss
+/* ============================================
+   LOGIN XI-XI – Fondo con foto y card glass
+============================================ */
 
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+/* Fondo con foto */
 .login-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
-  padding: 1rem;
+  padding: 1.5rem;
+  background:
+    linear-gradient(to bottom right, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.2)),
+    url('https://images.unsplash.com/photo-1718985342149-7178154e0aee?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?auto=compress&cs=tinysrgb&w=1600')
+      center center / cover no-repeat fixed;
 }
 
+/* Card tipo “glass” */
 .login-card {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 2rem 2.5rem;
-  max-width: 400px;
   width: 100%;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  max-width: 420px;
+  padding: 2.3rem 2.5rem;
+  border-radius: 20px;
+  background: rgba(249, 250, 251, 0.9);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 20px 40px rgba(15, 23, 42, 0.45),
+    0 0 0 1px rgba(148, 163, 184, 0.25);
+  display: flex;
+  flex-direction: column;
 }
 
+/* Branding XI-XI */
 .title {
   margin: 0;
   text-align: center;
-  font-size: 1.8rem;
-  letter-spacing: 0.2em;
+  font-size: 1.9rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #0f172a;
 }
 
 .subtitle {
   text-align: center;
-  margin-top: 0.2rem;
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-  color: #666;
+  margin-top: 0.25rem;
+  margin-bottom: 1.6rem;
+  font-size: 1rem;
+  color: #6b7280;
 }
 
+/* Formulario */
 .form-group {
   margin-bottom: 1rem;
 
@@ -40,80 +61,124 @@
     display: block;
     margin-bottom: 0.25rem;
     font-weight: 500;
+    font-size: 0.9rem;
+    color: #111827;
   }
 
   input {
     width: 100%;
-    padding: 0.55rem 0.7rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 0.6rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid #d4d4d8;
     outline: none;
     font-size: 0.95rem;
+    background: #f9fafb;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease,
+      background 0.18s ease;
 
     &:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+      border-color: #111827;
+      box-shadow: 0 0 0 1px #11182715, 0 0 0 4px #11182710;
+      background: #ffffff;
     }
 
     &.is-invalid {
       border-color: #e11d48;
+      box-shadow: 0 0 0 1px #fecaca;
     }
   }
 }
 
 .error-text {
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
   font-size: 0.8rem;
   color: #e11d48;
 }
 
+/* Botón principal */
 .btn-primary {
   width: 100%;
+  margin-top: 0.4rem;
   padding: 0.65rem;
-  border-radius: 4px;
+  border-radius: 999px;
   border: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  background: #2563eb;
-  color: #fff;
+  background: linear-gradient(135deg, #111827, #020617);
+  color: #f9fafb;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
 
   &:hover:not(:disabled) {
-    background: #1d4ed8;
+    filter: brightness(1.05);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.4);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: none;
   }
 
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+    box-shadow: none;
   }
 }
 
+/* Alertas */
 .alert {
-  border-radius: 4px;
+  border-radius: 12px;
   padding: 0.6rem 0.75rem;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   margin-bottom: 1rem;
 
   &.alert-error {
-    background: #fee2e2;
+    background: #fef2f2;
     border: 1px solid #fecaca;
     color: #b91c1c;
   }
 }
 
+/* Texto inferior */
 .extra {
-  margin-top: 1.25rem;
+  margin-top: 1.4rem;
   text-align: center;
   font-size: 0.9rem;
+  color: #4b5563;
 
   a {
-    color: #2563eb;
+    color: #111827;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
 
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .login-page {
+    padding: 1.25rem;
+    background:
+      linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8)),
+      url('https://images.unsplash.com/photo-1718985342149-7178154e0aee?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?auto=compress&cs=tinysrgb&w=1200')
+        center center / cover no-repeat;
+  }
+
+  .login-card {
+    padding: 1.8rem 1.6rem;
+    border-radius: 18px;
+  }
+
+  .title {
+    font-size: 1.7rem;
+    letter-spacing: 0.24em;
   }
 }

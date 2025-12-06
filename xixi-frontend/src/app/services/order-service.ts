@@ -57,11 +57,12 @@ export class OrderService {
     return this.http.get<ListResponse<Order>>(`${API_BASE_URL}/orders/${id}`);
   }
 
+  // 👇 AQUÍ EL CAMBIO: PUT -> PATCH
   updateOrderStatus(
     id: string,
     status: Order['status']
   ): Observable<ListResponse<Order>> {
-    return this.http.put<ListResponse<Order>>(
+    return this.http.patch<ListResponse<Order>>(
       `${API_BASE_URL}/orders/${id}/status`,
       { status }
     );
@@ -76,5 +77,13 @@ export class OrderService {
       `${API_BASE_URL}/orders/checkout`,
       payload
     );
+  }
+
+  // Alias opcional si en algún lugar viejo se usa createOrderFromCart
+  createOrderFromCart(payload: {
+    shippingAddress: string;
+    notes?: string;
+  }): Observable<ListResponse<Order>> {
+    return this.checkout(payload);
   }
 }

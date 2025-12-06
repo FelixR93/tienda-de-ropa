@@ -1,9 +1,24 @@
-// ADMIN - Categorías - Lista
+/* ==========================================================
+   ADMIN XI-XI – Categorías / Lista
+========================================================== */
 
-.admin-categories-page {
-  padding: 1.5rem 5vw 3rem;
+:host {
+  display: block;
 }
 
+/* ---------------------------
+   Contenedor principal
+--------------------------- */
+.admin-categories-page {
+  padding: 1.8rem 6vw 3rem;
+  background: #f3f4f6;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #111827;
+}
+
+/* ---------------------------
+   Header
+--------------------------- */
 .header {
   display: flex;
   align-items: center;
@@ -15,6 +30,9 @@
     font-size: 1.4rem;
     margin: 0;
     color: #111827;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   p {
@@ -24,8 +42,11 @@
   }
 }
 
+/* ---------------------------
+   Botón principal
+--------------------------- */
 .btn-primary {
-  padding: 0.5rem 1.1rem;
+  padding: 0.55rem 1.2rem;
   border-radius: 999px;
   border: none;
   background: #111827;
@@ -33,27 +54,62 @@
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+  transition: background 0.18s ease, transform 0.15s ease,
+    box-shadow 0.18s ease;
 
   &:hover {
-    background: #0b1120;
+    background: #020617;
+    transform: translateY(-1px);
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.35);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
   }
 }
 
+/* ---------------------------
+   Mensajes de estado
+--------------------------- */
+.info-text,
+.error-text {
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.9rem;
+}
+
 .info-text {
-  font-size: 0.95rem;
-  color: #6b7280;
+  background: #e5e7eb;
+  color: #111827;
 }
 
 .error-text {
-  font-size: 0.95rem;
+  background: #fee2e2;
   color: #b91c1c;
 }
 
+/* ---------------------------
+   Tabla
+--------------------------- */
 .table-wrapper {
   margin-top: 0.75rem;
   background: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 16px 36px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(229, 231, 235, 0.9);
   padding: 0.9rem 1rem;
   overflow-x: auto;
 }
@@ -65,9 +121,10 @@ table {
 
   th,
   td {
-    padding: 0.55rem 0.4rem;
+    padding: 0.55rem 0.45rem;
     text-align: left;
     border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
   }
 
   th {
@@ -86,6 +143,7 @@ table {
   }
 }
 
+/* Nombre y descripción */
 .cat-name {
   font-weight: 500;
   color: #111827;
@@ -94,34 +152,67 @@ table {
 .cat-description {
   font-size: 0.85rem;
   color: #4b5563;
+  max-width: 420px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* ---------------------------
+   Acciones (botones)
+--------------------------- */
 .actions {
   display: flex;
   gap: 0.35rem;
+  flex-wrap: wrap;
 }
 
 .btn-small {
-  padding: 0.25rem 0.6rem;
+  padding: 0.25rem 0.7rem;
   border-radius: 999px;
   border: 1px solid #d1d5db;
   font-size: 0.8rem;
   background: #ffffff;
   cursor: pointer;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease,
+    border-color 0.15s ease, transform 0.12s ease;
+
+  &:hover:not(:disabled) {
+    background: #f3f4f6;
+    transform: translateY(-1px);
+  }
 
   &.danger {
     border-color: #fecaca;
     color: #b91c1c;
+
+    &:hover:not(:disabled) {
+      background: #fee2e2;
+    }
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
   }
 }
 
+/* ---------------------------
+   Responsive
+--------------------------- */
 @media (max-width: 768px) {
   .admin-categories-page {
-    padding-inline: 1.25rem;
+    padding: 1.5rem 1.4rem 2.5rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cat-description {
+    max-width: 220px;
   }
 }
